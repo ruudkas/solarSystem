@@ -586,6 +586,8 @@ var _neptuneJpg = require("../img/neptune.jpg");
 var _neptuneJpgDefault = parcelHelpers.interopDefault(_neptuneJpg);
 var _plutoJpg = require("../img/pluto.jpg");
 var _plutoJpgDefault = parcelHelpers.interopDefault(_plutoJpg);
+var _moonJpg = require("../img/moon.jpg");
+var _moonJpgDefault = parcelHelpers.interopDefault(_moonJpg);
 const renderer = new _three.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
@@ -610,9 +612,36 @@ const sunGeo = new _three.SphereGeometry(16, 30, 30);
 const sunMat = new _three.MeshBasicMaterial({
     map: textureLoader.load((0, _sunJpgDefault.default))
 });
-const sun = new _three.Mesh(sunGeo, sunMat);
+const mesh = new _three.Mesh(sunGeo, sunMat);
+const sun = new _three.Object3D();
+sun.add(mesh);
 scene.add(sun);
-function createPlanete(size, texture, position, ring) {
+mesh.position.x = 0;
+function createPlanetWithMoon(size, texture, position, ring) {
+    const geo = new _three.SphereGeometry(size, 30, 30);
+    const mat = new _three.MeshStandardMaterial({
+        map: textureLoader.load(texture)
+    });
+    const mesh = new _three.Mesh(geo, mat);
+    const obj = new _three.Object3D();
+    obj.add(mesh);
+    if (ring) {
+        const ringGeo = new _three.RingGeometry(ring.innerRadius, ring.outerRadius, 32);
+        const ringMat = new _three.MeshBasicMaterial({
+            map: textureLoader.load(ring.texture),
+            side: _three.DoubleSide
+        });
+        const ringMesh = new _three.Mesh(ringGeo, ringMat);
+        obj.add(ringMesh);
+        ringMesh.position.x = position;
+        ringMesh.rotation.x = -0.5 * Math.PI;
+    }
+    return {
+        mesh,
+        obj
+    };
+}
+function createPlanet(size, texture, position, ring) {
     const geo = new _three.SphereGeometry(size, 30, 30);
     const mat = new _three.MeshStandardMaterial({
         map: textureLoader.load(texture)
@@ -638,23 +667,48 @@ function createPlanete(size, texture, position, ring) {
         obj
     };
 }
-const mercury = createPlanete(3.2, (0, _mercuryJpgDefault.default), 28);
-const venus = createPlanete(5.8, (0, _venusJpgDefault.default), 44);
-const earth = createPlanete(6, (0, _earthJpgDefault.default), 62);
-const mars = createPlanete(4, (0, _marsJpgDefault.default), 78);
-const jupiter = createPlanete(12, (0, _jupiterJpgDefault.default), 100);
-const saturn = createPlanete(10, (0, _saturnJpgDefault.default), 138, {
+const mercury = createPlanet(3.2, (0, _mercuryJpgDefault.default), 28);
+const venus = createPlanet(5.8, (0, _venusJpgDefault.default), 44);
+const earth = createPlanetWithMoon(6, (0, _earthJpgDefault.default), 62);
+const mars = createPlanet(4, (0, _marsJpgDefault.default), 78);
+const jupiter = createPlanet(12, (0, _jupiterJpgDefault.default), 100);
+const saturn = createPlanet(10, (0, _saturnJpgDefault.default), 138, {
     innerRadius: 10,
     outerRadius: 20,
     texture: (0, _saturnRingPngDefault.default)
 });
-const uranus = createPlanete(7, (0, _uranusJpgDefault.default), 176, {
+const uranus = createPlanet(7, (0, _uranusJpgDefault.default), 176, {
     innerRadius: 7,
     outerRadius: 12,
     texture: (0, _uranusRingPngDefault.default)
 });
-const neptune = createPlanete(7, (0, _neptuneJpgDefault.default), 200);
-const pluto = createPlanete(2.8, (0, _plutoJpgDefault.default), 216);
+const neptune = createPlanet(7, (0, _neptuneJpgDefault.default), 200);
+const pluto = createPlanet(2.8, (0, _plutoJpgDefault.default), 216);
+function createMoon(size, texture, position, planet) {
+    const geo = new _three.SphereGeometry(size, 30, 30);
+    const mat = new _three.MeshStandardMaterial({
+        map: textureLoader.load(texture)
+    });
+    const mesh = new _three.Mesh(geo, mat);
+    const obj = new _three.Object3D();
+    obj.add(mesh);
+    mesh.position.x = position;
+    return {
+        mesh,
+        obj
+    };
+}
+const pivot = new _three.Object3D();
+const moon = createMoon(1, (0, _moonJpgDefault.default), 10, earth);
+const earthGroup = new _three.Group();
+//earthGroup.add(sun.obj);
+earthGroup.add(earth.obj);
+earthGroup.add(moon.obj);
+earthGroup.position.set(62, 0, 0);
+const rotationGroup = new _three.Group();
+rotationGroup.add(sun.obj);
+rotationGroup.add(earthGroup);
+scene.add(rotationGroup);
 const pointLight = new _three.PointLight(0xFFFFFF, 2, 300);
 scene.add(pointLight);
 function animate() {
@@ -669,16 +723,20 @@ function animate() {
     uranus.mesh.rotateY(0.03);
     neptune.mesh.rotateY(0.032);
     pluto.mesh.rotateY(0.008);
+    moon.mesh.rotateY(0.004);
     //Around-sun-rotation
     mercury.obj.rotateY(0.04);
     venus.obj.rotateY(0.015);
     earth.obj.rotateY(0.01);
+    moon.obj.rotateY(0.01);
     mars.obj.rotateY(0.008);
     jupiter.obj.rotateY(0.002);
     saturn.obj.rotateY(0.0009);
     uranus.obj.rotateY(0.0004);
     neptune.obj.rotateY(0.0001);
     pluto.obj.rotateY(0.00007);
+    earthGroup.rotateY(.01);
+    rotationGroup.rotateY(.01);
     renderer.render(scene, camera);
 }
 renderer.setAnimationLoop(animate);
@@ -688,7 +746,7 @@ window.addEventListener("resize", function() {
     renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
-},{"three":"ktPTu","three/examples/jsm/controls/OrbitControls.js":"7mqRv","../img/stars.jpg":"4Nf6i","../img/sun.jpg":"04TFO","../img/mercury.jpg":"kxbqr","../img/venus.jpg":"h9jkC","../img/earth.jpg":"73KjM","../img/mars.jpg":"hQtin","../img/jupiter.jpg":"du9Jl","../img/saturn.jpg":"kCNmT","../img/saturn ring.png":"fvRC9","../img/uranus.jpg":"gV2xF","../img/uranus ring.png":"e7d5M","../img/neptune.jpg":"eMfLv","../img/pluto.jpg":"6Ml9M","@parcel/transformer-js/src/esmodule-helpers.js":"Gl9w7"}],"ktPTu":[function(require,module,exports) {
+},{"three":"ktPTu","three/examples/jsm/controls/OrbitControls.js":"7mqRv","../img/stars.jpg":"4Nf6i","../img/sun.jpg":"04TFO","../img/mercury.jpg":"kxbqr","../img/venus.jpg":"h9jkC","../img/earth.jpg":"73KjM","../img/mars.jpg":"hQtin","../img/jupiter.jpg":"du9Jl","../img/saturn.jpg":"kCNmT","../img/saturn ring.png":"fvRC9","../img/uranus.jpg":"gV2xF","../img/uranus ring.png":"e7d5M","../img/neptune.jpg":"eMfLv","../img/pluto.jpg":"6Ml9M","../img/moon.jpg":"iTiR7","@parcel/transformer-js/src/esmodule-helpers.js":"Gl9w7"}],"ktPTu":[function(require,module,exports) {
 /**
  * @license
  * Copyright 2010-2021 Three.js Authors
@@ -30799,6 +30857,9 @@ module.exports = require("7413c54ba479f707").getBundleURL("e6MYJ") + "neptune.69
 },{"7413c54ba479f707":"8F1tm"}],"6Ml9M":[function(require,module,exports) {
 module.exports = require("ecd29ad52ae37af4").getBundleURL("e6MYJ") + "pluto.cc2d7afe.jpg" + "?" + Date.now();
 
-},{"ecd29ad52ae37af4":"8F1tm"}]},["eQIYD","goJYj"], "goJYj", "parcelRequire7930")
+},{"ecd29ad52ae37af4":"8F1tm"}],"iTiR7":[function(require,module,exports) {
+module.exports = require("9b499fffba38d621").getBundleURL("e6MYJ") + "moon.398a608a.jpg" + "?" + Date.now();
+
+},{"9b499fffba38d621":"8F1tm"}]},["eQIYD","goJYj"], "goJYj", "parcelRequire7930")
 
 //# sourceMappingURL=index.64a4978e.js.map
