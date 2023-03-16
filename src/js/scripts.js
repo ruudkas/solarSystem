@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js';
 
+import * as speeds from "../speedConstants.js";
 import starsTexture from '../img/stars.jpg';
 import sunTexture from '../img/sun.jpg';
 import mercuryTexture from '../img/mercury.jpg';
@@ -132,7 +133,7 @@ const uranus = createPlanet(7, uranusTexture, 176, {
 const neptune = createPlanet(7, neptuneTexture, 200);
 const pluto = createPlanet(2.8, plutoTexture, 216);
 
-function createMoon(size, texture, position, planet) {
+function createMoon(size, texture, position) {
     const geo = new THREE.SphereGeometry(size, 30, 30);
     const mat = new THREE.MeshStandardMaterial({
         map: textureLoader.load(texture)
@@ -143,10 +144,9 @@ function createMoon(size, texture, position, planet) {
     mesh.position.x = position;
     return {mesh, obj}
 }
-const pivot = new THREE.Object3D();
-const moon = createMoon(1, moonTexture, 10, earth);
+
+const moon = createMoon(1, moonTexture, 10);
 const earthGroup = new THREE.Group();
-//earthGroup.add(sun.obj);
 earthGroup.add(earth.obj);
 earthGroup.add(moon.obj);
 earthGroup.position.set(62, 0, 0);
@@ -160,31 +160,31 @@ scene.add(pointLight);
 
 function animate() {
     //Self-rotation
-    sun.rotateY(0.004);
-    mercury.mesh.rotateY(0.004);
-    venus.mesh.rotateY(0.002);
-    earth.mesh.rotateY(0.02);
-    mars.mesh.rotateY(0.018);
-    jupiter.mesh.rotateY(0.04);
-    saturn.mesh.rotateY(0.038);
-    uranus.mesh.rotateY(0.03);
-    neptune.mesh.rotateY(0.032);
-    pluto.mesh.rotateY(0.008);
-    moon.mesh.rotateY(0.004);
+    sun.rotateY(speeds.sunRotation);
+    mercury.mesh.rotateY(speeds.mercuryRotation);
+    venus.mesh.rotateY(speeds.venusRotation);
+    earth.mesh.rotateY(speeds.earthRotation);
+    mars.mesh.rotateY(speeds.marsRotation);
+    jupiter.mesh.rotateY(speeds.jupiterRotation);
+    saturn.mesh.rotateY(speeds.saturnRotation);
+    uranus.mesh.rotateY(speeds.uranusRotation);
+    neptune.mesh.rotateY(speeds.neptuneRotation);
+    pluto.mesh.rotateY(speeds.plutoRotation);
+
+    moon.mesh.rotateY(speeds.moonRotation);
 
     //Around-sun-rotation
-    mercury.obj.rotateY(0.04);
-    venus.obj.rotateY(0.015);
-    earth.obj.rotateY(0.01);
-    moon.obj.rotateY(0.01);
-    mars.obj.rotateY(0.008);
-    jupiter.obj.rotateY(0.002);
-    saturn.obj.rotateY(0.0009);
-    uranus.obj.rotateY(0.0004);
-    neptune.obj.rotateY(0.0001);
-    pluto.obj.rotateY(0.00007);
-    earthGroup.rotateY(.01);
-    rotationGroup.rotateY(.01);
+    mercury.obj.rotateY(speeds.mercurySpeed);
+    venus.obj.rotateY(speeds.venusSpeed);
+    moon.obj.rotateY(speeds.moonSpeed);
+    mars.obj.rotateY(speeds.marsSpeed);
+    jupiter.obj.rotateY(speeds.jupiterSpeed);
+    saturn.obj.rotateY(speeds.saturnSpeed);
+    uranus.obj.rotateY(speeds.uranusSpeed);
+    neptune.obj.rotateY(speeds.neptuneSpeed);
+    pluto.obj.rotateY(speeds.plutoSpeed);
+
+    rotationGroup.rotateY(speeds.earthSpeed); //makes earth/moon rotate sun
 
     renderer.render(scene, camera);
 }

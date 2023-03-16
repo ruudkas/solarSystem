@@ -560,6 +560,7 @@ function hmrAccept(bundle, id) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _three = require("three");
 var _orbitControlsJs = require("three/examples/jsm/controls/OrbitControls.js");
+var _speedConstantsJs = require("../speedConstants.js");
 var _starsJpg = require("../img/stars.jpg");
 var _starsJpgDefault = parcelHelpers.interopDefault(_starsJpg);
 var _sunJpg = require("../img/sun.jpg");
@@ -684,7 +685,7 @@ const uranus = createPlanet(7, (0, _uranusJpgDefault.default), 176, {
 });
 const neptune = createPlanet(7, (0, _neptuneJpgDefault.default), 200);
 const pluto = createPlanet(2.8, (0, _plutoJpgDefault.default), 216);
-function createMoon(size, texture, position, planet) {
+function createMoon(size, texture, position) {
     const geo = new _three.SphereGeometry(size, 30, 30);
     const mat = new _three.MeshStandardMaterial({
         map: textureLoader.load(texture)
@@ -698,10 +699,8 @@ function createMoon(size, texture, position, planet) {
         obj
     };
 }
-const pivot = new _three.Object3D();
-const moon = createMoon(1, (0, _moonJpgDefault.default), 10, earth);
+const moon = createMoon(1, (0, _moonJpgDefault.default), 10);
 const earthGroup = new _three.Group();
-//earthGroup.add(sun.obj);
 earthGroup.add(earth.obj);
 earthGroup.add(moon.obj);
 earthGroup.position.set(62, 0, 0);
@@ -713,30 +712,28 @@ const pointLight = new _three.PointLight(0xFFFFFF, 2, 300);
 scene.add(pointLight);
 function animate() {
     //Self-rotation
-    sun.rotateY(0.004);
-    mercury.mesh.rotateY(0.004);
-    venus.mesh.rotateY(0.002);
-    earth.mesh.rotateY(0.02);
-    mars.mesh.rotateY(0.018);
-    jupiter.mesh.rotateY(0.04);
-    saturn.mesh.rotateY(0.038);
-    uranus.mesh.rotateY(0.03);
-    neptune.mesh.rotateY(0.032);
-    pluto.mesh.rotateY(0.008);
-    moon.mesh.rotateY(0.004);
+    sun.rotateY(_speedConstantsJs.sunRotation);
+    mercury.mesh.rotateY(_speedConstantsJs.mercuryRotation);
+    venus.mesh.rotateY(_speedConstantsJs.venusRotation);
+    earth.mesh.rotateY(_speedConstantsJs.earthRotation);
+    mars.mesh.rotateY(_speedConstantsJs.marsRotation);
+    jupiter.mesh.rotateY(_speedConstantsJs.jupiterRotation);
+    saturn.mesh.rotateY(_speedConstantsJs.saturnRotation);
+    uranus.mesh.rotateY(_speedConstantsJs.uranusRotation);
+    neptune.mesh.rotateY(_speedConstantsJs.neptuneRotation);
+    pluto.mesh.rotateY(_speedConstantsJs.plutoRotation);
+    moon.mesh.rotateY(_speedConstantsJs.moonRotation);
     //Around-sun-rotation
-    mercury.obj.rotateY(0.04);
-    venus.obj.rotateY(0.015);
-    earth.obj.rotateY(0.01);
-    moon.obj.rotateY(0.01);
-    mars.obj.rotateY(0.008);
-    jupiter.obj.rotateY(0.002);
-    saturn.obj.rotateY(0.0009);
-    uranus.obj.rotateY(0.0004);
-    neptune.obj.rotateY(0.0001);
-    pluto.obj.rotateY(0.00007);
-    earthGroup.rotateY(.01);
-    rotationGroup.rotateY(.01);
+    mercury.obj.rotateY(_speedConstantsJs.mercurySpeed);
+    venus.obj.rotateY(_speedConstantsJs.venusSpeed);
+    moon.obj.rotateY(_speedConstantsJs.moonSpeed);
+    mars.obj.rotateY(_speedConstantsJs.marsSpeed);
+    jupiter.obj.rotateY(_speedConstantsJs.jupiterSpeed);
+    saturn.obj.rotateY(_speedConstantsJs.saturnSpeed);
+    uranus.obj.rotateY(_speedConstantsJs.uranusSpeed);
+    neptune.obj.rotateY(_speedConstantsJs.neptuneSpeed);
+    pluto.obj.rotateY(_speedConstantsJs.plutoSpeed);
+    rotationGroup.rotateY(_speedConstantsJs.earthSpeed); //makes earth/moon rotate sun
     renderer.render(scene, camera);
 }
 renderer.setAnimationLoop(animate);
@@ -746,7 +743,7 @@ window.addEventListener("resize", function() {
     renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
-},{"three":"ktPTu","three/examples/jsm/controls/OrbitControls.js":"7mqRv","../img/stars.jpg":"4Nf6i","../img/sun.jpg":"04TFO","../img/mercury.jpg":"kxbqr","../img/venus.jpg":"h9jkC","../img/earth.jpg":"73KjM","../img/mars.jpg":"hQtin","../img/jupiter.jpg":"du9Jl","../img/saturn.jpg":"kCNmT","../img/saturn ring.png":"fvRC9","../img/uranus.jpg":"gV2xF","../img/uranus ring.png":"e7d5M","../img/neptune.jpg":"eMfLv","../img/pluto.jpg":"6Ml9M","../img/moon.jpg":"iTiR7","@parcel/transformer-js/src/esmodule-helpers.js":"Gl9w7"}],"ktPTu":[function(require,module,exports) {
+},{"three":"ktPTu","three/examples/jsm/controls/OrbitControls.js":"7mqRv","../img/stars.jpg":"4Nf6i","../img/sun.jpg":"04TFO","../img/mercury.jpg":"kxbqr","../img/venus.jpg":"h9jkC","../img/earth.jpg":"73KjM","../img/mars.jpg":"hQtin","../img/jupiter.jpg":"du9Jl","../img/saturn.jpg":"kCNmT","../img/saturn ring.png":"fvRC9","../img/uranus.jpg":"gV2xF","../img/uranus ring.png":"e7d5M","../img/neptune.jpg":"eMfLv","../img/pluto.jpg":"6Ml9M","../img/moon.jpg":"iTiR7","@parcel/transformer-js/src/esmodule-helpers.js":"Gl9w7","../speedConstants.js":"4yzi9"}],"ktPTu":[function(require,module,exports) {
 /**
  * @license
  * Copyright 2010-2021 Three.js Authors
@@ -30860,6 +30857,54 @@ module.exports = require("ecd29ad52ae37af4").getBundleURL("e6MYJ") + "pluto.cc2d
 },{"ecd29ad52ae37af4":"8F1tm"}],"iTiR7":[function(require,module,exports) {
 module.exports = require("9b499fffba38d621").getBundleURL("e6MYJ") + "moon.398a608a.jpg" + "?" + Date.now();
 
-},{"9b499fffba38d621":"8F1tm"}]},["eQIYD","goJYj"], "goJYj", "parcelRequire7930")
+},{"9b499fffba38d621":"8F1tm"}],"4yzi9":[function(require,module,exports) {
+// constants for speed of planets/moons
+//Self-rotation
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "sunRotation", ()=>sunRotation);
+parcelHelpers.export(exports, "mercuryRotation", ()=>mercuryRotation);
+parcelHelpers.export(exports, "venusRotation", ()=>venusRotation);
+parcelHelpers.export(exports, "earthRotation", ()=>earthRotation);
+parcelHelpers.export(exports, "marsRotation", ()=>marsRotation);
+parcelHelpers.export(exports, "jupiterRotation", ()=>jupiterRotation);
+parcelHelpers.export(exports, "saturnRotation", ()=>saturnRotation);
+parcelHelpers.export(exports, "uranusRotation", ()=>uranusRotation);
+parcelHelpers.export(exports, "neptuneRotation", ()=>neptuneRotation);
+parcelHelpers.export(exports, "plutoRotation", ()=>plutoRotation);
+parcelHelpers.export(exports, "mercurySpeed", ()=>mercurySpeed);
+parcelHelpers.export(exports, "venusSpeed", ()=>venusSpeed);
+parcelHelpers.export(exports, "marsSpeed", ()=>marsSpeed);
+parcelHelpers.export(exports, "jupiterSpeed", ()=>jupiterSpeed);
+parcelHelpers.export(exports, "saturnSpeed", ()=>saturnSpeed);
+parcelHelpers.export(exports, "uranusSpeed", ()=>uranusSpeed);
+parcelHelpers.export(exports, "neptuneSpeed", ()=>neptuneSpeed);
+parcelHelpers.export(exports, "plutoSpeed", ()=>plutoSpeed);
+parcelHelpers.export(exports, "earthSpeed", ()=>earthSpeed);
+parcelHelpers.export(exports, "moonRotation", ()=>moonRotation);
+parcelHelpers.export(exports, "moonSpeed", ()=>moonSpeed);
+const sunRotation = 0.004;
+const mercuryRotation = 0.004;
+const venusRotation = 0.002;
+const earthRotation = 0.02;
+const marsRotation = 0.018;
+const jupiterRotation = 0.04;
+const saturnRotation = 0.038;
+const uranusRotation = 0.03;
+const neptuneRotation = 0.032;
+const plutoRotation = 0.008;
+const mercurySpeed = 0.04;
+const venusSpeed = 0.015;
+const marsSpeed = 0.008;
+const jupiterSpeed = 0.002;
+const saturnSpeed = 0.0009;
+const uranusSpeed = 0.0004;
+const neptuneSpeed = 0.0001;
+const plutoSpeed = 0.00007;
+const earthSpeed = .01;
+const moonRotation = 0.004;
+const moonSpeed = 0.134;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"Gl9w7"}]},["eQIYD","goJYj"], "goJYj", "parcelRequire7930")
 
 //# sourceMappingURL=index.64a4978e.js.map
