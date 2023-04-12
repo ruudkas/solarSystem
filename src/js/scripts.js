@@ -1,7 +1,10 @@
 import * as THREE from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js';
 
-import * as speeds from "../speedConstants.js";
+import * as speeds from "./constants/speedConstants.js";
+import * as sizes from "./constants/sizeConstants";
+import * as distances from "./constants/distanceConstants";
+
 import starsTexture from '../img/stars.jpg';
 import sunTexture from '../img/sun.jpg';
 import mercuryTexture from '../img/mercury.jpg';
@@ -15,6 +18,7 @@ import uranusTexture from '../img/uranus.jpg';
 import uranusRingTexture from '../img/uranus ring.png';
 import neptuneTexture from '../img/neptune.jpg';
 import plutoTexture from '../img/pluto.jpg';
+import ioTexture from '../img/Io.jpg';
 
 import moonTexture from '../img/moon.jpg';
 
@@ -23,6 +27,10 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 
 document.body.appendChild(renderer.domElement);
+const initGui = async () => {
+    const dat = await import("dat.gui");
+    gui = new dat.GUI();
+  };
 
 const scene = new THREE.Scene();
 
@@ -52,8 +60,20 @@ scene.background = cubeTextureLoader.load([
 ]);
 
 const textureLoader = new THREE.TextureLoader();
+let scale = { value: false };
+const init = async() => { 
+      await initGui();
 
-const sunGeo = new THREE.SphereGeometry(16, 30, 30);
+      try {
+        solarSystemGui = gui.addFolder("solar system");
+      } catch {
+      }
+      solarSystemGui.add(scale, 'value').name("Easy View").listen;
+}
+init();
+
+let sizeSwitch = sizes.sun;
+const sunGeo = new THREE.SphereGeometry(sizeSwitch, 30, 30);
 const sunMat = new THREE.MeshBasicMaterial({
     map: textureLoader.load(sunTexture)
 });
@@ -115,23 +135,23 @@ function createPlanet(size, texture, position, ring) {
     return {mesh, obj}
 }
 
-const mercury = createPlanet(3.2, mercuryTexture, 28);
-const venus = createPlanet(5.8, venusTexture, 44);
-const earth = createPlanetWithMoon(6, earthTexture, 62);
-const mars = createPlanet(4, marsTexture, 78);
-const jupiter = createPlanet(12, jupiterTexture, 100);
-const saturn = createPlanet(10, saturnTexture, 138, {
+const mercury = createPlanet(sizes.mercury, mercuryTexture, distances.mercury);
+const venus = createPlanet(sizes.venus, venusTexture, distances.venus);
+const earth = createPlanetWithMoon(sizes.earth, earthTexture, distances.earth);
+const mars = createPlanet(sizes.mars, marsTexture, distances.mars);
+const jupiter = createPlanet(sizes.jupiter, jupiterTexture, distances.jupiter);
+const saturn = createPlanet(sizes.saturn, saturnTexture, distances.saturn, {
     innerRadius: 10,
     outerRadius: 20,
     texture: saturnRingTexture
 });
-const uranus = createPlanet(7, uranusTexture, 176, {
+const uranus = createPlanet(sizes.uranus, uranusTexture, distances.uranus, {
     innerRadius: 7,
     outerRadius: 12,
     texture: uranusRingTexture
 });
-const neptune = createPlanet(7, neptuneTexture, 200);
-const pluto = createPlanet(2.8, plutoTexture, 216);
+const neptune = createPlanet(sizes.neptune, neptuneTexture, distances.neptune);
+const pluto = createPlanet(sizes.pluto, plutoTexture, distances.pluto);
 
 function createMoon(size, texture, position) {
     const geo = new THREE.SphereGeometry(size, 30, 30);
@@ -145,7 +165,7 @@ function createMoon(size, texture, position) {
     return {mesh, obj}
 }
 
-const moon = createMoon(1, moonTexture, 10);
+const moon = createMoon(sizes.moon, moonTexture, distances.moon);
 const earthGroup = new THREE.Group();
 earthGroup.add(earth.obj);
 earthGroup.add(moon.obj);
@@ -155,8 +175,13 @@ rotationGroup.add(sun.obj);
 rotationGroup.add(earthGroup);
 scene.add(rotationGroup);
 
-const pointLight = new THREE.PointLight(0xFFFFFF, 2, 300);
-scene.add(pointLight);
+const io = createMoon(sizes.io, ioTexture, distances.io);
+const jupiterGroup = new THREE.Group();
+jupiterGroup.add(jupiter.obj);
+jupiterGroup.add(io.obj);
+
+const pointLight = new THREE.PointLight(0xFFFFFF, 10);
+scene.add(pointLight)
 
 function animate() {
     //Self-rotation
@@ -179,13 +204,14 @@ function animate() {
     moon.obj.rotateY(speeds.moonSpeed);
     mars.obj.rotateY(speeds.marsSpeed);
     jupiter.obj.rotateY(speeds.jupiterSpeed);
-    saturn.obj.rotateY(speeds.saturnSpeed);
+    saturn.obj.rotateY(scale.value ? speeds.saturnSpeed : 1);
     uranus.obj.rotateY(speeds.uranusSpeed);
     neptune.obj.rotateY(speeds.neptuneSpeed);
     pluto.obj.rotateY(speeds.plutoSpeed);
 
     rotationGroup.rotateY(speeds.earthSpeed); //makes earth/moon rotate sun
-
+    sun.scale.set(scale.value ? 1 : 2, scale.value ? 1 : 2, scale.value ? 1 : 2);
+   
     renderer.render(scene, camera);
 }
 

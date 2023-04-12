@@ -14,6 +14,7 @@
     "three": "^0.133.0"
   },
   "devDependencies": {
-    "@parcel/transformer-image": "^2.0.0-rc.0"
+    "@parcel/transformer-image": "^2.0.0-rc.0",
+    "dat.gui": "^0.7.9"
   }
 }

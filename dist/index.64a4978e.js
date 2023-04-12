@@ -560,7 +560,9 @@ function hmrAccept(bundle, id) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _three = require("three");
 var _orbitControlsJs = require("three/examples/jsm/controls/OrbitControls.js");
-var _speedConstantsJs = require("../speedConstants.js");
+var _speedConstantsJs = require("./constants/speedConstants.js");
+var _sizeConstants = require("./constants/sizeConstants");
+var _distanceConstants = require("./constants/distanceConstants");
 var _starsJpg = require("../img/stars.jpg");
 var _starsJpgDefault = parcelHelpers.interopDefault(_starsJpg);
 var _sunJpg = require("../img/sun.jpg");
@@ -587,11 +589,17 @@ var _neptuneJpg = require("../img/neptune.jpg");
 var _neptuneJpgDefault = parcelHelpers.interopDefault(_neptuneJpg);
 var _plutoJpg = require("../img/pluto.jpg");
 var _plutoJpgDefault = parcelHelpers.interopDefault(_plutoJpg);
+var _ioJpg = require("../img/Io.jpg");
+var _ioJpgDefault = parcelHelpers.interopDefault(_ioJpg);
 var _moonJpg = require("../img/moon.jpg");
 var _moonJpgDefault = parcelHelpers.interopDefault(_moonJpg);
 const renderer = new _three.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
+const initGui = async ()=>{
+    const dat = await require("3e04412cf4dd1837");
+    gui = new dat.GUI();
+};
 const scene = new _three.Scene();
 const camera = new _three.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
 const orbit = new (0, _orbitControlsJs.OrbitControls)(camera, renderer.domElement);
@@ -609,7 +617,19 @@ scene.background = cubeTextureLoader.load([
     (0, _starsJpgDefault.default)
 ]);
 const textureLoader = new _three.TextureLoader();
-const sunGeo = new _three.SphereGeometry(16, 30, 30);
+let scale = {
+    value: false
+};
+const init = async ()=>{
+    await initGui();
+    try {
+        solarSystemGui = gui.addFolder("solar system");
+    } catch  {}
+    solarSystemGui.add(scale, "value").name("Easy View").listen;
+};
+init();
+let sizeSwitch = _sizeConstants.sun;
+const sunGeo = new _three.SphereGeometry(sizeSwitch, 30, 30);
 const sunMat = new _three.MeshBasicMaterial({
     map: textureLoader.load((0, _sunJpgDefault.default))
 });
@@ -668,23 +688,23 @@ function createPlanet(size, texture, position, ring) {
         obj
     };
 }
-const mercury = createPlanet(3.2, (0, _mercuryJpgDefault.default), 28);
-const venus = createPlanet(5.8, (0, _venusJpgDefault.default), 44);
-const earth = createPlanetWithMoon(6, (0, _earthJpgDefault.default), 62);
-const mars = createPlanet(4, (0, _marsJpgDefault.default), 78);
-const jupiter = createPlanet(12, (0, _jupiterJpgDefault.default), 100);
-const saturn = createPlanet(10, (0, _saturnJpgDefault.default), 138, {
+const mercury = createPlanet(_sizeConstants.mercury, (0, _mercuryJpgDefault.default), _distanceConstants.mercury);
+const venus = createPlanet(_sizeConstants.venus, (0, _venusJpgDefault.default), _distanceConstants.venus);
+const earth = createPlanetWithMoon(_sizeConstants.earth, (0, _earthJpgDefault.default), _distanceConstants.earth);
+const mars = createPlanet(_sizeConstants.mars, (0, _marsJpgDefault.default), _distanceConstants.mars);
+const jupiter = createPlanet(_sizeConstants.jupiter, (0, _jupiterJpgDefault.default), _distanceConstants.jupiter);
+const saturn = createPlanet(_sizeConstants.saturn, (0, _saturnJpgDefault.default), _distanceConstants.saturn, {
     innerRadius: 10,
     outerRadius: 20,
     texture: (0, _saturnRingPngDefault.default)
 });
-const uranus = createPlanet(7, (0, _uranusJpgDefault.default), 176, {
+const uranus = createPlanet(_sizeConstants.uranus, (0, _uranusJpgDefault.default), _distanceConstants.uranus, {
     innerRadius: 7,
     outerRadius: 12,
     texture: (0, _uranusRingPngDefault.default)
 });
-const neptune = createPlanet(7, (0, _neptuneJpgDefault.default), 200);
-const pluto = createPlanet(2.8, (0, _plutoJpgDefault.default), 216);
+const neptune = createPlanet(_sizeConstants.neptune, (0, _neptuneJpgDefault.default), _distanceConstants.neptune);
+const pluto = createPlanet(_sizeConstants.pluto, (0, _plutoJpgDefault.default), _distanceConstants.pluto);
 function createMoon(size, texture, position) {
     const geo = new _three.SphereGeometry(size, 30, 30);
     const mat = new _three.MeshStandardMaterial({
@@ -699,7 +719,7 @@ function createMoon(size, texture, position) {
         obj
     };
 }
-const moon = createMoon(1, (0, _moonJpgDefault.default), 10);
+const moon = createMoon(_sizeConstants.moon, (0, _moonJpgDefault.default), _distanceConstants.moon);
 const earthGroup = new _three.Group();
 earthGroup.add(earth.obj);
 earthGroup.add(moon.obj);
@@ -708,7 +728,11 @@ const rotationGroup = new _three.Group();
 rotationGroup.add(sun.obj);
 rotationGroup.add(earthGroup);
 scene.add(rotationGroup);
-const pointLight = new _three.PointLight(0xFFFFFF, 2, 300);
+const io = createMoon(_sizeConstants.io, (0, _ioJpgDefault.default), _distanceConstants.io);
+const jupiterGroup = new _three.Group();
+jupiterGroup.add(jupiter.obj);
+jupiterGroup.add(io.obj);
+const pointLight = new _three.PointLight(0xFFFFFF, 10);
 scene.add(pointLight);
 function animate() {
     //Self-rotation
@@ -729,11 +753,12 @@ function animate() {
     moon.obj.rotateY(_speedConstantsJs.moonSpeed);
     mars.obj.rotateY(_speedConstantsJs.marsSpeed);
     jupiter.obj.rotateY(_speedConstantsJs.jupiterSpeed);
-    saturn.obj.rotateY(_speedConstantsJs.saturnSpeed);
+    saturn.obj.rotateY(scale.value ? _speedConstantsJs.saturnSpeed : 1);
     uranus.obj.rotateY(_speedConstantsJs.uranusSpeed);
     neptune.obj.rotateY(_speedConstantsJs.neptuneSpeed);
     pluto.obj.rotateY(_speedConstantsJs.plutoSpeed);
     rotationGroup.rotateY(_speedConstantsJs.earthSpeed); //makes earth/moon rotate sun
+    sun.scale.set(scale.value ? 1 : 2, scale.value ? 1 : 2, scale.value ? 1 : 2);
     renderer.render(scene, camera);
 }
 renderer.setAnimationLoop(animate);
@@ -743,7 +768,7 @@ window.addEventListener("resize", function() {
     renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
-},{"three":"ktPTu","three/examples/jsm/controls/OrbitControls.js":"7mqRv","../img/stars.jpg":"4Nf6i","../img/sun.jpg":"04TFO","../img/mercury.jpg":"kxbqr","../img/venus.jpg":"h9jkC","../img/earth.jpg":"73KjM","../img/mars.jpg":"hQtin","../img/jupiter.jpg":"du9Jl","../img/saturn.jpg":"kCNmT","../img/saturn ring.png":"fvRC9","../img/uranus.jpg":"gV2xF","../img/uranus ring.png":"e7d5M","../img/neptune.jpg":"eMfLv","../img/pluto.jpg":"6Ml9M","../img/moon.jpg":"iTiR7","@parcel/transformer-js/src/esmodule-helpers.js":"Gl9w7","../speedConstants.js":"4yzi9"}],"ktPTu":[function(require,module,exports) {
+},{"three":"ktPTu","three/examples/jsm/controls/OrbitControls.js":"7mqRv","../img/stars.jpg":"4Nf6i","../img/sun.jpg":"04TFO","../img/mercury.jpg":"kxbqr","../img/venus.jpg":"h9jkC","../img/earth.jpg":"73KjM","../img/mars.jpg":"hQtin","../img/jupiter.jpg":"du9Jl","../img/saturn.jpg":"kCNmT","../img/saturn ring.png":"fvRC9","../img/uranus.jpg":"gV2xF","../img/uranus ring.png":"e7d5M","../img/neptune.jpg":"eMfLv","../img/pluto.jpg":"6Ml9M","../img/moon.jpg":"iTiR7","@parcel/transformer-js/src/esmodule-helpers.js":"Gl9w7","./constants/speedConstants.js":"iTwIK","./constants/sizeConstants":"yioLF","./constants/distanceConstants":"gQXzp","../img/Io.jpg":"627od","3e04412cf4dd1837":"6rzI6"}],"ktPTu":[function(require,module,exports) {
 /**
  * @license
  * Copyright 2010-2021 Three.js Authors
@@ -30857,7 +30882,7 @@ module.exports = require("ecd29ad52ae37af4").getBundleURL("e6MYJ") + "pluto.cc2d
 },{"ecd29ad52ae37af4":"8F1tm"}],"iTiR7":[function(require,module,exports) {
 module.exports = require("9b499fffba38d621").getBundleURL("e6MYJ") + "moon.398a608a.jpg" + "?" + Date.now();
 
-},{"9b499fffba38d621":"8F1tm"}],"4yzi9":[function(require,module,exports) {
+},{"9b499fffba38d621":"8F1tm"}],"iTwIK":[function(require,module,exports) {
 // constants for speed of planets/moons
 //Self-rotation
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -30874,37 +30899,172 @@ parcelHelpers.export(exports, "neptuneRotation", ()=>neptuneRotation);
 parcelHelpers.export(exports, "plutoRotation", ()=>plutoRotation);
 parcelHelpers.export(exports, "mercurySpeed", ()=>mercurySpeed);
 parcelHelpers.export(exports, "venusSpeed", ()=>venusSpeed);
+parcelHelpers.export(exports, "earthSpeed", ()=>earthSpeed);
 parcelHelpers.export(exports, "marsSpeed", ()=>marsSpeed);
 parcelHelpers.export(exports, "jupiterSpeed", ()=>jupiterSpeed);
 parcelHelpers.export(exports, "saturnSpeed", ()=>saturnSpeed);
 parcelHelpers.export(exports, "uranusSpeed", ()=>uranusSpeed);
 parcelHelpers.export(exports, "neptuneSpeed", ()=>neptuneSpeed);
 parcelHelpers.export(exports, "plutoSpeed", ()=>plutoSpeed);
-parcelHelpers.export(exports, "earthSpeed", ()=>earthSpeed);
 parcelHelpers.export(exports, "moonRotation", ()=>moonRotation);
+parcelHelpers.export(exports, "ioRotation", ()=>ioRotation);
 parcelHelpers.export(exports, "moonSpeed", ()=>moonSpeed);
-const sunRotation = 0.004;
-const mercuryRotation = 0.004;
-const venusRotation = 0.002;
-const earthRotation = 0.02;
-const marsRotation = 0.018;
-const jupiterRotation = 0.04;
-const saturnRotation = 0.038;
-const uranusRotation = 0.03;
-const neptuneRotation = 0.032;
-const plutoRotation = 0.008;
-const mercurySpeed = 0.04;
-const venusSpeed = 0.015;
-const marsSpeed = 0.008;
-const jupiterSpeed = 0.002;
-const saturnSpeed = 0.0009;
-const uranusSpeed = 0.0004;
-const neptuneSpeed = 0.0001;
-const plutoSpeed = 0.00007;
-const earthSpeed = .01;
-const moonRotation = 0.004;
-const moonSpeed = 0.134;
+parcelHelpers.export(exports, "ioSpeed", ()=>ioSpeed);
+const sunRotation = 0.0006871; //6,871km/h
+const mercuryRotation = 0.000001083; //10.83km/h
+const venusRotation = -0.000000652; //-6.52km/h
+const earthRotation = 0.0001674; //1,674km/h
+const marsRotation = 0.000086822; //868.22km/h
+const jupiterRotation = 0.0045583; //45,583km/h
+const saturnRotation = 0.0036840; //36,840km/h
+const uranusRotation = 0.0014794; //14,794km/h
+const neptuneRotation = 0.0009719; //9,719km/h
+const plutoRotation = 0.000012321; //123.21km/h
+const mercurySpeed = 0.0180000; //180,000km/h
+const venusSpeed = 0.0126000; //126,000km/h
+const earthSpeed = .0107000; //107,000km/h
+const marsSpeed = 0.0086400; //86,400km/h
+const jupiterSpeed = 0.0047052; //47,052km/h
+const saturnSpeed = 0.0034848; //34,848km/h
+const uranusSpeed = 0.0024516; //24,516km/h
+const neptuneSpeed = 0.0019548; //19,548km/h
+const plutoSpeed = 0.0017074; //17,074km/h
+const moonRotation = 0.0003683; //3,683km/h //TODO
+const ioRotation = 0.00624024; //62,402.4 km/h
+const moonSpeed = 0.0003683; //3,683km/h
+const ioSpeed = 0.00624024; //62,402.4 km/h
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"Gl9w7"}]},["eQIYD","goJYj"], "goJYj", "parcelRequire7930")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"Gl9w7"}],"yioLF":[function(require,module,exports) {
+//size of sun/planets/moons
+//size of planets scaled by the size of the earth, sun scaled by earth then by 10^-1
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "sun", ()=>sun);
+parcelHelpers.export(exports, "mercury", ()=>mercury);
+parcelHelpers.export(exports, "venus", ()=>venus);
+parcelHelpers.export(exports, "earth", ()=>earth);
+parcelHelpers.export(exports, "mars", ()=>mars);
+parcelHelpers.export(exports, "jupiter", ()=>jupiter);
+parcelHelpers.export(exports, "saturn", ()=>saturn);
+parcelHelpers.export(exports, "uranus", ()=>uranus);
+parcelHelpers.export(exports, "neptune", ()=>neptune);
+parcelHelpers.export(exports, "pluto", ()=>pluto);
+parcelHelpers.export(exports, "moon", ()=>moon);
+parcelHelpers.export(exports, "io", ()=>io);
+parcelHelpers.export(exports, "ganymede", ()=>ganymede);
+const sun = 5.4374; //1,391,980km
+const mercury = 0.1905; //4,880km
+const venus = 0.4725; //12,100km
+const earth = 0.5; //12,800km
+const mars = 0.2655; //6,800km
+const jupiter = 5.5465; //142,000km
+const saturn = 4.6875; //120,000km
+const uranus = 2.023; //51,800km
+const neptune = 1.9335; //49,500km
+const pluto = 0.0895; //2,300km
+const moon = .3475; //3,475
+const io = .3640; // 3,640 km 
+const ganymede = .5262; //5,262 km
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"Gl9w7"}],"gQXzp":[function(require,module,exports) {
+//distance from sun for planets
+//Distance is scaled based on the distance from the sun to mercury
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "mercury", ()=>mercury);
+parcelHelpers.export(exports, "venus", ()=>venus);
+parcelHelpers.export(exports, "earth", ()=>earth);
+parcelHelpers.export(exports, "mars", ()=>mars);
+parcelHelpers.export(exports, "jupiter", ()=>jupiter);
+parcelHelpers.export(exports, "saturn", ()=>saturn);
+parcelHelpers.export(exports, "uranus", ()=>uranus);
+parcelHelpers.export(exports, "neptune", ()=>neptune);
+parcelHelpers.export(exports, "pluto", ()=>pluto);
+parcelHelpers.export(exports, "moon", ()=>moon);
+parcelHelpers.export(exports, "io", ()=>io);
+const mercury = 10; //58 million km
+const venus = 18.62; //108 million km
+const earth = 25.86; //150 million km
+const mars = 39.31; //228 million km
+const jupiter = 134.13; //778 million km
+const saturn = 246.55; //1,430 million km
+const uranus = 494.82; //2,870 million km
+const neptune = 775.86; //4,500 million km
+const pluto = 1017.24; //5,900 million km
+const moon = 38.2500; //382,500 km
+const io = 42.2000; //422,000km
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"Gl9w7"}],"627od":[function(require,module,exports) {
+module.exports = require("bd07cfaa93c065e5").getBundleURL("e6MYJ") + "Io.58a8119e.jpg" + "?" + Date.now();
+
+},{"bd07cfaa93c065e5":"8F1tm"}],"6rzI6":[function(require,module,exports) {
+module.exports = require("8795dbfbc93d1ac5")(require("dfc47a2623cd0fe7").getBundleURL("e6MYJ") + "dat.gui.module.07ee0674.js" + "?" + Date.now()).catch((err)=>{
+    delete module.bundle.cache[module.id];
+    throw err;
+}).then(()=>module.bundle.root("k3xQk"));
+
+},{"8795dbfbc93d1ac5":"3bVKG","dfc47a2623cd0fe7":"8F1tm"}],"3bVKG":[function(require,module,exports) {
+"use strict";
+var cacheLoader = require("9a2dc299f692c646");
+module.exports = cacheLoader(function(bundle) {
+    return new Promise(function(resolve, reject) {
+        // Don't insert the same script twice (e.g. if it was already in the HTML)
+        var existingScripts = document.getElementsByTagName("script");
+        if ([].concat(existingScripts).some(function isCurrentBundle(script) {
+            return script.src === bundle;
+        })) {
+            resolve();
+            return;
+        }
+        var preloadLink = document.createElement("link");
+        preloadLink.href = bundle;
+        preloadLink.rel = "preload";
+        preloadLink.as = "script";
+        document.head.appendChild(preloadLink);
+        var script = document.createElement("script");
+        script.async = true;
+        script.type = "text/javascript";
+        script.src = bundle;
+        script.onerror = function(e) {
+            var error = new TypeError("Failed to fetch dynamically imported module: ".concat(bundle, ". Error: ").concat(e.message));
+            script.onerror = script.onload = null;
+            script.remove();
+            reject(error);
+        };
+        script.onload = function() {
+            script.onerror = script.onload = null;
+            resolve();
+        };
+        document.getElementsByTagName("head")[0].appendChild(script);
+    });
+});
+
+},{"9a2dc299f692c646":"1CeSV"}],"1CeSV":[function(require,module,exports) {
+"use strict";
+var cachedBundles = {};
+var cachedPreloads = {};
+var cachedPrefetches = {};
+function getCache(type) {
+    switch(type){
+        case "preload":
+            return cachedPreloads;
+        case "prefetch":
+            return cachedPrefetches;
+        default:
+            return cachedBundles;
+    }
+}
+module.exports = function(loader, type) {
+    return function(bundle) {
+        var cache = getCache(type);
+        if (cache[bundle]) return cache[bundle];
+        return cache[bundle] = loader.apply(null, arguments).catch(function(e) {
+            delete cache[bundle];
+            throw e;
+        });
+    };
+};
+
+},{}]},["eQIYD","goJYj"], "goJYj", "parcelRequire7930")
 
 //# sourceMappingURL=index.64a4978e.js.map
