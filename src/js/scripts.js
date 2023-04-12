@@ -204,17 +204,39 @@ function animate() {
     moon.obj.rotateY(speeds.moonSpeed);
     mars.obj.rotateY(speeds.marsSpeed);
     jupiter.obj.rotateY(speeds.jupiterSpeed);
-    saturn.obj.rotateY(scale.value ? speeds.saturnSpeed : 1);
+    saturn.obj.rotateY(speeds.saturnSpeed);
     uranus.obj.rotateY(speeds.uranusSpeed);
     neptune.obj.rotateY(speeds.neptuneSpeed);
     pluto.obj.rotateY(speeds.plutoSpeed);
 
     rotationGroup.rotateY(speeds.earthSpeed); //makes earth/moon rotate sun
-    sun.scale.set(scale.value ? 1 : 2, scale.value ? 1 : 2, scale.value ? 1 : 2);
+    sun.scale.set(scale.value ? 2.9 : 1, scale.value ? 2.9 : 1, scale.value ? 2.9 : 1);
+    mercury.mesh.scale.set(scale.value ? 16.8 : 1, scale.value ? 16.8 : 1, scale.value ? 16.8 : 1);
+    mercury.mesh.position.x = scale.value ? 28 : distances.mercury;
+    venus.mesh.scale.set(scale.value ? 12.3 : 1, scale.value ? 12.3 : 1, scale.value ? 12.3 : 1);
+    venus.mesh.position.x = scale.value ? 44 : distances.venus;
+    earth.mesh.scale.set(scale.value ? 6 : 1, scale.value ? 6 : 1, scale.value ? 6 : 1);
+    earthGroup.position.x = scale.value ? 62 : distances.earth;
+    moon.mesh.scale.set(scale.value ? 2.9 : 1, scale.value ? 2.9 : 1, scale.value ? 2.9 : 1);
+    moon.mesh.position.x = scale.value ? 10 : distances.moon;
+    mars.mesh.scale.set(scale.value ? 8 : 1, scale.value ? 8 : 1, scale.value ? 8 : 1);
+    mars.mesh.position.x = scale.value ? 78 : distances.mars;
+
    
     renderer.render(scene, camera);
 }
-
+/*
+*sun = 16 
+mercury = 3.2 28
+venus = 5.8 44
+earth = 6 62
+mars = 4 78
+jupiter = 12 100
+saturn = 10 138
+uranus = 7 176
+neptune = 7 200
+pluto = 2.8 216
+*/
 renderer.setAnimationLoop(animate);
 
 window.addEventListener('resize', function() {
