@@ -734,6 +734,8 @@ jupiterGroup.add(jupiter.obj);
 jupiterGroup.add(io.obj);
 const pointLight = new _three.PointLight(0xFFFFFF, 10);
 scene.add(pointLight);
+//const pointLight = new THREE.PointLight(0xFFFFFF, 2, 300);
+console.log(pointLight);
 function animate() {
     //Self-rotation
     sun.rotateY(_speedConstantsJs.sunRotation);
@@ -750,13 +752,14 @@ function animate() {
     //Around-sun-rotation
     mercury.obj.rotateY(_speedConstantsJs.mercurySpeed);
     venus.obj.rotateY(_speedConstantsJs.venusSpeed);
-    moon.obj.rotateY(_speedConstantsJs.moonSpeed);
+    moon.obj.rotateY(scale.value ? .12 : _speedConstantsJs.moonSpeed);
     mars.obj.rotateY(_speedConstantsJs.marsSpeed);
     jupiter.obj.rotateY(_speedConstantsJs.jupiterSpeed);
     saturn.obj.rotateY(_speedConstantsJs.saturnSpeed);
     uranus.obj.rotateY(_speedConstantsJs.uranusSpeed);
     neptune.obj.rotateY(_speedConstantsJs.neptuneSpeed);
     pluto.obj.rotateY(_speedConstantsJs.plutoSpeed);
+    //change size and position based on view type
     rotationGroup.rotateY(_speedConstantsJs.earthSpeed); //makes earth/moon rotate sun
     sun.scale.set(scale.value ? 2.9 : 1, scale.value ? 2.9 : 1, scale.value ? 2.9 : 1);
     mercury.mesh.scale.set(scale.value ? 16.8 : 1, scale.value ? 16.8 : 1, scale.value ? 16.8 : 1);
@@ -769,20 +772,22 @@ function animate() {
     moon.mesh.position.x = scale.value ? 10 : _distanceConstants.moon;
     mars.mesh.scale.set(scale.value ? 8 : 1, scale.value ? 8 : 1, scale.value ? 8 : 1);
     mars.mesh.position.x = scale.value ? 78 : _distanceConstants.mars;
+    jupiter.mesh.scale.set(scale.value ? 2 : 1, scale.value ? 2 : 1, scale.value ? 2 : 1);
+    jupiter.mesh.position.x = scale.value ? 100 : _distanceConstants.jupiter;
+    saturn.mesh.scale.set(scale.value ? 2 : 1, scale.value ? 2 : 1, scale.value ? 2 : 1);
+    saturn.mesh.position.x = scale.value ? 138 : _distanceConstants.saturn;
+    saturn.obj.children[1].position.x = scale.value ? 138 : _distanceConstants.saturn;
+    uranus.mesh.scale.set(scale.value ? 3.5 : 1, scale.value ? 3.5 : 1, scale.value ? 3.5 : 1);
+    uranus.mesh.position.x = scale.value ? 176 : _distanceConstants.uranus;
+    uranus.obj.children[1].position.x = scale.value ? 176 : _distanceConstants.uranus;
+    neptune.mesh.scale.set(scale.value ? 8 : 1, scale.value ? 8 : 1, scale.value ? 8 : 1); //todo
+    neptune.mesh.position.x = scale.value ? 200 : _distanceConstants.neptune;
+    pluto.mesh.scale.set(scale.value ? 8 : 1, scale.value ? 8 : 1, scale.value ? 8 : 1);
+    pluto.mesh.position.x = scale.value ? 216 : _distanceConstants.pluto;
+    pointLight.intensity = scale.value ? 2 : 8;
     renderer.render(scene, camera);
 }
-/*
-*sun = 16 
-mercury = 3.2 28
-venus = 5.8 44
-earth = 6 62
-mars = 4 78
-jupiter = 12 100
-saturn = 10 138
-uranus = 7 176
-neptune = 7 200
-pluto = 2.8 216
-*/ renderer.setAnimationLoop(animate);
+renderer.setAnimationLoop(animate);
 window.addEventListener("resize", function() {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
