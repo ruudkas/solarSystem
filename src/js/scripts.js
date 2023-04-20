@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js';
-
+import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
+import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
 import * as speeds from "./constants/speedConstants.js";
 import * as sizes from "./constants/sizeConstants";
 import * as distances from "./constants/distanceConstants";
@@ -182,8 +183,34 @@ jupiterGroup.add(io.obj);
 
 const pointLight = new THREE.PointLight(0xFFFFFF, 10);
 scene.add(pointLight)
-//const pointLight = new THREE.PointLight(0xFFFFFF, 2, 300);
-console.log(pointLight);
+
+// const loader = new FontLoader();
+// loader.load('fonts/helvetiker_regular.typeface.json', function (font) {
+   const geometry = new THREE.TextGeometry('Hello Three.js!', {
+      size: 3,
+      height: 0.2,
+      curveSegments: 12,
+      bevelEnabled: false,
+      bevelThickness: 0.5,
+      bevelSize: 0.3,
+      bevelOffset: 0,
+      bevelSegments: 5,
+   })
+// })
+const material = new THREE.MeshFaceMaterial([
+    new THREE.MeshPhongMaterial({
+       color: 0xff22cc,
+       flatShading: true,
+    }), // front
+    new THREE.MeshPhongMaterial({
+       color: 0xffcc22
+    }), // side
+ ])
+ const meshText = new THREE.Mesh(geometry, material);
+ meshText.name = 'text';
+ scene.add(meshText);
+
+;
 function animate() {
     //Self-rotation
     sun.rotateY(speeds.sunRotation);

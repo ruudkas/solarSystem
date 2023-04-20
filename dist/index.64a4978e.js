@@ -560,6 +560,8 @@ function hmrAccept(bundle, id) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _three = require("three");
 var _orbitControlsJs = require("three/examples/jsm/controls/OrbitControls.js");
+var _textGeometry = require("three/examples/jsm/geometries/TextGeometry");
+var _fontLoaderJs = require("three/examples/jsm/loaders/FontLoader.js");
 var _speedConstantsJs = require("./constants/speedConstants.js");
 var _sizeConstants = require("./constants/sizeConstants");
 var _distanceConstants = require("./constants/distanceConstants");
@@ -734,8 +736,31 @@ jupiterGroup.add(jupiter.obj);
 jupiterGroup.add(io.obj);
 const pointLight = new _three.PointLight(0xFFFFFF, 10);
 scene.add(pointLight);
-//const pointLight = new THREE.PointLight(0xFFFFFF, 2, 300);
-console.log(pointLight);
+// const loader = new FontLoader();
+// loader.load('fonts/helvetiker_regular.typeface.json', function (font) {
+const geometry = new _three.TextGeometry("Hello Three.js!", {
+    size: 3,
+    height: 0.2,
+    curveSegments: 12,
+    bevelEnabled: false,
+    bevelThickness: 0.5,
+    bevelSize: 0.3,
+    bevelOffset: 0,
+    bevelSegments: 5
+});
+// })
+const material = new _three.MeshFaceMaterial([
+    new _three.MeshPhongMaterial({
+        color: 0xff22cc,
+        flatShading: true
+    }),
+    new _three.MeshPhongMaterial({
+        color: 0xffcc22
+    })
+]);
+const meshText = new _three.Mesh(geometry, material);
+meshText.name = "text";
+scene.add(meshText);
 function animate() {
     //Self-rotation
     sun.rotateY(_speedConstantsJs.sunRotation);
@@ -794,7 +819,7 @@ window.addEventListener("resize", function() {
     renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
-},{"three":"ktPTu","three/examples/jsm/controls/OrbitControls.js":"7mqRv","../img/stars.jpg":"4Nf6i","../img/sun.jpg":"04TFO","../img/mercury.jpg":"kxbqr","../img/venus.jpg":"h9jkC","../img/earth.jpg":"73KjM","../img/mars.jpg":"hQtin","../img/jupiter.jpg":"du9Jl","../img/saturn.jpg":"kCNmT","../img/saturn ring.png":"fvRC9","../img/uranus.jpg":"gV2xF","../img/uranus ring.png":"e7d5M","../img/neptune.jpg":"eMfLv","../img/pluto.jpg":"6Ml9M","../img/moon.jpg":"iTiR7","@parcel/transformer-js/src/esmodule-helpers.js":"Gl9w7","./constants/speedConstants.js":"iTwIK","./constants/sizeConstants":"yioLF","./constants/distanceConstants":"gQXzp","../img/Io.jpg":"627od","3e04412cf4dd1837":"6rzI6"}],"ktPTu":[function(require,module,exports) {
+},{"three":"ktPTu","three/examples/jsm/controls/OrbitControls.js":"7mqRv","../img/stars.jpg":"4Nf6i","../img/sun.jpg":"04TFO","../img/mercury.jpg":"kxbqr","../img/venus.jpg":"h9jkC","../img/earth.jpg":"73KjM","../img/mars.jpg":"hQtin","../img/jupiter.jpg":"du9Jl","../img/saturn.jpg":"kCNmT","../img/saturn ring.png":"fvRC9","../img/uranus.jpg":"gV2xF","../img/uranus ring.png":"e7d5M","../img/neptune.jpg":"eMfLv","../img/pluto.jpg":"6Ml9M","../img/moon.jpg":"iTiR7","@parcel/transformer-js/src/esmodule-helpers.js":"Gl9w7","./constants/speedConstants.js":"iTwIK","./constants/sizeConstants":"yioLF","./constants/distanceConstants":"gQXzp","../img/Io.jpg":"627od","3e04412cf4dd1837":"6rzI6","three/examples/jsm/geometries/TextGeometry":"d5vi9","three/examples/jsm/loaders/FontLoader.js":"h0CPK"}],"ktPTu":[function(require,module,exports) {
 /**
  * @license
  * Copyright 2010-2021 Three.js Authors
@@ -31091,6 +31116,158 @@ module.exports = function(loader, type) {
     };
 };
 
-},{}]},["eQIYD","goJYj"], "goJYj", "parcelRequire7930")
+},{}],"d5vi9":[function(require,module,exports) {
+/**
+ * Text = 3D Text
+ *
+ * parameters = {
+ *  font: <THREE.Font>, // font
+ *
+ *  size: <float>, // size of the text
+ *  height: <float>, // thickness to extrude text
+ *  curveSegments: <int>, // number of points on the curves
+ *
+ *  bevelEnabled: <bool>, // turn on bevel
+ *  bevelThickness: <float>, // how deep into text bevel goes
+ *  bevelSize: <float>, // how far from text outline (including bevelOffset) is bevel
+ *  bevelOffset: <float> // how far from text outline does bevel start
+ * }
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "TextGeometry", ()=>TextGeometry);
+var _three = require("three");
+class TextGeometry extends (0, _three.ExtrudeGeometry) {
+    constructor(text, parameters = {}){
+        const font = parameters.font;
+        if (!(font && font.isFont)) {
+            console.error("THREE.TextGeometry: font parameter is not an instance of THREE.Font.");
+            return new (0, _three.BufferGeometry)();
+        }
+        const shapes = font.generateShapes(text, parameters.size);
+        // translate parameters to ExtrudeGeometry API
+        parameters.depth = parameters.height !== undefined ? parameters.height : 50;
+        // defaults
+        if (parameters.bevelThickness === undefined) parameters.bevelThickness = 10;
+        if (parameters.bevelSize === undefined) parameters.bevelSize = 8;
+        if (parameters.bevelEnabled === undefined) parameters.bevelEnabled = false;
+        super(shapes, parameters);
+        this.type = "TextGeometry";
+    }
+}
+
+},{"three":"ktPTu","@parcel/transformer-js/src/esmodule-helpers.js":"Gl9w7"}],"h0CPK":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "FontLoader", ()=>FontLoader);
+parcelHelpers.export(exports, "Font", ()=>Font);
+var _three = require("three");
+class FontLoader extends (0, _three.Loader) {
+    constructor(manager){
+        super(manager);
+    }
+    load(url, onLoad, onProgress, onError) {
+        const scope = this;
+        const loader = new (0, _three.FileLoader)(this.manager);
+        loader.setPath(this.path);
+        loader.setRequestHeader(this.requestHeader);
+        loader.setWithCredentials(scope.withCredentials);
+        loader.load(url, function(text) {
+            let json;
+            try {
+                json = JSON.parse(text);
+            } catch (e) {
+                console.warn("THREE.FontLoader: typeface.js support is being deprecated. Use typeface.json instead.");
+                json = JSON.parse(text.substring(65, text.length - 2));
+            }
+            const font = scope.parse(json);
+            if (onLoad) onLoad(font);
+        }, onProgress, onError);
+    }
+    parse(json) {
+        return new Font(json);
+    }
+}
+//
+class Font {
+    constructor(data){
+        this.type = "Font";
+        this.data = data;
+    }
+    generateShapes(text, size = 100) {
+        const shapes = [];
+        const paths = createPaths(text, size, this.data);
+        for(let p = 0, pl = paths.length; p < pl; p++)Array.prototype.push.apply(shapes, paths[p].toShapes());
+        return shapes;
+    }
+}
+function createPaths(text, size, data) {
+    const chars = Array.from(text);
+    const scale = size / data.resolution;
+    const line_height = (data.boundingBox.yMax - data.boundingBox.yMin + data.underlineThickness) * scale;
+    const paths = [];
+    let offsetX = 0, offsetY = 0;
+    for(let i = 0; i < chars.length; i++){
+        const char = chars[i];
+        if (char === "\n") {
+            offsetX = 0;
+            offsetY -= line_height;
+        } else {
+            const ret = createPath(char, scale, offsetX, offsetY, data);
+            offsetX += ret.offsetX;
+            paths.push(ret.path);
+        }
+    }
+    return paths;
+}
+function createPath(char, scale, offsetX, offsetY, data) {
+    const glyph = data.glyphs[char] || data.glyphs["?"];
+    if (!glyph) {
+        console.error('THREE.Font: character "' + char + '" does not exists in font family ' + data.familyName + ".");
+        return;
+    }
+    const path = new (0, _three.ShapePath)();
+    let x, y, cpx, cpy, cpx1, cpy1, cpx2, cpy2;
+    if (glyph.o) {
+        const outline = glyph._cachedOutline || (glyph._cachedOutline = glyph.o.split(" "));
+        for(let i = 0, l = outline.length; i < l;){
+            const action = outline[i++];
+            switch(action){
+                case "m":
+                    x = outline[i++] * scale + offsetX;
+                    y = outline[i++] * scale + offsetY;
+                    path.moveTo(x, y);
+                    break;
+                case "l":
+                    x = outline[i++] * scale + offsetX;
+                    y = outline[i++] * scale + offsetY;
+                    path.lineTo(x, y);
+                    break;
+                case "q":
+                    cpx = outline[i++] * scale + offsetX;
+                    cpy = outline[i++] * scale + offsetY;
+                    cpx1 = outline[i++] * scale + offsetX;
+                    cpy1 = outline[i++] * scale + offsetY;
+                    path.quadraticCurveTo(cpx1, cpy1, cpx, cpy);
+                    break;
+                case "b":
+                    cpx = outline[i++] * scale + offsetX;
+                    cpy = outline[i++] * scale + offsetY;
+                    cpx1 = outline[i++] * scale + offsetX;
+                    cpy1 = outline[i++] * scale + offsetY;
+                    cpx2 = outline[i++] * scale + offsetX;
+                    cpy2 = outline[i++] * scale + offsetY;
+                    path.bezierCurveTo(cpx1, cpy1, cpx2, cpy2, cpx, cpy);
+                    break;
+            }
+        }
+    }
+    return {
+        offsetX: glyph.ha * scale,
+        path: path
+    };
+}
+Font.prototype.isFont = true;
+
+},{"three":"ktPTu","@parcel/transformer-js/src/esmodule-helpers.js":"Gl9w7"}]},["eQIYD","goJYj"], "goJYj", "parcelRequire7930")
 
 //# sourceMappingURL=index.64a4978e.js.map
