@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx parcel ./src/index.html",
+    "start": "npx parcel ./index.html",
     "predeploy": "rm -rf dist && parcel build ./*.html --public-url https://github.com/ruudkas/solarSystem",
     "deploy": "gh-pages -d dist"
   },
