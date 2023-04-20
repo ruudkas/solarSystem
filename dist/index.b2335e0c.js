@@ -142,13 +142,13 @@
       this[globalName] = mainExports;
     }
   }
-})({"eQIYD":[function(require,module,exports) {
+})({"h6Xe0":[function(require,module,exports) {
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "d6ea1d42532a7575";
-module.bundle.HMR_BUNDLE_ID = "a4579e5764a4978e";
+module.bundle.HMR_BUNDLE_ID = "ac0dcd70b2335e0c";
 "use strict";
 /* global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE, chrome, browser, globalThis, __parcel__import__, __parcel__importScripts__, ServiceWorkerGlobalScope */ /*::
 import type {
@@ -556,50 +556,50 @@ function hmrAccept(bundle, id) {
     });
 }
 
-},{}],"goJYj":[function(require,module,exports) {
+},{}],"f47v6":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _three = require("three");
 var _orbitControlsJs = require("three/examples/jsm/controls/OrbitControls.js");
 var _textGeometry = require("three/examples/jsm/geometries/TextGeometry");
 var _fontLoaderJs = require("three/examples/jsm/loaders/FontLoader.js");
-var _speedConstantsJs = require("./constants/speedConstants.js");
-var _sizeConstants = require("./constants/sizeConstants");
-var _distanceConstants = require("./constants/distanceConstants");
-var _starsJpg = require("../img/stars.jpg");
+var _speedConstantsJs = require("./src/js/constants/speedConstants.js");
+var _sizeConstants = require("./src/js/constants/sizeConstants");
+var _distanceConstants = require("./src/js/constants/distanceConstants");
+var _starsJpg = require("./src/img/stars.jpg");
 var _starsJpgDefault = parcelHelpers.interopDefault(_starsJpg);
-var _sunJpg = require("../img/sun.jpg");
+var _sunJpg = require("./src/img/sun.jpg");
 var _sunJpgDefault = parcelHelpers.interopDefault(_sunJpg);
-var _mercuryJpg = require("../img/mercury.jpg");
+var _mercuryJpg = require("./src/img/mercury.jpg");
 var _mercuryJpgDefault = parcelHelpers.interopDefault(_mercuryJpg);
-var _venusJpg = require("../img/venus.jpg");
+var _venusJpg = require("./src/img/venus.jpg");
 var _venusJpgDefault = parcelHelpers.interopDefault(_venusJpg);
-var _earthJpg = require("../img/earth.jpg");
+var _earthJpg = require("./src/img/earth.jpg");
 var _earthJpgDefault = parcelHelpers.interopDefault(_earthJpg);
-var _marsJpg = require("../img/mars.jpg");
+var _marsJpg = require("./src/img/mars.jpg");
 var _marsJpgDefault = parcelHelpers.interopDefault(_marsJpg);
-var _jupiterJpg = require("../img/jupiter.jpg");
+var _jupiterJpg = require("./src/img/jupiter.jpg");
 var _jupiterJpgDefault = parcelHelpers.interopDefault(_jupiterJpg);
-var _saturnJpg = require("../img/saturn.jpg");
+var _saturnJpg = require("./src/img/saturn.jpg");
 var _saturnJpgDefault = parcelHelpers.interopDefault(_saturnJpg);
-var _saturnRingPng = require("../img/saturn ring.png");
+var _saturnRingPng = require("./src/img/saturn ring.png");
 var _saturnRingPngDefault = parcelHelpers.interopDefault(_saturnRingPng);
-var _uranusJpg = require("../img/uranus.jpg");
+var _uranusJpg = require("./src/img/uranus.jpg");
 var _uranusJpgDefault = parcelHelpers.interopDefault(_uranusJpg);
-var _uranusRingPng = require("../img/uranus ring.png");
+var _uranusRingPng = require("./src/img/uranus ring.png");
 var _uranusRingPngDefault = parcelHelpers.interopDefault(_uranusRingPng);
-var _neptuneJpg = require("../img/neptune.jpg");
+var _neptuneJpg = require("./src/img/neptune.jpg");
 var _neptuneJpgDefault = parcelHelpers.interopDefault(_neptuneJpg);
-var _plutoJpg = require("../img/pluto.jpg");
+var _plutoJpg = require("./src/img/pluto.jpg");
 var _plutoJpgDefault = parcelHelpers.interopDefault(_plutoJpg);
-var _ioJpg = require("../img/Io.jpg");
+var _ioJpg = require("./src/img/Io.jpg");
 var _ioJpgDefault = parcelHelpers.interopDefault(_ioJpg);
-var _moonJpg = require("../img/moon.jpg");
+var _moonJpg = require("./src/img/moon.jpg");
 var _moonJpgDefault = parcelHelpers.interopDefault(_moonJpg);
 const renderer = new _three.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 const initGui = async ()=>{
-    const dat = await require("3e04412cf4dd1837");
+    const dat = await require("3878a8afca23ff8f");
     gui = new dat.GUI();
 };
 const scene = new _three.Scene();
@@ -819,7 +819,7 @@ window.addEventListener("resize", function() {
     renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
-},{"three":"ktPTu","three/examples/jsm/controls/OrbitControls.js":"7mqRv","three/examples/jsm/geometries/TextGeometry":"d5vi9","three/examples/jsm/loaders/FontLoader.js":"h0CPK","./constants/speedConstants.js":"iTwIK","./constants/sizeConstants":"yioLF","./constants/distanceConstants":"gQXzp","../img/stars.jpg":"4Nf6i","../img/sun.jpg":"04TFO","../img/mercury.jpg":"kxbqr","../img/venus.jpg":"h9jkC","../img/earth.jpg":"73KjM","../img/mars.jpg":"hQtin","../img/jupiter.jpg":"du9Jl","../img/saturn.jpg":"kCNmT","../img/saturn ring.png":"fvRC9","../img/uranus.jpg":"gV2xF","../img/uranus ring.png":"e7d5M","../img/neptune.jpg":"eMfLv","../img/pluto.jpg":"6Ml9M","../img/Io.jpg":"627od","../img/moon.jpg":"iTiR7","3e04412cf4dd1837":"6rzI6","@parcel/transformer-js/src/esmodule-helpers.js":"Gl9w7"}],"ktPTu":[function(require,module,exports) {
+},{"three":"ktPTu","three/examples/jsm/controls/OrbitControls.js":"7mqRv","three/examples/jsm/geometries/TextGeometry":"d5vi9","three/examples/jsm/loaders/FontLoader.js":"h0CPK","3878a8afca23ff8f":"hYovN","@parcel/transformer-js/src/esmodule-helpers.js":"Gl9w7","./src/js/constants/speedConstants.js":"iTwIK","./src/js/constants/sizeConstants":"yioLF","./src/js/constants/distanceConstants":"gQXzp","./src/img/stars.jpg":"2iW0S","./src/img/sun.jpg":"9ePMA","./src/img/mercury.jpg":"8Elja","./src/img/venus.jpg":"8JEij","./src/img/earth.jpg":"bjLEc","./src/img/mars.jpg":"iXB8B","./src/img/jupiter.jpg":"hpdAb","./src/img/saturn.jpg":"dmEqi","./src/img/saturn ring.png":"kFP7F","./src/img/uranus.jpg":"khOR6","./src/img/uranus ring.png":"73au7","./src/img/neptune.jpg":"jHh9J","./src/img/pluto.jpg":"guN5P","./src/img/Io.jpg":"dePSf","./src/img/moon.jpg":"3jyAL"}],"ktPTu":[function(require,module,exports) {
 /**
  * @license
  * Copyright 2010-2021 Three.js Authors
@@ -31009,7 +31009,109 @@ function createPath(char, scale, offsetX, offsetY, data) {
 }
 Font.prototype.isFont = true;
 
-},{"three":"ktPTu","@parcel/transformer-js/src/esmodule-helpers.js":"Gl9w7"}],"iTwIK":[function(require,module,exports) {
+},{"three":"ktPTu","@parcel/transformer-js/src/esmodule-helpers.js":"Gl9w7"}],"hYovN":[function(require,module,exports) {
+module.exports = require("6fe3daece000cc1e")(require("832c795133796e4d").getBundleURL("eLQ0X") + "dat.gui.module.07ee0674.js" + "?" + Date.now()).catch((err)=>{
+    delete module.bundle.cache[module.id];
+    throw err;
+}).then(()=>module.bundle.root("k3xQk"));
+
+},{"6fe3daece000cc1e":"3bVKG","832c795133796e4d":"8F1tm"}],"3bVKG":[function(require,module,exports) {
+"use strict";
+var cacheLoader = require("9a2dc299f692c646");
+module.exports = cacheLoader(function(bundle) {
+    return new Promise(function(resolve, reject) {
+        // Don't insert the same script twice (e.g. if it was already in the HTML)
+        var existingScripts = document.getElementsByTagName("script");
+        if ([].concat(existingScripts).some(function isCurrentBundle(script) {
+            return script.src === bundle;
+        })) {
+            resolve();
+            return;
+        }
+        var preloadLink = document.createElement("link");
+        preloadLink.href = bundle;
+        preloadLink.rel = "preload";
+        preloadLink.as = "script";
+        document.head.appendChild(preloadLink);
+        var script = document.createElement("script");
+        script.async = true;
+        script.type = "text/javascript";
+        script.src = bundle;
+        script.onerror = function(e) {
+            var error = new TypeError("Failed to fetch dynamically imported module: ".concat(bundle, ". Error: ").concat(e.message));
+            script.onerror = script.onload = null;
+            script.remove();
+            reject(error);
+        };
+        script.onload = function() {
+            script.onerror = script.onload = null;
+            resolve();
+        };
+        document.getElementsByTagName("head")[0].appendChild(script);
+    });
+});
+
+},{"9a2dc299f692c646":"1CeSV"}],"1CeSV":[function(require,module,exports) {
+"use strict";
+var cachedBundles = {};
+var cachedPreloads = {};
+var cachedPrefetches = {};
+function getCache(type) {
+    switch(type){
+        case "preload":
+            return cachedPreloads;
+        case "prefetch":
+            return cachedPrefetches;
+        default:
+            return cachedBundles;
+    }
+}
+module.exports = function(loader, type) {
+    return function(bundle) {
+        var cache = getCache(type);
+        if (cache[bundle]) return cache[bundle];
+        return cache[bundle] = loader.apply(null, arguments).catch(function(e) {
+            delete cache[bundle];
+            throw e;
+        });
+    };
+};
+
+},{}],"8F1tm":[function(require,module,exports) {
+"use strict";
+var bundleURL = {};
+function getBundleURLCached(id) {
+    var value = bundleURL[id];
+    if (!value) {
+        value = getBundleURL();
+        bundleURL[id] = value;
+    }
+    return value;
+}
+function getBundleURL() {
+    try {
+        throw new Error();
+    } catch (err) {
+        var matches = ("" + err.stack).match(/(https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/[^)\n]+/g);
+        if (matches) // The first two stack frames will be this function and getBundleURLCached.
+        // Use the 3rd one, which will be a runtime in the original bundle.
+        return getBaseURL(matches[2]);
+    }
+    return "/";
+}
+function getBaseURL(url) {
+    return ("" + url).replace(/^((?:https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/.+)\/[^/]+$/, "$1") + "/";
+} // TODO: Replace uses with `new URL(url).origin` when ie11 is no longer supported.
+function getOrigin(url) {
+    var matches = ("" + url).match(/(https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/[^/]+/);
+    if (!matches) throw new Error("Origin not found");
+    return matches[0];
+}
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+exports.getOrigin = getOrigin;
+
+},{}],"iTwIK":[function(require,module,exports) {
 // constants for speed of planets/moons
 //Self-rotation
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -31121,153 +31223,51 @@ const pluto = 1017.24; //5,900 million km
 const moon = 38.2500; //382,500 km
 const io = 42.2000; //422,000km
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"Gl9w7"}],"4Nf6i":[function(require,module,exports) {
-module.exports = require("63f0b44933cc4f14").getBundleURL("e6MYJ") + "stars.a1d7fe60.jpg" + "?" + Date.now();
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"Gl9w7"}],"2iW0S":[function(require,module,exports) {
+module.exports = require("a270c0383463ec80").getBundleURL("eLQ0X") + "stars.a1d7fe60.jpg" + "?" + Date.now();
 
-},{"63f0b44933cc4f14":"8F1tm"}],"8F1tm":[function(require,module,exports) {
-"use strict";
-var bundleURL = {};
-function getBundleURLCached(id) {
-    var value = bundleURL[id];
-    if (!value) {
-        value = getBundleURL();
-        bundleURL[id] = value;
-    }
-    return value;
-}
-function getBundleURL() {
-    try {
-        throw new Error();
-    } catch (err) {
-        var matches = ("" + err.stack).match(/(https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/[^)\n]+/g);
-        if (matches) // The first two stack frames will be this function and getBundleURLCached.
-        // Use the 3rd one, which will be a runtime in the original bundle.
-        return getBaseURL(matches[2]);
-    }
-    return "/";
-}
-function getBaseURL(url) {
-    return ("" + url).replace(/^((?:https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/.+)\/[^/]+$/, "$1") + "/";
-} // TODO: Replace uses with `new URL(url).origin` when ie11 is no longer supported.
-function getOrigin(url) {
-    var matches = ("" + url).match(/(https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/[^/]+/);
-    if (!matches) throw new Error("Origin not found");
-    return matches[0];
-}
-exports.getBundleURL = getBundleURLCached;
-exports.getBaseURL = getBaseURL;
-exports.getOrigin = getOrigin;
+},{"a270c0383463ec80":"8F1tm"}],"9ePMA":[function(require,module,exports) {
+module.exports = require("3fda5a092a8892e3").getBundleURL("eLQ0X") + "sun.a08d7ba3.jpg" + "?" + Date.now();
 
-},{}],"04TFO":[function(require,module,exports) {
-module.exports = require("e2fa9c9ace79976a").getBundleURL("e6MYJ") + "sun.a08d7ba3.jpg" + "?" + Date.now();
+},{"3fda5a092a8892e3":"8F1tm"}],"8Elja":[function(require,module,exports) {
+module.exports = require("b444fd7f7874a02d").getBundleURL("eLQ0X") + "mercury.e64be2d9.jpg" + "?" + Date.now();
 
-},{"e2fa9c9ace79976a":"8F1tm"}],"kxbqr":[function(require,module,exports) {
-module.exports = require("11e51d5462620941").getBundleURL("e6MYJ") + "mercury.e64be2d9.jpg" + "?" + Date.now();
+},{"b444fd7f7874a02d":"8F1tm"}],"8JEij":[function(require,module,exports) {
+module.exports = require("8c17f06fd410d75d").getBundleURL("eLQ0X") + "venus.c3875816.jpg" + "?" + Date.now();
 
-},{"11e51d5462620941":"8F1tm"}],"h9jkC":[function(require,module,exports) {
-module.exports = require("cc218c56408942d7").getBundleURL("e6MYJ") + "venus.c3875816.jpg" + "?" + Date.now();
+},{"8c17f06fd410d75d":"8F1tm"}],"bjLEc":[function(require,module,exports) {
+module.exports = require("27e02aab6e408243").getBundleURL("eLQ0X") + "earth.0431f8a5.jpg" + "?" + Date.now();
 
-},{"cc218c56408942d7":"8F1tm"}],"73KjM":[function(require,module,exports) {
-module.exports = require("60a378b4011ee608").getBundleURL("e6MYJ") + "earth.0431f8a5.jpg" + "?" + Date.now();
+},{"27e02aab6e408243":"8F1tm"}],"iXB8B":[function(require,module,exports) {
+module.exports = require("5ed7fc14298ea0d1").getBundleURL("eLQ0X") + "mars.39828838.jpg" + "?" + Date.now();
 
-},{"60a378b4011ee608":"8F1tm"}],"hQtin":[function(require,module,exports) {
-module.exports = require("12984dc612ee4956").getBundleURL("e6MYJ") + "mars.39828838.jpg" + "?" + Date.now();
+},{"5ed7fc14298ea0d1":"8F1tm"}],"hpdAb":[function(require,module,exports) {
+module.exports = require("a94f5f90ccfe6f3f").getBundleURL("eLQ0X") + "jupiter.970a44f9.jpg" + "?" + Date.now();
 
-},{"12984dc612ee4956":"8F1tm"}],"du9Jl":[function(require,module,exports) {
-module.exports = require("d664c87284b19f9b").getBundleURL("e6MYJ") + "jupiter.970a44f9.jpg" + "?" + Date.now();
+},{"a94f5f90ccfe6f3f":"8F1tm"}],"dmEqi":[function(require,module,exports) {
+module.exports = require("f9de102c81d53239").getBundleURL("eLQ0X") + "saturn.f0999ace.jpg" + "?" + Date.now();
 
-},{"d664c87284b19f9b":"8F1tm"}],"kCNmT":[function(require,module,exports) {
-module.exports = require("18bc97fe4c26d146").getBundleURL("e6MYJ") + "saturn.f0999ace.jpg" + "?" + Date.now();
+},{"f9de102c81d53239":"8F1tm"}],"kFP7F":[function(require,module,exports) {
+module.exports = require("45b83d6d3cea6f02").getBundleURL("eLQ0X") + "saturn ring.cc9fe67e.png" + "?" + Date.now();
 
-},{"18bc97fe4c26d146":"8F1tm"}],"fvRC9":[function(require,module,exports) {
-module.exports = require("85c829df5f4f5b75").getBundleURL("e6MYJ") + "saturn ring.cc9fe67e.png" + "?" + Date.now();
+},{"45b83d6d3cea6f02":"8F1tm"}],"khOR6":[function(require,module,exports) {
+module.exports = require("1a15d35659ad4f43").getBundleURL("eLQ0X") + "uranus.03f8200b.jpg" + "?" + Date.now();
 
-},{"85c829df5f4f5b75":"8F1tm"}],"gV2xF":[function(require,module,exports) {
-module.exports = require("e9d1253070c0dcd").getBundleURL("e6MYJ") + "uranus.03f8200b.jpg" + "?" + Date.now();
+},{"1a15d35659ad4f43":"8F1tm"}],"73au7":[function(require,module,exports) {
+module.exports = require("c1ea66d5d324e5bd").getBundleURL("eLQ0X") + "uranus ring.bb04d0b4.png" + "?" + Date.now();
 
-},{"e9d1253070c0dcd":"8F1tm"}],"e7d5M":[function(require,module,exports) {
-module.exports = require("eed8ea783c469254").getBundleURL("e6MYJ") + "uranus ring.bb04d0b4.png" + "?" + Date.now();
+},{"c1ea66d5d324e5bd":"8F1tm"}],"jHh9J":[function(require,module,exports) {
+module.exports = require("aec63f96b534b88c").getBundleURL("eLQ0X") + "neptune.69b29d20.jpg" + "?" + Date.now();
 
-},{"eed8ea783c469254":"8F1tm"}],"eMfLv":[function(require,module,exports) {
-module.exports = require("7413c54ba479f707").getBundleURL("e6MYJ") + "neptune.69b29d20.jpg" + "?" + Date.now();
+},{"aec63f96b534b88c":"8F1tm"}],"guN5P":[function(require,module,exports) {
+module.exports = require("d6620ff21d217f04").getBundleURL("eLQ0X") + "pluto.cc2d7afe.jpg" + "?" + Date.now();
 
-},{"7413c54ba479f707":"8F1tm"}],"6Ml9M":[function(require,module,exports) {
-module.exports = require("ecd29ad52ae37af4").getBundleURL("e6MYJ") + "pluto.cc2d7afe.jpg" + "?" + Date.now();
+},{"d6620ff21d217f04":"8F1tm"}],"dePSf":[function(require,module,exports) {
+module.exports = require("e44b9291130f586").getBundleURL("eLQ0X") + "Io.58a8119e.jpg" + "?" + Date.now();
 
-},{"ecd29ad52ae37af4":"8F1tm"}],"627od":[function(require,module,exports) {
-module.exports = require("bd07cfaa93c065e5").getBundleURL("e6MYJ") + "Io.58a8119e.jpg" + "?" + Date.now();
+},{"e44b9291130f586":"8F1tm"}],"3jyAL":[function(require,module,exports) {
+module.exports = require("13ed6667efe006c5").getBundleURL("eLQ0X") + "moon.398a608a.jpg" + "?" + Date.now();
 
-},{"bd07cfaa93c065e5":"8F1tm"}],"iTiR7":[function(require,module,exports) {
-module.exports = require("9b499fffba38d621").getBundleURL("e6MYJ") + "moon.398a608a.jpg" + "?" + Date.now();
+},{"13ed6667efe006c5":"8F1tm"}]},["h6Xe0","f47v6"], "f47v6", "parcelRequire7930")
 
-},{"9b499fffba38d621":"8F1tm"}],"6rzI6":[function(require,module,exports) {
-module.exports = require("8795dbfbc93d1ac5")(require("dfc47a2623cd0fe7").getBundleURL("e6MYJ") + "dat.gui.module.07ee0674.js" + "?" + Date.now()).catch((err)=>{
-    delete module.bundle.cache[module.id];
-    throw err;
-}).then(()=>module.bundle.root("k3xQk"));
-
-},{"8795dbfbc93d1ac5":"3bVKG","dfc47a2623cd0fe7":"8F1tm"}],"3bVKG":[function(require,module,exports) {
-"use strict";
-var cacheLoader = require("9a2dc299f692c646");
-module.exports = cacheLoader(function(bundle) {
-    return new Promise(function(resolve, reject) {
-        // Don't insert the same script twice (e.g. if it was already in the HTML)
-        var existingScripts = document.getElementsByTagName("script");
-        if ([].concat(existingScripts).some(function isCurrentBundle(script) {
-            return script.src === bundle;
-        })) {
-            resolve();
-            return;
-        }
-        var preloadLink = document.createElement("link");
-        preloadLink.href = bundle;
-        preloadLink.rel = "preload";
-        preloadLink.as = "script";
-        document.head.appendChild(preloadLink);
-        var script = document.createElement("script");
-        script.async = true;
-        script.type = "text/javascript";
-        script.src = bundle;
-        script.onerror = function(e) {
-            var error = new TypeError("Failed to fetch dynamically imported module: ".concat(bundle, ". Error: ").concat(e.message));
-            script.onerror = script.onload = null;
-            script.remove();
-            reject(error);
-        };
-        script.onload = function() {
-            script.onerror = script.onload = null;
-            resolve();
-        };
-        document.getElementsByTagName("head")[0].appendChild(script);
-    });
-});
-
-},{"9a2dc299f692c646":"1CeSV"}],"1CeSV":[function(require,module,exports) {
-"use strict";
-var cachedBundles = {};
-var cachedPreloads = {};
-var cachedPrefetches = {};
-function getCache(type) {
-    switch(type){
-        case "preload":
-            return cachedPreloads;
-        case "prefetch":
-            return cachedPrefetches;
-        default:
-            return cachedBundles;
-    }
-}
-module.exports = function(loader, type) {
-    return function(bundle) {
-        var cache = getCache(type);
-        if (cache[bundle]) return cache[bundle];
-        return cache[bundle] = loader.apply(null, arguments).catch(function(e) {
-            delete cache[bundle];
-            throw e;
-        });
-    };
-};
-
-},{}]},["eQIYD","goJYj"], "goJYj", "parcelRequire7930")
-
-//# sourceMappingURL=index.64a4978e.js.map
+//# sourceMappingURL=index.b2335e0c.js.map

@@ -2,26 +2,26 @@ import * as THREE from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
-import * as speeds from "./constants/speedConstants.js";
-import * as sizes from "./constants/sizeConstants";
-import * as distances from "./constants/distanceConstants";
+import * as speeds from "./src/js/constants/speedConstants.js";
+import * as sizes from "./src/js/constants/sizeConstants";
+import * as distances from "./src/js/constants/distanceConstants";
 
-import starsTexture from '../img/stars.jpg';
-import sunTexture from '../img/sun.jpg';
-import mercuryTexture from '../img/mercury.jpg';
-import venusTexture from '../img/venus.jpg';
-import earthTexture from '../img/earth.jpg';
-import marsTexture from '../img/mars.jpg';
-import jupiterTexture from '../img/jupiter.jpg';
-import saturnTexture from '../img/saturn.jpg';
-import saturnRingTexture from '../img/saturn ring.png';
-import uranusTexture from '../img/uranus.jpg';
-import uranusRingTexture from '../img/uranus ring.png';
-import neptuneTexture from '../img/neptune.jpg';
-import plutoTexture from '../img/pluto.jpg';
-import ioTexture from '../img/Io.jpg';
+import starsTexture from './src/img/stars.jpg';
+import sunTexture from './src/img/sun.jpg';
+import mercuryTexture from './src/img/mercury.jpg';
+import venusTexture from './src/img/venus.jpg';
+import earthTexture from './src/img/earth.jpg';
+import marsTexture from './src/img/mars.jpg';
+import jupiterTexture from './src/img/jupiter.jpg';
+import saturnTexture from './src/img/saturn.jpg';
+import saturnRingTexture from './src/img/saturn ring.png';
+import uranusTexture from './src/img/uranus.jpg';
+import uranusRingTexture from './src/img/uranus ring.png';
+import neptuneTexture from './src/img/neptune.jpg';
+import plutoTexture from './src/img/pluto.jpg';
+import ioTexture from './src/img/Io.jpg';
 
-import moonTexture from '../img/moon.jpg';
+import moonTexture from './src/img/moon.jpg';
 
 const renderer = new THREE.WebGLRenderer();
 
