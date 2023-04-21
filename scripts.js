@@ -1,7 +1,6 @@
 import * as THREE from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js';
-import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
-import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
+import { CSS2DRenderer, CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer';
 import * as speeds from "./src/js/constants/speedConstants.js";
 import * as sizes from "./src/js/constants/sizeConstants";
 import * as distances from "./src/js/constants/distanceConstants";
@@ -73,6 +72,19 @@ const init = async() => {
 }
 init();
 
+const labelRenderer = new CSS2DRenderer();
+labelRenderer.setSize(window.innerWidth, window.innerHeight);
+labelRenderer.domElement.style.position = 'absolute';
+labelRenderer.domElement.style.top = '0px';
+labelRenderer.domElement.style.pointerEvents = 'none';
+document.body.appendChild(labelRenderer.domElement);
+
+const p = document.createElement('p');
+p.textContent = 'Hello';
+p.style = "color: white";
+const cPointLabel = new CSS2DObject(p);
+scene.add(cPointLabel);
+cPointLabel.position.set(-6, 0.8, 4);
 let sizeSwitch = sizes.sun;
 const sunGeo = new THREE.SphereGeometry(sizeSwitch, 30, 30);
 const sunMat = new THREE.MeshBasicMaterial({
@@ -182,35 +194,8 @@ jupiterGroup.add(jupiter.obj);
 jupiterGroup.add(io.obj);
 
 const pointLight = new THREE.PointLight(0xFFFFFF, 10);
-scene.add(pointLight)
+scene.add(pointLight);
 
-// const loader = new FontLoader();
-// loader.load('fonts/helvetiker_regular.typeface.json', function (font) {
-   const geometry = new THREE.TextGeometry('Hello Three.js!', {
-      size: 3,
-      height: 0.2,
-      curveSegments: 12,
-      bevelEnabled: false,
-      bevelThickness: 0.5,
-      bevelSize: 0.3,
-      bevelOffset: 0,
-      bevelSegments: 5,
-   })
-// })
-const material = new THREE.MeshFaceMaterial([
-    new THREE.MeshPhongMaterial({
-       color: 0xff22cc,
-       flatShading: true,
-    }), // front
-    new THREE.MeshPhongMaterial({
-       color: 0xffcc22
-    }), // side
- ])
- const meshText = new THREE.Mesh(geometry, material);
- meshText.name = 'text';
- scene.add(meshText);
-
-;
 function animate() {
     //Self-rotation
     sun.rotateY(speeds.sunRotation);
@@ -265,6 +250,7 @@ function animate() {
    
     pointLight.intensity = scale.value ? 2 : 8;
 
+    labelRenderer.render(scene, camera);
     renderer.render(scene, camera);
 }
 
@@ -274,4 +260,5 @@ window.addEventListener('resize', function() {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
+    labelRenderer.setSize(this.window.innerWidth, this.window.innerHeight);
 });

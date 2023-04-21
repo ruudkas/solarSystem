@@ -560,8 +560,7 @@ function hmrAccept(bundle, id) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _three = require("three");
 var _orbitControlsJs = require("three/examples/jsm/controls/OrbitControls.js");
-var _textGeometry = require("three/examples/jsm/geometries/TextGeometry");
-var _fontLoaderJs = require("three/examples/jsm/loaders/FontLoader.js");
+var _css2Drenderer = require("three/examples/jsm/renderers/CSS2DRenderer");
 var _speedConstantsJs = require("./src/js/constants/speedConstants.js");
 var _sizeConstants = require("./src/js/constants/sizeConstants");
 var _distanceConstants = require("./src/js/constants/distanceConstants");
@@ -630,6 +629,18 @@ const init = async ()=>{
     solarSystemGui.add(scale, "value").name("Easy View").listen;
 };
 init();
+const labelRenderer = new (0, _css2Drenderer.CSS2DRenderer)();
+labelRenderer.setSize(window.innerWidth, window.innerHeight);
+labelRenderer.domElement.style.position = "absolute";
+labelRenderer.domElement.style.top = "0px";
+labelRenderer.domElement.style.pointerEvents = "none";
+document.body.appendChild(labelRenderer.domElement);
+const p = document.createElement("p");
+p.textContent = "Hello";
+p.style = "color: white";
+const cPointLabel = new (0, _css2Drenderer.CSS2DObject)(p);
+scene.add(cPointLabel);
+cPointLabel.position.set(-6, 0.8, 4);
 let sizeSwitch = _sizeConstants.sun;
 const sunGeo = new _three.SphereGeometry(sizeSwitch, 30, 30);
 const sunMat = new _three.MeshBasicMaterial({
@@ -736,31 +747,6 @@ jupiterGroup.add(jupiter.obj);
 jupiterGroup.add(io.obj);
 const pointLight = new _three.PointLight(0xFFFFFF, 10);
 scene.add(pointLight);
-// const loader = new FontLoader();
-// loader.load('fonts/helvetiker_regular.typeface.json', function (font) {
-const geometry = new _three.TextGeometry("Hello Three.js!", {
-    size: 3,
-    height: 0.2,
-    curveSegments: 12,
-    bevelEnabled: false,
-    bevelThickness: 0.5,
-    bevelSize: 0.3,
-    bevelOffset: 0,
-    bevelSegments: 5
-});
-// })
-const material = new _three.MeshFaceMaterial([
-    new _three.MeshPhongMaterial({
-        color: 0xff22cc,
-        flatShading: true
-    }),
-    new _three.MeshPhongMaterial({
-        color: 0xffcc22
-    })
-]);
-const meshText = new _three.Mesh(geometry, material);
-meshText.name = "text";
-scene.add(meshText);
 function animate() {
     //Self-rotation
     sun.rotateY(_speedConstantsJs.sunRotation);
@@ -810,6 +796,7 @@ function animate() {
     pluto.mesh.scale.set(scale.value ? 8 : 1, scale.value ? 8 : 1, scale.value ? 8 : 1);
     pluto.mesh.position.x = scale.value ? 216 : _distanceConstants.pluto;
     pointLight.intensity = scale.value ? 2 : 8;
+    labelRenderer.render(scene, camera);
     renderer.render(scene, camera);
 }
 renderer.setAnimationLoop(animate);
@@ -817,9 +804,10 @@ window.addEventListener("resize", function() {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
+    labelRenderer.setSize(this.window.innerWidth, this.window.innerHeight);
 });
 
-},{"three":"ktPTu","three/examples/jsm/controls/OrbitControls.js":"7mqRv","three/examples/jsm/geometries/TextGeometry":"d5vi9","three/examples/jsm/loaders/FontLoader.js":"h0CPK","3878a8afca23ff8f":"hYovN","@parcel/transformer-js/src/esmodule-helpers.js":"Gl9w7","./src/js/constants/speedConstants.js":"iTwIK","./src/js/constants/sizeConstants":"yioLF","./src/js/constants/distanceConstants":"gQXzp","./src/img/stars.jpg":"2iW0S","./src/img/sun.jpg":"9ePMA","./src/img/mercury.jpg":"8Elja","./src/img/venus.jpg":"8JEij","./src/img/earth.jpg":"bjLEc","./src/img/mars.jpg":"iXB8B","./src/img/jupiter.jpg":"hpdAb","./src/img/saturn.jpg":"dmEqi","./src/img/saturn ring.png":"kFP7F","./src/img/uranus.jpg":"khOR6","./src/img/uranus ring.png":"73au7","./src/img/neptune.jpg":"jHh9J","./src/img/pluto.jpg":"guN5P","./src/img/Io.jpg":"dePSf","./src/img/moon.jpg":"3jyAL"}],"ktPTu":[function(require,module,exports) {
+},{"three":"ktPTu","three/examples/jsm/controls/OrbitControls.js":"7mqRv","3878a8afca23ff8f":"hYovN","@parcel/transformer-js/src/esmodule-helpers.js":"Gl9w7","./src/js/constants/speedConstants.js":"iTwIK","./src/js/constants/sizeConstants":"yioLF","./src/js/constants/distanceConstants":"gQXzp","./src/img/stars.jpg":"2iW0S","./src/img/sun.jpg":"9ePMA","./src/img/mercury.jpg":"8Elja","./src/img/venus.jpg":"8JEij","./src/img/earth.jpg":"bjLEc","./src/img/mars.jpg":"iXB8B","./src/img/jupiter.jpg":"hpdAb","./src/img/saturn.jpg":"dmEqi","./src/img/saturn ring.png":"kFP7F","./src/img/uranus.jpg":"khOR6","./src/img/uranus ring.png":"73au7","./src/img/neptune.jpg":"jHh9J","./src/img/pluto.jpg":"guN5P","./src/img/Io.jpg":"dePSf","./src/img/moon.jpg":"3jyAL","three/examples/jsm/renderers/CSS2DRenderer":"3tWLO"}],"ktPTu":[function(require,module,exports) {
 /**
  * @license
  * Copyright 2010-2021 Three.js Authors
@@ -30857,158 +30845,6 @@ class MapControls extends OrbitControls {
     }
 }
 
-},{"three":"ktPTu","@parcel/transformer-js/src/esmodule-helpers.js":"Gl9w7"}],"d5vi9":[function(require,module,exports) {
-/**
- * Text = 3D Text
- *
- * parameters = {
- *  font: <THREE.Font>, // font
- *
- *  size: <float>, // size of the text
- *  height: <float>, // thickness to extrude text
- *  curveSegments: <int>, // number of points on the curves
- *
- *  bevelEnabled: <bool>, // turn on bevel
- *  bevelThickness: <float>, // how deep into text bevel goes
- *  bevelSize: <float>, // how far from text outline (including bevelOffset) is bevel
- *  bevelOffset: <float> // how far from text outline does bevel start
- * }
- */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "TextGeometry", ()=>TextGeometry);
-var _three = require("three");
-class TextGeometry extends (0, _three.ExtrudeGeometry) {
-    constructor(text, parameters = {}){
-        const font = parameters.font;
-        if (!(font && font.isFont)) {
-            console.error("THREE.TextGeometry: font parameter is not an instance of THREE.Font.");
-            return new (0, _three.BufferGeometry)();
-        }
-        const shapes = font.generateShapes(text, parameters.size);
-        // translate parameters to ExtrudeGeometry API
-        parameters.depth = parameters.height !== undefined ? parameters.height : 50;
-        // defaults
-        if (parameters.bevelThickness === undefined) parameters.bevelThickness = 10;
-        if (parameters.bevelSize === undefined) parameters.bevelSize = 8;
-        if (parameters.bevelEnabled === undefined) parameters.bevelEnabled = false;
-        super(shapes, parameters);
-        this.type = "TextGeometry";
-    }
-}
-
-},{"three":"ktPTu","@parcel/transformer-js/src/esmodule-helpers.js":"Gl9w7"}],"h0CPK":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "FontLoader", ()=>FontLoader);
-parcelHelpers.export(exports, "Font", ()=>Font);
-var _three = require("three");
-class FontLoader extends (0, _three.Loader) {
-    constructor(manager){
-        super(manager);
-    }
-    load(url, onLoad, onProgress, onError) {
-        const scope = this;
-        const loader = new (0, _three.FileLoader)(this.manager);
-        loader.setPath(this.path);
-        loader.setRequestHeader(this.requestHeader);
-        loader.setWithCredentials(scope.withCredentials);
-        loader.load(url, function(text) {
-            let json;
-            try {
-                json = JSON.parse(text);
-            } catch (e) {
-                console.warn("THREE.FontLoader: typeface.js support is being deprecated. Use typeface.json instead.");
-                json = JSON.parse(text.substring(65, text.length - 2));
-            }
-            const font = scope.parse(json);
-            if (onLoad) onLoad(font);
-        }, onProgress, onError);
-    }
-    parse(json) {
-        return new Font(json);
-    }
-}
-//
-class Font {
-    constructor(data){
-        this.type = "Font";
-        this.data = data;
-    }
-    generateShapes(text, size = 100) {
-        const shapes = [];
-        const paths = createPaths(text, size, this.data);
-        for(let p = 0, pl = paths.length; p < pl; p++)Array.prototype.push.apply(shapes, paths[p].toShapes());
-        return shapes;
-    }
-}
-function createPaths(text, size, data) {
-    const chars = Array.from(text);
-    const scale = size / data.resolution;
-    const line_height = (data.boundingBox.yMax - data.boundingBox.yMin + data.underlineThickness) * scale;
-    const paths = [];
-    let offsetX = 0, offsetY = 0;
-    for(let i = 0; i < chars.length; i++){
-        const char = chars[i];
-        if (char === "\n") {
-            offsetX = 0;
-            offsetY -= line_height;
-        } else {
-            const ret = createPath(char, scale, offsetX, offsetY, data);
-            offsetX += ret.offsetX;
-            paths.push(ret.path);
-        }
-    }
-    return paths;
-}
-function createPath(char, scale, offsetX, offsetY, data) {
-    const glyph = data.glyphs[char] || data.glyphs["?"];
-    if (!glyph) {
-        console.error('THREE.Font: character "' + char + '" does not exists in font family ' + data.familyName + ".");
-        return;
-    }
-    const path = new (0, _three.ShapePath)();
-    let x, y, cpx, cpy, cpx1, cpy1, cpx2, cpy2;
-    if (glyph.o) {
-        const outline = glyph._cachedOutline || (glyph._cachedOutline = glyph.o.split(" "));
-        for(let i = 0, l = outline.length; i < l;){
-            const action = outline[i++];
-            switch(action){
-                case "m":
-                    x = outline[i++] * scale + offsetX;
-                    y = outline[i++] * scale + offsetY;
-                    path.moveTo(x, y);
-                    break;
-                case "l":
-                    x = outline[i++] * scale + offsetX;
-                    y = outline[i++] * scale + offsetY;
-                    path.lineTo(x, y);
-                    break;
-                case "q":
-                    cpx = outline[i++] * scale + offsetX;
-                    cpy = outline[i++] * scale + offsetY;
-                    cpx1 = outline[i++] * scale + offsetX;
-                    cpy1 = outline[i++] * scale + offsetY;
-                    path.quadraticCurveTo(cpx1, cpy1, cpx, cpy);
-                    break;
-                case "b":
-                    cpx = outline[i++] * scale + offsetX;
-                    cpy = outline[i++] * scale + offsetY;
-                    cpx1 = outline[i++] * scale + offsetX;
-                    cpy1 = outline[i++] * scale + offsetY;
-                    cpx2 = outline[i++] * scale + offsetX;
-                    cpy2 = outline[i++] * scale + offsetY;
-                    path.bezierCurveTo(cpx1, cpy1, cpx2, cpy2, cpx, cpy);
-                    break;
-            }
-        }
-    }
-    return {
-        offsetX: glyph.ha * scale,
-        path: path
-    };
-}
-Font.prototype.isFont = true;
-
 },{"three":"ktPTu","@parcel/transformer-js/src/esmodule-helpers.js":"Gl9w7"}],"hYovN":[function(require,module,exports) {
 module.exports = require("6fe3daece000cc1e")(require("832c795133796e4d").getBundleURL("eLQ0X") + "dat.gui.module.07ee0674.js" + "?" + Date.now()).catch((err)=>{
     delete module.bundle.cache[module.id];
@@ -31268,6 +31104,114 @@ module.exports = require("e44b9291130f586").getBundleURL("eLQ0X") + "Io.58a8119e
 },{"e44b9291130f586":"8F1tm"}],"3jyAL":[function(require,module,exports) {
 module.exports = require("13ed6667efe006c5").getBundleURL("eLQ0X") + "moon.398a608a.jpg" + "?" + Date.now();
 
-},{"13ed6667efe006c5":"8F1tm"}]},["h6Xe0","f47v6"], "f47v6", "parcelRequire7930")
+},{"13ed6667efe006c5":"8F1tm"}],"3tWLO":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "CSS2DObject", ()=>CSS2DObject);
+parcelHelpers.export(exports, "CSS2DRenderer", ()=>CSS2DRenderer);
+var _three = require("three");
+class CSS2DObject extends (0, _three.Object3D) {
+    constructor(element){
+        super();
+        this.element = element || document.createElement("div");
+        this.element.style.position = "absolute";
+        this.element.style.userSelect = "none";
+        this.element.setAttribute("draggable", false);
+        this.addEventListener("removed", function() {
+            this.traverse(function(object) {
+                if (object.element instanceof Element && object.element.parentNode !== null) object.element.parentNode.removeChild(object.element);
+            });
+        });
+    }
+    copy(source, recursive) {
+        super.copy(source, recursive);
+        this.element = source.element.cloneNode(true);
+        return this;
+    }
+}
+CSS2DObject.prototype.isCSS2DObject = true;
+//
+const _vector = new (0, _three.Vector3)();
+const _viewMatrix = new (0, _three.Matrix4)();
+const _viewProjectionMatrix = new (0, _three.Matrix4)();
+const _a = new (0, _three.Vector3)();
+const _b = new (0, _three.Vector3)();
+class CSS2DRenderer {
+    constructor(){
+        const _this = this;
+        let _width, _height;
+        let _widthHalf, _heightHalf;
+        const cache = {
+            objects: new WeakMap()
+        };
+        const domElement = document.createElement("div");
+        domElement.style.overflow = "hidden";
+        this.domElement = domElement;
+        this.getSize = function() {
+            return {
+                width: _width,
+                height: _height
+            };
+        };
+        this.render = function(scene, camera) {
+            if (scene.autoUpdate === true) scene.updateMatrixWorld();
+            if (camera.parent === null) camera.updateMatrixWorld();
+            _viewMatrix.copy(camera.matrixWorldInverse);
+            _viewProjectionMatrix.multiplyMatrices(camera.projectionMatrix, _viewMatrix);
+            renderObject(scene, scene, camera);
+            zOrder(scene);
+        };
+        this.setSize = function(width, height) {
+            _width = width;
+            _height = height;
+            _widthHalf = _width / 2;
+            _heightHalf = _height / 2;
+            domElement.style.width = width + "px";
+            domElement.style.height = height + "px";
+        };
+        function renderObject(object, scene, camera) {
+            if (object.isCSS2DObject) {
+                object.onBeforeRender(_this, scene, camera);
+                _vector.setFromMatrixPosition(object.matrixWorld);
+                _vector.applyMatrix4(_viewProjectionMatrix);
+                const element = object.element;
+                if (/apple/i.test(navigator.vendor)) // https://github.com/mrdoob/three.js/issues/21415
+                element.style.transform = "translate(-50%,-50%) translate(" + Math.round(_vector.x * _widthHalf + _widthHalf) + "px," + Math.round(-_vector.y * _heightHalf + _heightHalf) + "px)";
+                else element.style.transform = "translate(-50%,-50%) translate(" + (_vector.x * _widthHalf + _widthHalf) + "px," + (-_vector.y * _heightHalf + _heightHalf) + "px)";
+                element.style.display = object.visible && _vector.z >= -1 && _vector.z <= 1 ? "" : "none";
+                const objectData = {
+                    distanceToCameraSquared: getDistanceToSquared(camera, object)
+                };
+                cache.objects.set(object, objectData);
+                if (element.parentNode !== domElement) domElement.appendChild(element);
+                object.onAfterRender(_this, scene, camera);
+            }
+            for(let i = 0, l = object.children.length; i < l; i++)renderObject(object.children[i], scene, camera);
+        }
+        function getDistanceToSquared(object1, object2) {
+            _a.setFromMatrixPosition(object1.matrixWorld);
+            _b.setFromMatrixPosition(object2.matrixWorld);
+            return _a.distanceToSquared(_b);
+        }
+        function filterAndFlatten(scene) {
+            const result = [];
+            scene.traverse(function(object) {
+                if (object.isCSS2DObject) result.push(object);
+            });
+            return result;
+        }
+        function zOrder(scene) {
+            const sorted = filterAndFlatten(scene).sort(function(a, b) {
+                const distanceA = cache.objects.get(a).distanceToCameraSquared;
+                const distanceB = cache.objects.get(b).distanceToCameraSquared;
+                return distanceA - distanceB;
+            });
+            const zMax = sorted.length;
+            for(let i = 0, l = sorted.length; i < l; i++)sorted[i].element.style.zIndex = zMax - i;
+        }
+    }
+}
+
+},{"three":"ktPTu","@parcel/transformer-js/src/esmodule-helpers.js":"Gl9w7"}]},["h6Xe0","f47v6"], "f47v6", "parcelRequire7930")
 
 //# sourceMappingURL=index.b2335e0c.js.map
