@@ -597,7 +597,7 @@ var _moonJpgDefault = parcelHelpers.interopDefault(_moonJpg);
 var _fs = require("fs");
 var _fsDefault = parcelHelpers.interopDefault(_fs);
 var Buffer = require("ddc3b05bff6d84c0").Buffer;
-const rawFacts = Buffer.from("ew0KICAgICJzdW4iOiAiRXF1YXRvciBjaXJjdW1mZXJlbmNlOiA0LDM3OSwwMDBrbSBcblJhZGl1czogNjk1LDcwMGttIFxuVGVtcGVyYXR1cmU6IDUsOTczwrBDIHRvIDE1LDAwMCwwMDDCsEMgXG5BdmVyYWdlIG9yYml0YWwgc3BlZWQgYXJvdW5kIHRoZSBNaWxreSBXYXk6IDcyMCwwMDBrbS9oICgyMDBrbS9zKSBcblN0YXIgdHlwZTogWWVsbG93IGR3YXJmIFxuQXZlcmFnZSB0aW1lIHRha2VuIHRvIHJvdGF0ZSBvbiBheGlzOiAyNyBFYXJ0aCBkYXlzIFxuTnVtYmVyIG9mIHBsYW5ldHM6IDgiDQp9", "base64");
+const rawFacts = Buffer.from("ew0KICAgICJzdW4iOiAiRXF1YXRvciBjaXJjdW1mZXJlbmNlOiA0LDM3OSwwMDBrbSBcblJhZGl1czogNjk1LDcwMGttIFxuVGVtcGVyYXR1cmU6IDUsOTczwrBDIHRvIDE1LDAwMCwwMDDCsEMgXG5BdmVyYWdlIG9yYml0YWwgc3BlZWQgYXJvdW5kIHRoZSBNaWxreSBXYXk6IDcyMCwwMDBrbS9oICgyMDBrbS9zKSBcblN0YXIgdHlwZTogWWVsbG93IGR3YXJmIFxuQXZlcmFnZSB0aW1lIHRha2VuIHRvIHJvdGF0ZSBvbiBheGlzOiAyNyBFYXJ0aCBkYXlzIFxuTnVtYmVyIG9mIHBsYW5ldHM6IDgiLA0KICAgICJtYXJzIjogIk1hcnMgaXMgYSBjb2xkIGRlc2VydCB3b3JsZC4gSXQgaXMgaGFsZiB0aGUgc2l6ZSBvZiBFYXJ0aC4gTWFycyBpcyBzb21ldGltZXMgY2FsbGVkIHRoZSBSZWQgUGxhbmV0LiBJdCdzIHJlZCBiZWNhdXNlIG9mIHJ1c3R5IGlyb24gaW4gdGhlIGdyb3VuZC4gXG5cbkxpa2UgRWFydGgsIE1hcnMgaGFzIHNlYXNvbnMsIHBvbGFyIGljZSBjYXBzLCB2b2xjYW5vZXMsIGNhbnlvbnMsIGFuZCB3ZWF0aGVyLiBJdCBoYXMgYSB2ZXJ5IHRoaW4gYXRtb3NwaGVyZSBtYWRlIG9mIGNhcmJvbiBkaW94aWRlLCBuaXRyb2dlbiwgYW5kIGFyZ29uLiBcblxuVGhlcmUgYXJlIHNpZ25zIG9mIGFuY2llbnQgZmxvb2RzIG9uIE1hcnMsIGJ1dCBub3cgd2F0ZXIgbW9zdGx5IGV4aXN0cyBpbiBpY3kgZGlydCBhbmQgdGhpbiBjbG91ZHMuIE9uIHNvbWUgTWFydGlhbiBoaWxsc2lkZXMsIHRoZXJlIGlzIGV2aWRlbmNlIG9mIGxpcXVpZCBzYWx0eSB3YXRlciBpbiB0aGUgZ3JvdW5kLiIsDQogICAgIm1lcmN1cnkiOiAiTWVyY3VyeSBpcyB0aGUgc21hbGxlc3QgcGxhbmV0IGluIG91ciBzb2xhciBzeXN0ZW0uIEl0J3MgYSBsaXR0bGUgYmlnZ2VyIHRoYW4gRWFydGgncyBNb29uLiBJdCBpcyB0aGUgY2xvc2VzdCBwbGFuZXQgdG8gdGhlIFN1biwgYnV0IGl04oCZcyBhY3R1YWxseSBub3QgdGhlIGhvdHRlc3QuIFZlbnVzIGlzIGhvdHRlci4gXG5cbkFsb25nIHdpdGggVmVudXMsIEVhcnRoLCBhbmQgTWFycywgTWVyY3VyeSBpcyBvbmUgb2YgdGhlIHJvY2t5IHBsYW5ldHMuIEl0IGhhcyBhIHNvbGlkIHN1cmZhY2UgdGhhdCBpcyBjb3ZlcmVkIHdpdGggY3JhdGVycyBsaWtlIG91ciBNb29uLiBJdCBoYXMgYSB0aGluIGF0bW9zcGhlcmUsIGFuZCBpdCBkb2Vzbid0IGhhdmUgYW55IG1vb25zLiBNZXJjdXJ5IGxpa2VzIHRvIGtlZXAgdGhpbmdzIHNpbXBsZS4gXG5cbk1lcmN1cnkgc3BpbnMgc2xvd2x5IGNvbXBhcmVkIHRvIEVhcnRoLCBzbyBvbmUgZGF5IGxhc3RzIGEgbG9uZyB0aW1lLiBNZXJjdXJ5IHRha2VzIDU5IEVhcnRoIGRheXMgdG8gbWFrZSBvbmUgZnVsbCByb3RhdGlvbi4gQnV0IGEgeWVhciBvbiBNZXJjdXJ5IGdvZXMgZmFzdC4gQmVjYXVzZSBpdCdzIHRoZSBjbG9zZXN0IHBsYW5ldCB0byB0aGUgc3VuLCBpdCBnb2VzIGFyb3VuZCB0aGUgU3VuIGluIGp1c3QgODggRWFydGggZGF5cy4iLA0KICAgICJ2ZW51cyI6ICJWZW51cyBpcyB0aGUgc2Vjb25kIHBsYW5ldCBmcm9tIHRoZSBTdW4gYW5kIEVhcnRoJ3MgY2xvc2VzdCBwbGFuZXRhcnkgbmVpZ2hib3IuIEV2ZW4gdGhvdWdoIE1lcmN1cnkgaXMgY2xvc2VyIHRvIHRoZSBTdW4sIFZlbnVzIGlzIHRoZSBob3R0ZXN0IHBsYW5ldCBpbiBvdXIgc29sYXIgc3lzdGVtLiBJdHMgdGhpY2sgYXRtb3NwaGVyZSBpcyBmdWxsIG9mIHRoZSBncmVlbmhvdXNlIGdhcyBjYXJib24gZGlveGlkZSwgYW5kIGl0IGhhcyBjbG91ZHMgb2Ygc3VsZnVyaWMgYWNpZC4gVGhlIGF0bW9zcGhlcmUgdHJhcHMgaGVhdCwgbWFraW5nIGl0IGZlZWwgbGlrZSBhIGZ1cm5hY2Ugb24gdGhlIHN1cmZhY2UuIEl0J3Mgc28gaG90IG9uIFZlbnVzLCB0aGUgbWV0YWwgbGVhZCB3b3VsZCBtZWx0LiBcblxuVmVudXMgaXMgc29tZXRpbWVzIGNhbGxlZCBFYXJ0aCdzIHR3aW4gYmVjYXVzZSBpdCdzIHNpbWlsYXIgaW4gc2l6ZSBhbmQgc3RydWN0dXJlLCBidXQgdGhlIHBsYW5ldHMgYXJlIHZlcnkgZGlmZmVyZW50IGluIG90aGVyIHdheXMuIEluIGFkZGl0aW9uIHRvIGJlaW5nIGV4dHJlbWVseSBob3QsIFZlbnVzIGlzIHVudXN1YWwgYmVjYXVzZSBpdCBzcGlucyBpbiB0aGUgb3Bwb3NpdGUgZGlyZWN0aW9uIG9mIEVhcnRoIGFuZCBtb3N0IG90aGVyIHBsYW5ldHMuIEl0IGFsc28gaGFzIGEgdmVyeSBzbG93IHJvdGF0aW9uIG1ha2luZyBpdHMgZGF5IGxvbmdlciB0aGFuIGl0cyB5ZWFyLiIsDQogICAgImVhcnRoIjogIk91ciBob21lIHBsYW5ldCBFYXJ0aCBpcyBhIHJvY2t5LCB0ZXJyZXN0cmlhbCBwbGFuZXQuIEl0IGhhcyBhIHNvbGlkIGFuZCBhY3RpdmUgc3VyZmFjZSB3aXRoIG1vdW50YWlucywgdmFsbGV5cywgY2FueW9ucywgcGxhaW5zIGFuZCBzbyBtdWNoIG1vcmUuIEVhcnRoIGlzIHNwZWNpYWwgYmVjYXVzZSBpdCBpcyBhbiBvY2VhbiBwbGFuZXQuIFdhdGVyIGNvdmVycyA3MCUgb2YgRWFydGgncyBzdXJmYWNlLiBcblxuRWFydGgncyBhdG1vc3BoZXJlIGlzIG1hZGUgbW9zdGx5IG9mIG5pdHJvZ2VuIGFuZCBoYXMgcGxlbnR5IG9mIG94eWdlbiBmb3IgdXMgdG8gYnJlYXRoZS4gVGhlIGF0bW9zcGhlcmUgYWxzbyBwcm90ZWN0cyB1cyBmcm9tIGluY29taW5nIG1ldGVvcm9pZHMsIG1vc3Qgb2Ygd2hpY2ggYnJlYWsgdXAgYmVmb3JlIHRoZXkgY2FuIGhpdCB0aGUgc3VyZmFjZS4iLA0KICAgICJqdXBpdGVyIjogIkp1cGl0ZXIgaXMgdGhlIGJpZ2dlc3QgcGxhbmV0IGluIG91ciBzb2xhciBzeXN0ZW0uIEl0J3Mgc2ltaWxhciB0byBhIHN0YXIsIGJ1dCBpdCBuZXZlciBnb3QgYmlnIGVub3VnaCB0byBzdGFydCBidXJuaW5nLiBcblxuSnVwaXRlciBpcyBjb3ZlcmVkIGluIHN3aXJsaW5nIGNsb3VkIHN0cmlwZXMuIEl0IGhhcyBiaWcgc3Rvcm1zIGxpa2UgdGhlIEdyZWF0IFJlZCBTcG90LCB3aGljaCBoYXMgYmVlbiBnb2luZyBmb3IgaHVuZHJlZHMgb2YgeWVhcnMuIFxuXG5KdXBpdGVyIGlzIGEgZ2FzIGdpYW50IGFuZCBkb2Vzbid0IGhhdmUgYSBzb2xpZCBzdXJmYWNlLCBidXQgaXQgbWF5IGhhdmUgYSBzb2xpZCBpbm5lciBjb3JlIGFib3V0IHRoZSBzaXplIG9mIEVhcnRoLiBKdXBpdGVyIGFsc28gaGFzIHJpbmdzLCBidXQgdGhleSdyZSB0b28gZmFpbnQgdG8gc2VlIHZlcnkgd2VsbC4iLA0KICAgICJwbHV0byI6ICJQbHV0byBpcyBhIGR3YXJmIHBsYW5ldCB0aGF0IGxpZXMgaW4gdGhlIEt1aXBlciBCZWx0LCBhbiBhcmVhIGZ1bGwgb2YgaWN5IGJvZGllcyBhbmQgb3RoZXIgZHdhcmYgcGxhbmV0cyBvdXQgcGFzdCBOZXB0dW5lLiBQbHV0byBpcyB2ZXJ5IHNtYWxsLCBvbmx5IGFib3V0IGhhbGYgdGhlIHdpZHRoIG9mIHRoZSBVbml0ZWQgU3RhdGVzIGFuZCBpdHMgYmlnZ2VzdCBtb29uIENoYXJvbiBpcyBhYm91dCBoYWxmIHRoZSBzaXplIG9mIFBsdXRvLiBcblxuQWxtb3N0IGFsbCB0aGUgcGxhbmV0cyB0cmF2ZWwgYXJvdW5kIHRoZSBTdW4gaW4gbmVhcmx5IHBlcmZlY3QgY2lyY2xlcy4gQnV0IG5vdCBQbHV0by4gSXQgdGFrZXMgYW4gb3ZhbC1zaGFwZWQgcGF0aCB3aXRoIHRoZSBTdW4gbm93aGVyZSBuZWFyIGl0cyBjZW50ZXIuIFdoYXQncyBtb3JlLCBpdHMgcGF0aCBpcyBxdWl0ZSB0aWx0ZWQgY29tcGFyZWQgdG8gdGhlIHBsYW5ldHMuIiwNCiAgICAic2F0dXJuIjogIlNhdHVybiBpc24ndCB0aGUgb25seSBwbGFuZXQgdG8gaGF2ZSByaW5ncywgYnV0IGl0IGRlZmluaXRlbHkgaGFzIHRoZSBtb3N0IGJlYXV0aWZ1bCBvbmVzLiBcblxuVGhlIHJpbmdzIHdlIHNlZSBhcmUgbWFkZSBvZiBncm91cHMgb2YgdGlueSByaW5nbGV0cyB0aGF0IHN1cnJvdW5kIFNhdHVybi4gVGhleeKAmXJlIG1hZGUgb2YgY2h1bmtzIG9mIGljZSBhbmQgcm9jay4gXG5cbkxpa2UgSnVwaXRlciwgU2F0dXJuIGlzIG1vc3RseSBhIGJhbGwgb2YgaHlkcm9nZW4gYW5kIGhlbGl1bS4iLA0KICAgICJ1cmFudXMiOiAiVXJhbnVzIGlzIHN1cnJvdW5kZWQgYnkgYSBzZXQgb2YgMTMgcmluZ3MuIFVyYW51cyBpcyBhbiBpY2UgZ2lhbnQgKGluc3RlYWQgb2YgYSBnYXMgZ2lhbnQpLiBJdCBpcyBtb3N0bHkgbWFkZSBvZiBmbG93aW5nIGljeSBtYXRlcmlhbHMgYWJvdmUgYSBzb2xpZCBjb3JlLiBVcmFudXMgaGFzIGEgdGhpY2sgYXRtb3NwaGVyZSBtYWRlIG9mIG1ldGhhbmUsIGh5ZHJvZ2VuLCBhbmQgaGVsaXVtLiBcblxuVXJhbnVzIGlzIHRoZSBvbmx5IHBsYW5ldCB0aGF0IHNwaW5zIG9uIGl0cyBzaWRlLiBVcmFudXMgc3BpbnMgdGhlIG9wcG9zaXRlIGRpcmVjdGlvbiBhcyBFYXJ0aCBhbmQgbW9zdCBvdGhlciBwbGFuZXRzLiIsDQogICAgIm5lcHR1bmUiOiAiTmVwdHVuZSBpcyBkYXJrLCBjb2xkLCBhbmQgdmVyeSB3aW5keS4gSXQncyB0aGUgbGFzdCBvZiB0aGUgcGxhbmV0cyBpbiBvdXIgc29sYXIgc3lzdGVtLiBJdCdzIG1vcmUgdGhhbiAzMCB0aW1lcyBhcyBmYXIgZnJvbSB0aGUgU3VuIGFzIEVhcnRoIGlzLlxuXG5OZXB0dW5lIGlzIHZlcnkgc2ltaWxhciB0byBVcmFudXMuIEl0J3MgbWFkZSBvZiBhIHRoaWNrIHNvdXAgb2Ygd2F0ZXIsIGFtbW9uaWEsIGFuZCBtZXRoYW5lIG92ZXIgYW4gRWFydGgtc2l6ZWQgc29saWQgY2VudGVyLiBJdHMgYXRtb3NwaGVyZSBpcyBtYWRlIG9mIGh5ZHJvZ2VuLCBoZWxpdW0sIGFuZCBtZXRoYW5lLiBUaGUgbWV0aGFuZSBnaXZlcyBOZXB0dW5lIHRoZSBzYW1lIGJsdWUgY29sb3IgYXMgVXJhbnVzLiBcblxuTmVwdHVuZSBoYXMgc2l4IHJpbmdzLCBidXQgdGhleSdyZSB2ZXJ5IGhhcmQgdG8gc2VlLiINCn0=", "base64");
 const facts = JSON.parse(rawFacts);
 const renderer = new _three.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -630,6 +630,13 @@ let factButtons = {
     sun: false,
     mars: false,
     earth: false,
+    mercury: false,
+    venus: false,
+    jupiter: false,
+    saturn: false,
+    uranus: false,
+    neptune: false,
+    pluto: false,
     none: false
 };
 const init = async ()=>{
@@ -641,6 +648,33 @@ const init = async ()=>{
     factFolder = gui.addFolder("Facts");
     factFolder.add(factButtons, "sun").name("Sun").listen().onChange(function() {
         buttonChange("sun");
+    });
+    factFolder.add(factButtons, "mercury").name("Mercury").listen().onChange(function() {
+        buttonChange("mercury");
+    });
+    factFolder.add(factButtons, "venus").name("Venus").listen().onChange(function() {
+        buttonChange("venus");
+    });
+    factFolder.add(factButtons, "earth").name("Earth").listen().onChange(function() {
+        buttonChange("earth");
+    });
+    factFolder.add(factButtons, "mars").name("Mars").listen().onChange(function() {
+        buttonChange("mars");
+    });
+    factFolder.add(factButtons, "jupiter").name("Jupiter").listen().onChange(function() {
+        buttonChange("jupiter");
+    });
+    factFolder.add(factButtons, "saturn").name("Saturn").listen().onChange(function() {
+        buttonChange("saturn");
+    });
+    factFolder.add(factButtons, "uranus").name("Uranus").listen().onChange(function() {
+        buttonChange("uranus");
+    });
+    factFolder.add(factButtons, "neptune").name("Neptune").listen().onChange(function() {
+        buttonChange("neptune");
+    });
+    factFolder.add(factButtons, "pluto").name("Pluto").listen().onChange(function() {
+        buttonChange("pluto");
     });
     factFolder.add(factButtons, "none").name("None").listen().onChange(function() {
         buttonChange("none");
@@ -656,7 +690,7 @@ function buttonChange(buttonName) {
         p.textContent = "";
     } else {
         p.className = "tooltip show";
-        cPointLabel.position.set(-6, 0.8, 4);
+        cPointLabel.position.set(-100, 10, 4);
         p.textContent = facts[buttonName];
     }
 }
@@ -668,27 +702,12 @@ labelRenderer.domElement.style.pointerEvents = "none";
 document.body.appendChild(labelRenderer.domElement);
 // create the element to hold the text
 const p = document.createElement("p");
-p.style = "color: white; white-space: pre";
+p.style = "color: white; white-space: pre-line; max-width: 250px";
 p.className = "tooltip";
 const pContainer = document.createElement("div");
 pContainer.appendChild(p);
 const cPointLabel = new (0, _css2Drenderer.CSS2DObject)(pContainer);
 scene.add(cPointLabel);
-// window.addEventListener('mousemove', function(e) {
-//     console.log(sunButton.value);
-//     if(sunButton.value == true){
-//         p.className = 'tooltip show';
-//         cPointLabel.position.set(-6, 0.8, 4);
-//         p.textContent = 'Sun';
-//     } else if(earthButton.value == true) {
-//         p.className = 'tooltip show';
-//         cPointLabel.position.set(-6, 0.8, 4);
-//         p.textContent = 'Earth';
-//     } else {
-//         p.className = 'tooltip hide';
-//         p.textContent = "";
-//     }
-// })
 let sizeSwitch = _sizeConstants.sun;
 const sunGeo = new _three.SphereGeometry(sizeSwitch, 30, 30);
 const sunMat = new _three.MeshBasicMaterial({

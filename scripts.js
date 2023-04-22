@@ -69,6 +69,13 @@ let factButtons = {
     sun: false,
     mars: false,
     earth: false,
+    mercury: false,
+    venus: false,
+    jupiter: false,
+    saturn: false,
+    uranus: false,
+    neptune: false,
+    pluto: false,
     none: false
 }
 
@@ -76,12 +83,21 @@ const init = async() => {
     await initGui();
 
     try {
-    solarSystemGui = gui.addFolder("Solar System");
+        solarSystemGui = gui.addFolder("Solar System");
     } catch {
     }
     solarSystemGui.add(scale, 'value').name("Easy View").listen;
     factFolder = gui.addFolder("Facts");
     factFolder.add(factButtons, 'sun').name('Sun').listen().onChange(function(){buttonChange('sun')});
+    factFolder.add(factButtons, 'mercury').name('Mercury').listen().onChange(function(){buttonChange('mercury')});
+    factFolder.add(factButtons, 'venus').name('Venus').listen().onChange(function(){buttonChange('venus')});
+    factFolder.add(factButtons, 'earth').name('Earth').listen().onChange(function(){buttonChange('earth')});
+    factFolder.add(factButtons, 'mars').name('Mars').listen().onChange(function(){buttonChange('mars')});
+    factFolder.add(factButtons, 'jupiter').name('Jupiter').listen().onChange(function(){buttonChange('jupiter')});
+    factFolder.add(factButtons, 'saturn').name('Saturn').listen().onChange(function(){buttonChange('saturn')});
+    factFolder.add(factButtons, 'uranus').name('Uranus').listen().onChange(function(){buttonChange('uranus')});
+    factFolder.add(factButtons, 'neptune').name('Neptune').listen().onChange(function(){buttonChange('neptune')});
+    factFolder.add(factButtons, 'pluto').name('Pluto').listen().onChange(function(){buttonChange('pluto')});
     factFolder.add(factButtons, 'none').name('None').listen().onChange(function(){buttonChange('none')});
 
 }
@@ -98,7 +114,7 @@ function buttonChange(buttonName) {
         p.textContent = '';
     } else {
         p.className = 'tooltip show';
-        cPointLabel.position.set(-6, 0.8, 4);
+        cPointLabel.position.set(-100, 10, 4);
         p.textContent = facts[buttonName];
     }
   
@@ -113,28 +129,12 @@ document.body.appendChild(labelRenderer.domElement);
 
 // create the element to hold the text
 const p = document.createElement('p');
-p.style = "color: white; white-space: pre";
+p.style = "color: white; white-space: pre-line; max-width: 250px";
 p.className = 'tooltip';
 const pContainer = document.createElement('div');
 pContainer.appendChild(p);
 const cPointLabel = new CSS2DObject(pContainer);
 scene.add(cPointLabel);
-
-// window.addEventListener('mousemove', function(e) {
-//     console.log(sunButton.value);
-//     if(sunButton.value == true){
-//         p.className = 'tooltip show';
-//         cPointLabel.position.set(-6, 0.8, 4);
-//         p.textContent = 'Sun';
-//     } else if(earthButton.value == true) {
-//         p.className = 'tooltip show';
-//         cPointLabel.position.set(-6, 0.8, 4);
-//         p.textContent = 'Earth';
-//     } else {
-//         p.className = 'tooltip hide';
-//         p.textContent = "";
-//     }
-// })
 
 let sizeSwitch = sizes.sun;
 const sunGeo = new THREE.SphereGeometry(sizeSwitch, 30, 30);
