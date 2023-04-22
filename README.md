@@ -9,3 +9,7 @@ https://solarsystem.nasa.gov/planets/mercury/overview/
 https://solarsystem.nasa.gov/planets/venus/overview/
 https://solarsystem.nasa.gov/planets/earth/overview/
 https://solarsystem.nasa.gov/planets/jupiter/overview/
+https://solarsystem.nasa.gov/planets/saturn/overview/
+https://solarsystem.nasa.gov/planets/uranus/overview/
+https://solarsystem.nasa.gov/planets/neptune/overview/
+https://solarsystem.nasa.gov/planets/dwarf-planets/pluto/overview/

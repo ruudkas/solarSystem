@@ -117,7 +117,6 @@ function buttonChange(buttonName) {
         cPointLabel.position.set(-100, 10, 4);
         p.textContent = facts[buttonName];
     }
-  
 }
 
 const labelRenderer = new CSS2DRenderer();
