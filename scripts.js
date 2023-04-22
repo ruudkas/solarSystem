@@ -1,26 +1,30 @@
 import * as THREE from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js';
+import { CSS2DRenderer, CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer';
+import * as speeds from "./src/js/constants/speedConstants.js";
+import * as sizes from "./src/js/constants/sizeConstants";
+import * as distances from "./src/js/constants/distanceConstants";
 
-import * as speeds from "./constants/speedConstants.js";
-import * as sizes from "./constants/sizeConstants";
-import * as distances from "./constants/distanceConstants";
+import starsTexture from './src/img/stars.jpg';
+import sunTexture from './src/img/sun.jpg';
+import mercuryTexture from './src/img/mercury.jpg';
+import venusTexture from './src/img/venus.jpg';
+import earthTexture from './src/img/earth.jpg';
+import marsTexture from './src/img/mars.jpg';
+import jupiterTexture from './src/img/jupiter.jpg';
+import saturnTexture from './src/img/saturn.jpg';
+import saturnRingTexture from './src/img/saturn ring.png';
+import uranusTexture from './src/img/uranus.jpg';
+import uranusRingTexture from './src/img/uranus ring.png';
+import neptuneTexture from './src/img/neptune.jpg';
+import plutoTexture from './src/img/pluto.jpg';
+import ioTexture from './src/img/Io.jpg';
 
-import starsTexture from '../img/stars.jpg';
-import sunTexture from '../img/sun.jpg';
-import mercuryTexture from '../img/mercury.jpg';
-import venusTexture from '../img/venus.jpg';
-import earthTexture from '../img/earth.jpg';
-import marsTexture from '../img/mars.jpg';
-import jupiterTexture from '../img/jupiter.jpg';
-import saturnTexture from '../img/saturn.jpg';
-import saturnRingTexture from '../img/saturn ring.png';
-import uranusTexture from '../img/uranus.jpg';
-import uranusRingTexture from '../img/uranus ring.png';
-import neptuneTexture from '../img/neptune.jpg';
-import plutoTexture from '../img/pluto.jpg';
-import ioTexture from '../img/Io.jpg';
+import moonTexture from './src/img/moon.jpg';
 
-import moonTexture from '../img/moon.jpg';
+import fs from 'fs';
+const rawFacts = fs.readFileSync('./src/js/constants/facts.json', { encoding: 'utf-8' });
+const facts = JSON.parse(rawFacts);
 
 const renderer = new THREE.WebGLRenderer();
 
@@ -61,16 +65,75 @@ scene.background = cubeTextureLoader.load([
 
 const textureLoader = new THREE.TextureLoader();
 let scale = { value: false };
-const init = async() => { 
-      await initGui();
+let factButtons = {
+    sun: false,
+    mars: false,
+    earth: false,
+    mercury: false,
+    venus: false,
+    jupiter: false,
+    saturn: false,
+    uranus: false,
+    neptune: false,
+    pluto: false,
+    none: false
+}
 
-      try {
-        solarSystemGui = gui.addFolder("solar system");
-      } catch {
-      }
-      solarSystemGui.add(scale, 'value').name("Easy View").listen;
+const init = async() => { 
+    await initGui();
+
+    try {
+        solarSystemGui = gui.addFolder("Solar System");
+    } catch {
+    }
+    solarSystemGui.add(scale, 'value').name("Easy View").listen;
+    factFolder = gui.addFolder("Facts");
+    factFolder.add(factButtons, 'sun').name('Sun').listen().onChange(function(){buttonChange('sun')});
+    factFolder.add(factButtons, 'mercury').name('Mercury').listen().onChange(function(){buttonChange('mercury')});
+    factFolder.add(factButtons, 'venus').name('Venus').listen().onChange(function(){buttonChange('venus')});
+    factFolder.add(factButtons, 'earth').name('Earth').listen().onChange(function(){buttonChange('earth')});
+    factFolder.add(factButtons, 'mars').name('Mars').listen().onChange(function(){buttonChange('mars')});
+    factFolder.add(factButtons, 'jupiter').name('Jupiter').listen().onChange(function(){buttonChange('jupiter')});
+    factFolder.add(factButtons, 'saturn').name('Saturn').listen().onChange(function(){buttonChange('saturn')});
+    factFolder.add(factButtons, 'uranus').name('Uranus').listen().onChange(function(){buttonChange('uranus')});
+    factFolder.add(factButtons, 'neptune').name('Neptune').listen().onChange(function(){buttonChange('neptune')});
+    factFolder.add(factButtons, 'pluto').name('Pluto').listen().onChange(function(){buttonChange('pluto')});
+    factFolder.add(factButtons, 'none').name('None').listen().onChange(function(){buttonChange('none')});
+
 }
 init();
+
+function buttonChange(buttonName) {
+    console.log('running');
+    for( let param in factButtons){
+        factButtons[param] = false;
+    }
+    factButtons[buttonName] = true;
+    if(buttonName === 'none'){
+        p.className = 'tooltip hide';
+        p.textContent = '';
+    } else {
+        p.className = 'tooltip show';
+        cPointLabel.position.set(-100, 10, 4);
+        p.textContent = facts[buttonName];
+    }
+}
+
+const labelRenderer = new CSS2DRenderer();
+labelRenderer.setSize(window.innerWidth, window.innerHeight);
+labelRenderer.domElement.style.position = 'absolute';
+labelRenderer.domElement.style.top = '0px';
+labelRenderer.domElement.style.pointerEvents = 'none';
+document.body.appendChild(labelRenderer.domElement);
+
+// create the element to hold the text
+const p = document.createElement('p');
+p.style = "color: white; white-space: pre-line; max-width: 250px";
+p.className = 'tooltip';
+const pContainer = document.createElement('div');
+pContainer.appendChild(p);
+const cPointLabel = new CSS2DObject(pContainer);
+scene.add(cPointLabel);
 
 let sizeSwitch = sizes.sun;
 const sunGeo = new THREE.SphereGeometry(sizeSwitch, 30, 30);
@@ -78,11 +141,12 @@ const sunMat = new THREE.MeshBasicMaterial({
     map: textureLoader.load(sunTexture)
 });
 const mesh = new THREE.Mesh(sunGeo, sunMat);
+mesh.name = 'Sun';
 const sun = new THREE.Object3D();
 sun.add(mesh);
 scene.add(sun);
 mesh.position.x = 0;
-
+ 
 
 function createPlanetWithMoon(size, texture, position, ring) {
     const geo = new THREE.SphereGeometry(size, 30, 30);
@@ -181,9 +245,8 @@ jupiterGroup.add(jupiter.obj);
 jupiterGroup.add(io.obj);
 
 const pointLight = new THREE.PointLight(0xFFFFFF, 10);
-scene.add(pointLight)
-//const pointLight = new THREE.PointLight(0xFFFFFF, 2, 300);
-console.log(pointLight);
+scene.add(pointLight);
+
 function animate() {
     //Self-rotation
     sun.rotateY(speeds.sunRotation);
@@ -238,6 +301,7 @@ function animate() {
    
     pointLight.intensity = scale.value ? 2 : 8;
 
+    labelRenderer.render(scene, camera);
     renderer.render(scene, camera);
 }
 
@@ -247,4 +311,5 @@ window.addEventListener('resize', function() {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
+    labelRenderer.setSize(this.window.innerWidth, this.window.innerHeight);
 });
