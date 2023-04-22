@@ -14,11 +14,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "fs": "^0.0.1-security",
     "gh-pages": "^5.0.0",
     "three": "^0.133.0"
   },
   "devDependencies": {
     "@parcel/transformer-image": "^2.0.0-rc.0",
+    "buffer": "^5.7.1",
     "dat.gui": "^0.7.9"
   }
 }

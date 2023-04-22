@@ -22,6 +22,10 @@ import ioTexture from './src/img/Io.jpg';
 
 import moonTexture from './src/img/moon.jpg';
 
+import fs from 'fs';
+const rawFacts = fs.readFileSync('./src/js/constants/facts.json', { encoding: 'utf-8' });
+const facts = JSON.parse(rawFacts);
+
 const renderer = new THREE.WebGLRenderer();
 
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -61,16 +65,44 @@ scene.background = cubeTextureLoader.load([
 
 const textureLoader = new THREE.TextureLoader();
 let scale = { value: false };
-const init = async() => { 
-      await initGui();
+let factButtons = {
+    sun: false,
+    mars: false,
+    earth: false,
+    none: false
+}
 
-      try {
-        solarSystemGui = gui.addFolder("solar system");
-      } catch {
-      }
-      solarSystemGui.add(scale, 'value').name("Easy View").listen;
+const init = async() => { 
+    await initGui();
+
+    try {
+    solarSystemGui = gui.addFolder("Solar System");
+    } catch {
+    }
+    solarSystemGui.add(scale, 'value').name("Easy View").listen;
+    factFolder = gui.addFolder("Facts");
+    factFolder.add(factButtons, 'sun').name('Sun').listen().onChange(function(){buttonChange('sun')});
+    factFolder.add(factButtons, 'none').name('None').listen().onChange(function(){buttonChange('none')});
+
 }
 init();
+
+function buttonChange(buttonName) {
+    console.log('running');
+    for( let param in factButtons){
+        factButtons[param] = false;
+    }
+    factButtons[buttonName] = true;
+    if(buttonName === 'none'){
+        p.className = 'tooltip hide';
+        p.textContent = '';
+    } else {
+        p.className = 'tooltip show';
+        cPointLabel.position.set(-6, 0.8, 4);
+        p.textContent = facts[buttonName];
+    }
+  
+}
 
 const labelRenderer = new CSS2DRenderer();
 labelRenderer.setSize(window.innerWidth, window.innerHeight);
@@ -79,23 +111,43 @@ labelRenderer.domElement.style.top = '0px';
 labelRenderer.domElement.style.pointerEvents = 'none';
 document.body.appendChild(labelRenderer.domElement);
 
+// create the element to hold the text
 const p = document.createElement('p');
-p.textContent = 'Hello';
-p.style = "color: white";
-const cPointLabel = new CSS2DObject(p);
+p.style = "color: white; white-space: pre";
+p.className = 'tooltip';
+const pContainer = document.createElement('div');
+pContainer.appendChild(p);
+const cPointLabel = new CSS2DObject(pContainer);
 scene.add(cPointLabel);
-cPointLabel.position.set(-6, 0.8, 4);
+
+// window.addEventListener('mousemove', function(e) {
+//     console.log(sunButton.value);
+//     if(sunButton.value == true){
+//         p.className = 'tooltip show';
+//         cPointLabel.position.set(-6, 0.8, 4);
+//         p.textContent = 'Sun';
+//     } else if(earthButton.value == true) {
+//         p.className = 'tooltip show';
+//         cPointLabel.position.set(-6, 0.8, 4);
+//         p.textContent = 'Earth';
+//     } else {
+//         p.className = 'tooltip hide';
+//         p.textContent = "";
+//     }
+// })
+
 let sizeSwitch = sizes.sun;
 const sunGeo = new THREE.SphereGeometry(sizeSwitch, 30, 30);
 const sunMat = new THREE.MeshBasicMaterial({
     map: textureLoader.load(sunTexture)
 });
 const mesh = new THREE.Mesh(sunGeo, sunMat);
+mesh.name = 'Sun';
 const sun = new THREE.Object3D();
 sun.add(mesh);
 scene.add(sun);
 mesh.position.x = 0;
-
+ 
 
 function createPlanetWithMoon(size, texture, position, ring) {
     const geo = new THREE.SphereGeometry(size, 30, 30);
