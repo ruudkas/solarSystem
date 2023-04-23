@@ -27,7 +27,13 @@ export const plutoSpeed = 0.0017074; //17,074km/h
 //Moon self-rotation
 export const moonRotation = 0.0003683; //3,683km/h //TODO
 export const ioRotation = 0.00624024; //62,402.4 km/h
+export const europaRotation = .0049476096; //49,476.096 km/h
+export const callistoRotation = .002961193; //29,611.93
+export const ganymedeRotation = .0001653; //1,653 km/h
 
 //moon around planet rotation
 export const moonSpeed = 0.0003683; //3,683km/h
 export const ioSpeed = 0.00624024; //62,402.4 km/h
+export const europaSpeed = .0049476096; //49,476.096 km/h
+export const callistoSpeed = .002961193; //29,611.93 km/h
+export const ganymedeSpeed = .0039168; //39,168 km/h

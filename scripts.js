@@ -104,7 +104,6 @@ const init = async() => {
 init();
 
 function buttonChange(buttonName) {
-    console.log('running');
     for( let param in factButtons){
         factButtons[param] = false;
     }
@@ -114,23 +113,25 @@ function buttonChange(buttonName) {
         p.textContent = '';
     } else {
         p.className = 'tooltip show';
-        cPointLabel.position.set(-100, 10, 4);
+        //cPointLabel.position.set(-100, 10, 4);
         p.textContent = facts[buttonName];
     }
 }
 
 const labelRenderer = new CSS2DRenderer();
 labelRenderer.setSize(window.innerWidth, window.innerHeight);
-labelRenderer.domElement.style.position = 'absolute';
+labelRenderer.domElement.style.position = 'fixed';
 labelRenderer.domElement.style.top = '0px';
 labelRenderer.domElement.style.pointerEvents = 'none';
 document.body.appendChild(labelRenderer.domElement);
 
 // create the element to hold the text
 const p = document.createElement('p');
-p.style = "color: white; white-space: pre-line; max-width: 250px";
+p.style = "color: white; white-space: pre-line; max-width: 250px;";
 p.className = 'tooltip';
 const pContainer = document.createElement('div');
+pContainer.style.position = 'fixed';
+pContainer.style.left = "-500px";
 pContainer.appendChild(p);
 const cPointLabel = new CSS2DObject(pContainer);
 scene.add(cPointLabel);

@@ -18,3 +18,5 @@ export const pluto = .179/2; //2,300km
 export const moon = .3475;//3,475
 export const io = .3640; // 3,640 km 
 export const ganymede = .5262; //5,262 km
+export const europa = .3100; //3,100 km
+export const callisto = .4820; // 4,820.6 km
