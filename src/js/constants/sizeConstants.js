@@ -20,3 +20,6 @@ export const io = .3640; // 3,640 km
 export const ganymede = .5262; //5,262 km
 export const europa = .3100; //3,100 km
 export const callisto = .4820; // 4,820.6 km
+export const titan = .51495; //5,149.5 km
+export const enceladus = .0504; //504.2 km
+export const triton = .2700; // 2,700 km

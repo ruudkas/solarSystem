@@ -25,11 +25,14 @@ export const neptuneSpeed = 0.0019548;//19,548km/h
 export const plutoSpeed = 0.0017074; //17,074km/h
 
 //Moon self-rotation
-export const moonRotation = 0.0003683; //3,683km/h //TODO
+export const moonRotation = 0.0003683; //3,683km/h
 export const ioRotation = 0.00624024; //62,402.4 km/h
 export const europaRotation = .0049476096; //49,476.096 km/h
 export const callistoRotation = .002961193; //29,611.93
 export const ganymedeRotation = .0001653; //1,653 km/h
+export const titanRotation = .0020052; //20,052 km/h
+export const enceladusRotation = .00454873; //45,487.3 km/h
+export const tritonRotation = .0015804; // 15,804 km/h
 
 //moon around planet rotation
 export const moonSpeed = 0.0003683; //3,683km/h
@@ -37,3 +40,6 @@ export const ioSpeed = 0.00624024; //62,402.4 km/h
 export const europaSpeed = .0049476096; //49,476.096 km/h
 export const callistoSpeed = .002961193; //29,611.93 km/h
 export const ganymedeSpeed = .0039168; //39,168 km/h
+export const titanSpeed = .0020052; //20,052 km/h
+export const enceladusSpeed = .00454873; //45,487.3 km/h
+export const tritonSpeed = .0015804; // 15,804 km/h

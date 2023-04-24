@@ -14,4 +14,6 @@ https://solarsystem.nasa.gov/planets/uranus/overview/
 https://solarsystem.nasa.gov/planets/neptune/overview/
 https://solarsystem.nasa.gov/planets/dwarf-planets/pluto/overview/
 https://www.youtube.com/watch?v=0ZW3xrFhY3w
+http://www.celestiamotherlode.net/addon/addon_1508.html
+http://www.celestiamotherlode.net/catalog/saturn.html
 

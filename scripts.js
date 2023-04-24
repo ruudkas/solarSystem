@@ -18,11 +18,18 @@ import uranusTexture from './src/img/uranus.jpg';
 import uranusRingTexture from './src/img/uranus ring.png';
 import neptuneTexture from './src/img/neptune.jpg';
 import plutoTexture from './src/img/pluto.jpg';
-import ioTexture from './src/img/Io.jpg';
 
+import ioTexture from './src/img/Io.jpg';
+import europaTexture from './src/img/europa.jpg';
+import ganymedeTexture from './src/img/ganymede.jpg';
+import callistoTexture from './src/img/callisto.jpg';
 import moonTexture from './src/img/moon.jpg';
+import titanTexture from './src/img/Titan.png';
+import enceladusTexture from './src/img/Enceladus.png';
+import tritonTexture from './src/img/triton.jpg';
 
 import fs from 'fs';
+//read in planet facts from the JSON
 const rawFacts = fs.readFileSync('./src/js/constants/facts.json', { encoding: 'utf-8' });
 const facts = JSON.parse(rawFacts);
 
@@ -64,7 +71,8 @@ scene.background = cubeTextureLoader.load([
 ]);
 
 const textureLoader = new THREE.TextureLoader();
-let scale = { value: false };
+let scale = { value: false }; // controls scaled or easy view of solar system
+//controls which fact to show
 let factButtons = {
     sun: false,
     mars: false,
@@ -81,12 +89,14 @@ let factButtons = {
 
 const init = async() => { 
     await initGui();
-
+    //create the folders to hold the controls
     try {
         solarSystemGui = gui.addFolder("Solar System");
     } catch {
     }
+    // create the control for the view window
     solarSystemGui.add(scale, 'value').name("Easy View").listen;
+    //create the controls for the facts
     factFolder = gui.addFolder("Facts");
     factFolder.add(factButtons, 'sun').name('Sun').listen().onChange(function(){buttonChange('sun')});
     factFolder.add(factButtons, 'mercury').name('Mercury').listen().onChange(function(){buttonChange('mercury')});
@@ -104,6 +114,7 @@ const init = async() => {
 init();
 
 function buttonChange(buttonName) {
+    //switches the fact shown based on the item selected
     for( let param in factButtons){
         factButtons[param] = false;
     }
@@ -118,6 +129,7 @@ function buttonChange(buttonName) {
     }
 }
 
+//create a render to render the text
 const labelRenderer = new CSS2DRenderer();
 labelRenderer.setSize(window.innerWidth, window.innerHeight);
 labelRenderer.domElement.style.position = 'fixed';
@@ -136,8 +148,8 @@ pContainer.appendChild(p);
 const cPointLabel = new CSS2DObject(pContainer);
 scene.add(cPointLabel);
 
-let sizeSwitch = sizes.sun;
-const sunGeo = new THREE.SphereGeometry(sizeSwitch, 30, 30);
+//create the sun
+const sunGeo = new THREE.SphereGeometry(sizes.sun, 30, 30);
 const sunMat = new THREE.MeshBasicMaterial({
     map: textureLoader.load(sunTexture)
 });
@@ -150,6 +162,8 @@ mesh.position.x = 0;
  
 
 function createPlanetWithMoon(size, texture, position, ring) {
+    //different from creating planet because the planet is not added to the
+    //scene immediately, allowing grouping with a moon
     const geo = new THREE.SphereGeometry(size, 30, 30);
     const mat = new THREE.MeshStandardMaterial({
         map: textureLoader.load(texture)
@@ -200,12 +214,13 @@ function createPlanet(size, texture, position, ring) {
     return {mesh, obj}
 }
 
+//create all of the planets
 const mercury = createPlanet(sizes.mercury, mercuryTexture, distances.mercury);
 const venus = createPlanet(sizes.venus, venusTexture, distances.venus);
 const earth = createPlanetWithMoon(sizes.earth, earthTexture, distances.earth);
 const mars = createPlanet(sizes.mars, marsTexture, distances.mars);
-const jupiter = createPlanet(sizes.jupiter, jupiterTexture, distances.jupiter);
-const saturn = createPlanet(sizes.saturn, saturnTexture, distances.saturn, {
+const jupiter = createPlanetWithMoon(sizes.jupiter, jupiterTexture, distances.jupiter);
+const saturn = createPlanetWithMoon(sizes.saturn, saturnTexture, 0, {
     innerRadius: 10,
     outerRadius: 20,
     texture: saturnRingTexture
@@ -215,7 +230,7 @@ const uranus = createPlanet(sizes.uranus, uranusTexture, distances.uranus, {
     outerRadius: 12,
     texture: uranusRingTexture
 });
-const neptune = createPlanet(sizes.neptune, neptuneTexture, distances.neptune);
+const neptune = createPlanetWithMoon(sizes.neptune, neptuneTexture, distances.neptune);
 const pluto = createPlanet(sizes.pluto, plutoTexture, distances.pluto);
 
 function createMoon(size, texture, position) {
@@ -230,21 +245,64 @@ function createMoon(size, texture, position) {
     return {mesh, obj}
 }
 
+//create the moon
 const moon = createMoon(sizes.moon, moonTexture, distances.moon);
+//create a group for earth and moon
 const earthGroup = new THREE.Group();
 earthGroup.add(earth.obj);
 earthGroup.add(moon.obj);
-earthGroup.position.set(62, 0, 0);
+//set the distance the group is from sun (based on earth as origin of group)
+earthGroup.position.set(distances.earth, 0, 0);
+//create a group to pivot the earth group around the sun
 const rotationGroup = new THREE.Group();
 rotationGroup.add(sun.obj);
 rotationGroup.add(earthGroup);
 scene.add(rotationGroup);
 
+//create jupiter moons and form rotation group
 const io = createMoon(sizes.io, ioTexture, distances.io);
+const europa = createMoon(sizes.europa, europaTexture, distances.europa);
+const ganymede = createMoon(sizes.ganymede, ganymedeTexture, distances.ganymede);
+const callisto = createMoon(sizes.callisto, callistoTexture, distances.callisto);
 const jupiterGroup = new THREE.Group();
 jupiterGroup.add(jupiter.obj);
 jupiterGroup.add(io.obj);
+jupiterGroup.add(europa.obj);
+jupiterGroup.add(ganymede.obj);
+jupiterGroup.add(callisto.obj);
+jupiterGroup.position.set(distances.jupiter, 0, 0);
+const jupiterRotationGroup = new THREE.Group();
+jupiterRotationGroup.add(sun.obj);
+jupiterRotationGroup.add(jupiterGroup);
+scene.add(jupiterRotationGroup);
 
+//create saturn moons and form rotation group
+const titan = createMoon(sizes.titan, titanTexture, distances.titan);
+const enceladus = createMoon(sizes.enceladus, enceladusTexture, distances.enceladus);
+const saturnGroup = new THREE.Group();
+saturnGroup.add(saturn.obj);
+saturnGroup.add(saturn.obj.ringMesh);
+saturnGroup.add(titan.obj);
+saturnGroup.add(enceladus.obj);
+saturnGroup.position.set(distances.saturn, 0, 0);
+const saturnRotationGroup = new THREE.Group();
+saturnRotationGroup.add(sun.obj);
+saturnRotationGroup.add(saturnGroup);
+scene.add(saturnRotationGroup);
+
+
+// create neptune moon and form rotation group
+const triton = createMoon(sizes.triton, tritonTexture, distances.triton);
+const neptuneGroup = new THREE.Group();
+neptuneGroup.add(neptune.obj);
+neptuneGroup.add(triton.obj);
+neptuneGroup.position.set(distances.neptune, 0, 0);
+const neptuneRotationGroup = new THREE.Group();
+neptuneRotationGroup.add(sun.obj);
+neptuneRotationGroup.add(neptuneGroup);
+scene.add(neptuneRotationGroup);
+
+// make the light come from the sun
 const pointLight = new THREE.PointLight(0xFFFFFF, 10);
 scene.add(pointLight);
 
@@ -262,41 +320,74 @@ function animate() {
     pluto.mesh.rotateY(speeds.plutoRotation);
 
     moon.mesh.rotateY(speeds.moonRotation);
+    io.mesh.rotateY(speeds.ioRotation);
 
     //Around-sun-rotation
     mercury.obj.rotateY(speeds.mercurySpeed);
     venus.obj.rotateY(speeds.venusSpeed);
-    moon.obj.rotateY(scale.value ? .12 : speeds.moonSpeed);
     mars.obj.rotateY(speeds.marsSpeed);
-    jupiter.obj.rotateY(speeds.jupiterSpeed);
-    saturn.obj.rotateY(speeds.saturnSpeed);
+    //saturn.obj.rotateY(speeds.saturnSpeed);
     uranus.obj.rotateY(speeds.uranusSpeed);
-    neptune.obj.rotateY(speeds.neptuneSpeed);
+    //neptune.obj.rotateY(speeds.neptuneSpeed);
     pluto.obj.rotateY(speeds.plutoSpeed);
+    rotationGroup.rotateY(speeds.earthSpeed); //makes earth/moon rotate sun
+    jupiterRotationGroup.rotateY(speeds.jupiterSpeed);
+    saturnRotationGroup.rotateY(speeds.saturnSpeed);
+    neptuneRotationGroup.rotateY(speeds.neptuneSpeed);
+
+    //around planet rotation
+    moon.obj.rotateY(scale.value ? .12 : speeds.moonSpeed);
+    io.obj.rotateY(scale.value? .062 : speeds.ioSpeed);
+    europa.obj.rotateY(scale.value? .049 : speeds.europaSpeed);
+    ganymede.obj.rotateY(scale.value? .039 : speeds.ganymedeSpeed);
+    callisto.obj.rotateY(scale.value? .029 : speeds.callistoSpeed);
+    titan.obj.rotateY(scale.value ? .05 : speeds.titanSpeed);
+    enceladus.obj.rotateY(scale.value ? .1 : speeds.enceladusSpeed);
+    triton.obj.rotateY(scale.value ? .05 : speeds.tritonSpeed);
 
     //change size and position based on view type
-    rotationGroup.rotateY(speeds.earthSpeed); //makes earth/moon rotate sun
     sun.scale.set(scale.value ? 2.9 : 1, scale.value ? 2.9 : 1, scale.value ? 2.9 : 1);
     mercury.mesh.scale.set(scale.value ? 16.8 : 1, scale.value ? 16.8 : 1, scale.value ? 16.8 : 1);
     mercury.mesh.position.x = scale.value ? 28 : distances.mercury;
+
     venus.mesh.scale.set(scale.value ? 12.3 : 1, scale.value ? 12.3 : 1, scale.value ? 12.3 : 1);
     venus.mesh.position.x = scale.value ? 44 : distances.venus;
+
     earth.mesh.scale.set(scale.value ? 6 : 1, scale.value ? 6 : 1, scale.value ? 6 : 1);
     earthGroup.position.x = scale.value ? 62 : distances.earth;
     moon.mesh.scale.set(scale.value ? 2.9 : 1, scale.value ? 2.9 : 1, scale.value ? 2.9 : 1);
     moon.mesh.position.x = scale.value ? 10 : distances.moon;
+
     mars.mesh.scale.set(scale.value ? 8 : 1, scale.value ? 8 : 1, scale.value ? 8 : 1);
     mars.mesh.position.x = scale.value ? 78 : distances.mars;
+
     jupiter.mesh.scale.set(scale.value ? 2 : 1, scale.value ? 2 : 1, scale.value ? 2 : 1);
-    jupiter.mesh.position.x = scale.value ? 100 : distances.jupiter
+    jupiterGroup.position.x = scale.value ? 100 : distances.jupiter;
+    io.mesh.scale.set(scale.value ? 3 : 1, scale.value ? 3 : 1, scale.value ? 3 : 1);
+    io.mesh.position.x = scale.value ? 12 : distances.io;
+    europa.mesh.scale.set(scale.value ? 3 : 1, scale.value ? 3 : 1, scale.value ? 3 : 1);
+    europa.mesh.position.x = scale.value ? 15 : distances.europa;
+    ganymede.mesh.scale.set(scale.value ? 3 : 1, scale.value ? 3 : 1, scale.value ? 3 : 1);
+    ganymede.mesh.position.x = scale.value ? 18 : distances.ganymede;
+    callisto.mesh.scale.set(scale.value ? 3 : 1, scale.value ? 3 : 1, scale.value ? 3 : 1);
+    callisto.mesh.position.x = scale.value ? 21 : distances.callisto;
+
     saturn.mesh.scale.set(scale.value ? 2 : 1, scale.value ? 2 : 1, scale.value ? 2 : 1);
-    saturn.mesh.position.x = scale.value ? 138 : distances.saturn;
-    saturn.obj.children[1].position.x = scale.value ? 138 : distances.saturn;
+    saturnGroup.position.x = scale.value ? 138 : distances.saturn;
+    titan.mesh.scale.set(scale.value ? 4 : 1, scale.value ? 4 : 1, scale.value ?  4 : 1);
+    titan.mesh.position.x = scale.value ? 25 : distances.titan;
+    enceladus.mesh.scale.set(scale.value ? 10 : 1, scale.value ? 10 : 1, scale.value ? 10 : 1);
+    enceladus.mesh.position.x = scale.value ? 22 : distances.enceladus;
+
     uranus.mesh.scale.set(scale.value ? 3.5 : 1, scale.value ? 3.5 : 1, scale.value ? 3.5 : 1);
     uranus.mesh.position.x = scale.value ? 176 : distances.uranus;
     uranus.obj.children[1].position.x = scale.value ? 176 : distances.uranus;
-    neptune.mesh.scale.set(scale.value ? 8 : 1, scale.value ? 8 : 1, scale.value ? 8 : 1);//todo
-    neptune.mesh.position.x = scale.value ? 200 : distances.neptune
+
+    neptune.mesh.scale.set(scale.value ? 5 : 1, scale.value ? 5 : 1, scale.value ? 5 : 1);//todo
+    neptuneGroup.position.x = scale.value ? 200 : distances.neptune;
+    triton.mesh.scale.set(scale.value ? 3 : 1, scale.value ? 3 : 1, scale.value ? 3 : 1);
+    triton.mesh.position.x = scale.value ? 12 : distances.triton;
+
     pluto.mesh.scale.set(scale.value ? 8 : 1, scale.value ? 8 : 1, scale.value ? 8 : 1);
     pluto.mesh.position.x = scale.value ? 216 : distances.pluto
    

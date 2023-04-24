@@ -592,11 +592,24 @@ var _plutoJpg = require("./src/img/pluto.jpg");
 var _plutoJpgDefault = parcelHelpers.interopDefault(_plutoJpg);
 var _ioJpg = require("./src/img/Io.jpg");
 var _ioJpgDefault = parcelHelpers.interopDefault(_ioJpg);
+var _europaJpg = require("./src/img/europa.jpg");
+var _europaJpgDefault = parcelHelpers.interopDefault(_europaJpg);
+var _ganymedeJpg = require("./src/img/ganymede.jpg");
+var _ganymedeJpgDefault = parcelHelpers.interopDefault(_ganymedeJpg);
+var _callistoJpg = require("./src/img/callisto.jpg");
+var _callistoJpgDefault = parcelHelpers.interopDefault(_callistoJpg);
 var _moonJpg = require("./src/img/moon.jpg");
 var _moonJpgDefault = parcelHelpers.interopDefault(_moonJpg);
+var _titanPng = require("./src/img/Titan.png");
+var _titanPngDefault = parcelHelpers.interopDefault(_titanPng);
+var _enceladusPng = require("./src/img/Enceladus.png");
+var _enceladusPngDefault = parcelHelpers.interopDefault(_enceladusPng);
+var _tritonJpg = require("./src/img/triton.jpg");
+var _tritonJpgDefault = parcelHelpers.interopDefault(_tritonJpg);
 var _fs = require("fs");
 var _fsDefault = parcelHelpers.interopDefault(_fs);
 var Buffer = require("ddc3b05bff6d84c0").Buffer;
+//read in planet facts from the JSON
 const rawFacts = Buffer.from("ewogICAgInN1biI6ICJFcXVhdG9yIGNpcmN1bWZlcmVuY2U6IDQsMzc5LDAwMGttIFxuUmFkaXVzOiA2OTUsNzAwa20gXG5UZW1wZXJhdHVyZTogNSw5NzPCsEMgdG8gMTUsMDAwLDAwMMKwQyBcbkF2ZXJhZ2Ugb3JiaXRhbCBzcGVlZCBhcm91bmQgdGhlIE1pbGt5IFdheTogNzIwLDAwMGttL2ggKDIwMGttL3MpIFxuU3RhciB0eXBlOiBZZWxsb3cgZHdhcmYgXG5BdmVyYWdlIHRpbWUgdGFrZW4gdG8gcm90YXRlIG9uIGF4aXM6IDI3IEVhcnRoIGRheXMgXG5OdW1iZXIgb2YgcGxhbmV0czogOCIsCiAgICAibWFycyI6ICJNYXJzIGlzIGEgY29sZCBkZXNlcnQgd29ybGQuIEl0IGlzIGhhbGYgdGhlIHNpemUgb2YgRWFydGguIE1hcnMgaXMgc29tZXRpbWVzIGNhbGxlZCB0aGUgUmVkIFBsYW5ldC4gSXQncyByZWQgYmVjYXVzZSBvZiBydXN0eSBpcm9uIGluIHRoZSBncm91bmQuIFxuXG5MaWtlIEVhcnRoLCBNYXJzIGhhcyBzZWFzb25zLCBwb2xhciBpY2UgY2Fwcywgdm9sY2Fub2VzLCBjYW55b25zLCBhbmQgd2VhdGhlci4gSXQgaGFzIGEgdmVyeSB0aGluIGF0bW9zcGhlcmUgbWFkZSBvZiBjYXJib24gZGlveGlkZSwgbml0cm9nZW4sIGFuZCBhcmdvbi4gXG5cblRoZXJlIGFyZSBzaWducyBvZiBhbmNpZW50IGZsb29kcyBvbiBNYXJzLCBidXQgbm93IHdhdGVyIG1vc3RseSBleGlzdHMgaW4gaWN5IGRpcnQgYW5kIHRoaW4gY2xvdWRzLiBPbiBzb21lIE1hcnRpYW4gaGlsbHNpZGVzLCB0aGVyZSBpcyBldmlkZW5jZSBvZiBsaXF1aWQgc2FsdHkgd2F0ZXIgaW4gdGhlIGdyb3VuZC4iLAogICAgIm1lcmN1cnkiOiAiTWVyY3VyeSBpcyB0aGUgc21hbGxlc3QgcGxhbmV0IGluIG91ciBzb2xhciBzeXN0ZW0uIEl0J3MgYSBsaXR0bGUgYmlnZ2VyIHRoYW4gRWFydGgncyBNb29uLiBJdCBpcyB0aGUgY2xvc2VzdCBwbGFuZXQgdG8gdGhlIFN1biwgYnV0IGl04oCZcyBhY3R1YWxseSBub3QgdGhlIGhvdHRlc3QuIFZlbnVzIGlzIGhvdHRlci4gXG5cbkFsb25nIHdpdGggVmVudXMsIEVhcnRoLCBhbmQgTWFycywgTWVyY3VyeSBpcyBvbmUgb2YgdGhlIHJvY2t5IHBsYW5ldHMuIEl0IGhhcyBhIHNvbGlkIHN1cmZhY2UgdGhhdCBpcyBjb3ZlcmVkIHdpdGggY3JhdGVycyBsaWtlIG91ciBNb29uLiBJdCBoYXMgYSB0aGluIGF0bW9zcGhlcmUsIGFuZCBpdCBkb2Vzbid0IGhhdmUgYW55IG1vb25zLiBNZXJjdXJ5IGxpa2VzIHRvIGtlZXAgdGhpbmdzIHNpbXBsZS4gXG5cbk1lcmN1cnkgc3BpbnMgc2xvd2x5IGNvbXBhcmVkIHRvIEVhcnRoLCBzbyBvbmUgZGF5IGxhc3RzIGEgbG9uZyB0aW1lLiBNZXJjdXJ5IHRha2VzIDU5IEVhcnRoIGRheXMgdG8gbWFrZSBvbmUgZnVsbCByb3RhdGlvbi4gQnV0IGEgeWVhciBvbiBNZXJjdXJ5IGdvZXMgZmFzdC4gQmVjYXVzZSBpdCdzIHRoZSBjbG9zZXN0IHBsYW5ldCB0byB0aGUgc3VuLCBpdCBnb2VzIGFyb3VuZCB0aGUgU3VuIGluIGp1c3QgODggRWFydGggZGF5cy4iLAogICAgInZlbnVzIjogIlZlbnVzIGlzIHRoZSBzZWNvbmQgcGxhbmV0IGZyb20gdGhlIFN1biBhbmQgRWFydGgncyBjbG9zZXN0IHBsYW5ldGFyeSBuZWlnaGJvci4gRXZlbiB0aG91Z2ggTWVyY3VyeSBpcyBjbG9zZXIgdG8gdGhlIFN1biwgVmVudXMgaXMgdGhlIGhvdHRlc3QgcGxhbmV0IGluIG91ciBzb2xhciBzeXN0ZW0uIEl0cyB0aGljayBhdG1vc3BoZXJlIGlzIGZ1bGwgb2YgdGhlIGdyZWVuaG91c2UgZ2FzIGNhcmJvbiBkaW94aWRlLCBhbmQgaXQgaGFzIGNsb3VkcyBvZiBzdWxmdXJpYyBhY2lkLiBUaGUgYXRtb3NwaGVyZSB0cmFwcyBoZWF0LCBtYWtpbmcgaXQgZmVlbCBsaWtlIGEgZnVybmFjZSBvbiB0aGUgc3VyZmFjZS4gSXQncyBzbyBob3Qgb24gVmVudXMsIHRoZSBtZXRhbCBsZWFkIHdvdWxkIG1lbHQuIFxuXG5WZW51cyBpcyBzb21ldGltZXMgY2FsbGVkIEVhcnRoJ3MgdHdpbiBiZWNhdXNlIGl0J3Mgc2ltaWxhciBpbiBzaXplIGFuZCBzdHJ1Y3R1cmUsIGJ1dCB0aGUgcGxhbmV0cyBhcmUgdmVyeSBkaWZmZXJlbnQgaW4gb3RoZXIgd2F5cy4gSW4gYWRkaXRpb24gdG8gYmVpbmcgZXh0cmVtZWx5IGhvdCwgVmVudXMgaXMgdW51c3VhbCBiZWNhdXNlIGl0IHNwaW5zIGluIHRoZSBvcHBvc2l0ZSBkaXJlY3Rpb24gb2YgRWFydGggYW5kIG1vc3Qgb3RoZXIgcGxhbmV0cy4gSXQgYWxzbyBoYXMgYSB2ZXJ5IHNsb3cgcm90YXRpb24gbWFraW5nIGl0cyBkYXkgbG9uZ2VyIHRoYW4gaXRzIHllYXIuIiwKICAgICJlYXJ0aCI6ICJPdXIgaG9tZSBwbGFuZXQgRWFydGggaXMgYSByb2NreSwgdGVycmVzdHJpYWwgcGxhbmV0LiBJdCBoYXMgYSBzb2xpZCBhbmQgYWN0aXZlIHN1cmZhY2Ugd2l0aCBtb3VudGFpbnMsIHZhbGxleXMsIGNhbnlvbnMsIHBsYWlucyBhbmQgc28gbXVjaCBtb3JlLiBFYXJ0aCBpcyBzcGVjaWFsIGJlY2F1c2UgaXQgaXMgYW4gb2NlYW4gcGxhbmV0LiBXYXRlciBjb3ZlcnMgNzAlIG9mIEVhcnRoJ3Mgc3VyZmFjZS4gXG5cbkVhcnRoJ3MgYXRtb3NwaGVyZSBpcyBtYWRlIG1vc3RseSBvZiBuaXRyb2dlbiBhbmQgaGFzIHBsZW50eSBvZiBveHlnZW4gZm9yIHVzIHRvIGJyZWF0aGUuIFRoZSBhdG1vc3BoZXJlIGFsc28gcHJvdGVjdHMgdXMgZnJvbSBpbmNvbWluZyBtZXRlb3JvaWRzLCBtb3N0IG9mIHdoaWNoIGJyZWFrIHVwIGJlZm9yZSB0aGV5IGNhbiBoaXQgdGhlIHN1cmZhY2UuIiwKICAgICJqdXBpdGVyIjogIkp1cGl0ZXIgaXMgdGhlIGJpZ2dlc3QgcGxhbmV0IGluIG91ciBzb2xhciBzeXN0ZW0uIEl0J3Mgc2ltaWxhciB0byBhIHN0YXIsIGJ1dCBpdCBuZXZlciBnb3QgYmlnIGVub3VnaCB0byBzdGFydCBidXJuaW5nLiBcblxuSnVwaXRlciBpcyBjb3ZlcmVkIGluIHN3aXJsaW5nIGNsb3VkIHN0cmlwZXMuIEl0IGhhcyBiaWcgc3Rvcm1zIGxpa2UgdGhlIEdyZWF0IFJlZCBTcG90LCB3aGljaCBoYXMgYmVlbiBnb2luZyBmb3IgaHVuZHJlZHMgb2YgeWVhcnMuIFxuXG5KdXBpdGVyIGlzIGEgZ2FzIGdpYW50IGFuZCBkb2Vzbid0IGhhdmUgYSBzb2xpZCBzdXJmYWNlLCBidXQgaXQgbWF5IGhhdmUgYSBzb2xpZCBpbm5lciBjb3JlIGFib3V0IHRoZSBzaXplIG9mIEVhcnRoLiBKdXBpdGVyIGFsc28gaGFzIHJpbmdzLCBidXQgdGhleSdyZSB0b28gZmFpbnQgdG8gc2VlIHZlcnkgd2VsbC4iLAogICAgInBsdXRvIjogIlBsdXRvIGlzIGEgZHdhcmYgcGxhbmV0IHRoYXQgbGllcyBpbiB0aGUgS3VpcGVyIEJlbHQsIGFuIGFyZWEgZnVsbCBvZiBpY3kgYm9kaWVzIGFuZCBvdGhlciBkd2FyZiBwbGFuZXRzIG91dCBwYXN0IE5lcHR1bmUuIFBsdXRvIGlzIHZlcnkgc21hbGwsIG9ubHkgYWJvdXQgaGFsZiB0aGUgd2lkdGggb2YgdGhlIFVuaXRlZCBTdGF0ZXMgYW5kIGl0cyBiaWdnZXN0IG1vb24gQ2hhcm9uIGlzIGFib3V0IGhhbGYgdGhlIHNpemUgb2YgUGx1dG8uIFxuXG5BbG1vc3QgYWxsIHRoZSBwbGFuZXRzIHRyYXZlbCBhcm91bmQgdGhlIFN1biBpbiBuZWFybHkgcGVyZmVjdCBjaXJjbGVzLiBCdXQgbm90IFBsdXRvLiBJdCB0YWtlcyBhbiBvdmFsLXNoYXBlZCBwYXRoIHdpdGggdGhlIFN1biBub3doZXJlIG5lYXIgaXRzIGNlbnRlci4gV2hhdCdzIG1vcmUsIGl0cyBwYXRoIGlzIHF1aXRlIHRpbHRlZCBjb21wYXJlZCB0byB0aGUgcGxhbmV0cy4iLAogICAgInNhdHVybiI6ICJTYXR1cm4gaXNuJ3QgdGhlIG9ubHkgcGxhbmV0IHRvIGhhdmUgcmluZ3MsIGJ1dCBpdCBkZWZpbml0ZWx5IGhhcyB0aGUgbW9zdCBiZWF1dGlmdWwgb25lcy4gXG5cblRoZSByaW5ncyB3ZSBzZWUgYXJlIG1hZGUgb2YgZ3JvdXBzIG9mIHRpbnkgcmluZ2xldHMgdGhhdCBzdXJyb3VuZCBTYXR1cm4uIFRoZXnigJlyZSBtYWRlIG9mIGNodW5rcyBvZiBpY2UgYW5kIHJvY2suIFxuXG5MaWtlIEp1cGl0ZXIsIFNhdHVybiBpcyBtb3N0bHkgYSBiYWxsIG9mIGh5ZHJvZ2VuIGFuZCBoZWxpdW0uIiwKICAgICJ1cmFudXMiOiAiVXJhbnVzIGlzIHN1cnJvdW5kZWQgYnkgYSBzZXQgb2YgMTMgcmluZ3MuIFVyYW51cyBpcyBhbiBpY2UgZ2lhbnQgKGluc3RlYWQgb2YgYSBnYXMgZ2lhbnQpLiBJdCBpcyBtb3N0bHkgbWFkZSBvZiBmbG93aW5nIGljeSBtYXRlcmlhbHMgYWJvdmUgYSBzb2xpZCBjb3JlLiBVcmFudXMgaGFzIGEgdGhpY2sgYXRtb3NwaGVyZSBtYWRlIG9mIG1ldGhhbmUsIGh5ZHJvZ2VuLCBhbmQgaGVsaXVtLiBcblxuVXJhbnVzIGlzIHRoZSBvbmx5IHBsYW5ldCB0aGF0IHNwaW5zIG9uIGl0cyBzaWRlLiBVcmFudXMgc3BpbnMgdGhlIG9wcG9zaXRlIGRpcmVjdGlvbiBhcyBFYXJ0aCBhbmQgbW9zdCBvdGhlciBwbGFuZXRzLiIsCiAgICAibmVwdHVuZSI6ICJOZXB0dW5lIGlzIGRhcmssIGNvbGQsIGFuZCB2ZXJ5IHdpbmR5LiBJdCdzIHRoZSBsYXN0IG9mIHRoZSBwbGFuZXRzIGluIG91ciBzb2xhciBzeXN0ZW0uIEl0J3MgbW9yZSB0aGFuIDMwIHRpbWVzIGFzIGZhciBmcm9tIHRoZSBTdW4gYXMgRWFydGggaXMuXG5cbk5lcHR1bmUgaXMgdmVyeSBzaW1pbGFyIHRvIFVyYW51cy4gSXQncyBtYWRlIG9mIGEgdGhpY2sgc291cCBvZiB3YXRlciwgYW1tb25pYSwgYW5kIG1ldGhhbmUgb3ZlciBhbiBFYXJ0aC1zaXplZCBzb2xpZCBjZW50ZXIuIEl0cyBhdG1vc3BoZXJlIGlzIG1hZGUgb2YgaHlkcm9nZW4sIGhlbGl1bSwgYW5kIG1ldGhhbmUuIFRoZSBtZXRoYW5lIGdpdmVzIE5lcHR1bmUgdGhlIHNhbWUgYmx1ZSBjb2xvciBhcyBVcmFudXMuIFxuXG5OZXB0dW5lIGhhcyBzaXggcmluZ3MsIGJ1dCB0aGV5J3JlIHZlcnkgaGFyZCB0byBzZWUuIgp9", "base64");
 const facts = JSON.parse(rawFacts);
 const renderer = new _three.WebGLRenderer();
@@ -625,7 +638,8 @@ scene.background = cubeTextureLoader.load([
 const textureLoader = new _three.TextureLoader();
 let scale = {
     value: false
-};
+}; // controls scaled or easy view of solar system
+//controls which fact to show
 let factButtons = {
     sun: false,
     mars: false,
@@ -641,10 +655,13 @@ let factButtons = {
 };
 const init = async ()=>{
     await initGui();
+    //create the folders to hold the controls
     try {
         solarSystemGui = gui.addFolder("Solar System");
     } catch  {}
+    // create the control for the view window
     solarSystemGui.add(scale, "value").name("Easy View").listen;
+    //create the controls for the facts
     factFolder = gui.addFolder("Facts");
     factFolder.add(factButtons, "sun").name("Sun").listen().onChange(function() {
         buttonChange("sun");
@@ -682,6 +699,7 @@ const init = async ()=>{
 };
 init();
 function buttonChange(buttonName) {
+    //switches the fact shown based on the item selected
     for(let param in factButtons)factButtons[param] = false;
     factButtons[buttonName] = true;
     if (buttonName === "none") {
@@ -693,6 +711,7 @@ function buttonChange(buttonName) {
         p.textContent = facts[buttonName];
     }
 }
+//create a render to render the text
 const labelRenderer = new (0, _css2Drenderer.CSS2DRenderer)();
 labelRenderer.setSize(window.innerWidth, window.innerHeight);
 labelRenderer.domElement.style.position = "fixed";
@@ -709,8 +728,8 @@ pContainer.style.left = "-500px";
 pContainer.appendChild(p);
 const cPointLabel = new (0, _css2Drenderer.CSS2DObject)(pContainer);
 scene.add(cPointLabel);
-let sizeSwitch = _sizeConstants.sun;
-const sunGeo = new _three.SphereGeometry(sizeSwitch, 30, 30);
+//create the sun
+const sunGeo = new _three.SphereGeometry(_sizeConstants.sun, 30, 30);
 const sunMat = new _three.MeshBasicMaterial({
     map: textureLoader.load((0, _sunJpgDefault.default))
 });
@@ -721,6 +740,8 @@ sun.add(mesh);
 scene.add(sun);
 mesh.position.x = 0;
 function createPlanetWithMoon(size, texture, position, ring) {
+    //different from creating planet because the planet is not added to the
+    //scene immediately, allowing grouping with a moon
     const geo = new _three.SphereGeometry(size, 30, 30);
     const mat = new _three.MeshStandardMaterial({
         map: textureLoader.load(texture)
@@ -770,12 +791,13 @@ function createPlanet(size, texture, position, ring) {
         obj
     };
 }
+//create all of the planets
 const mercury = createPlanet(_sizeConstants.mercury, (0, _mercuryJpgDefault.default), _distanceConstants.mercury);
 const venus = createPlanet(_sizeConstants.venus, (0, _venusJpgDefault.default), _distanceConstants.venus);
 const earth = createPlanetWithMoon(_sizeConstants.earth, (0, _earthJpgDefault.default), _distanceConstants.earth);
 const mars = createPlanet(_sizeConstants.mars, (0, _marsJpgDefault.default), _distanceConstants.mars);
-const jupiter = createPlanet(_sizeConstants.jupiter, (0, _jupiterJpgDefault.default), _distanceConstants.jupiter);
-const saturn = createPlanet(_sizeConstants.saturn, (0, _saturnJpgDefault.default), _distanceConstants.saturn, {
+const jupiter = createPlanetWithMoon(_sizeConstants.jupiter, (0, _jupiterJpgDefault.default), _distanceConstants.jupiter);
+const saturn = createPlanetWithMoon(_sizeConstants.saturn, (0, _saturnJpgDefault.default), 0, {
     innerRadius: 10,
     outerRadius: 20,
     texture: (0, _saturnRingPngDefault.default)
@@ -785,7 +807,7 @@ const uranus = createPlanet(_sizeConstants.uranus, (0, _uranusJpgDefault.default
     outerRadius: 12,
     texture: (0, _uranusRingPngDefault.default)
 });
-const neptune = createPlanet(_sizeConstants.neptune, (0, _neptuneJpgDefault.default), _distanceConstants.neptune);
+const neptune = createPlanetWithMoon(_sizeConstants.neptune, (0, _neptuneJpgDefault.default), _distanceConstants.neptune);
 const pluto = createPlanet(_sizeConstants.pluto, (0, _plutoJpgDefault.default), _distanceConstants.pluto);
 function createMoon(size, texture, position) {
     const geo = new _three.SphereGeometry(size, 30, 30);
@@ -801,19 +823,59 @@ function createMoon(size, texture, position) {
         obj
     };
 }
+//create the moon
 const moon = createMoon(_sizeConstants.moon, (0, _moonJpgDefault.default), _distanceConstants.moon);
+//create a group for earth and moon
 const earthGroup = new _three.Group();
 earthGroup.add(earth.obj);
 earthGroup.add(moon.obj);
-earthGroup.position.set(62, 0, 0);
+//set the distance the group is from sun (based on earth as origin of group)
+earthGroup.position.set(_distanceConstants.earth, 0, 0);
+//create a group to pivot the earth group around the sun
 const rotationGroup = new _three.Group();
 rotationGroup.add(sun.obj);
 rotationGroup.add(earthGroup);
 scene.add(rotationGroup);
+//create jupiter moons and form rotation group
 const io = createMoon(_sizeConstants.io, (0, _ioJpgDefault.default), _distanceConstants.io);
+const europa = createMoon(_sizeConstants.europa, (0, _europaJpgDefault.default), _distanceConstants.europa);
+const ganymede = createMoon(_sizeConstants.ganymede, (0, _ganymedeJpgDefault.default), _distanceConstants.ganymede);
+const callisto = createMoon(_sizeConstants.callisto, (0, _callistoJpgDefault.default), _distanceConstants.callisto);
 const jupiterGroup = new _three.Group();
 jupiterGroup.add(jupiter.obj);
 jupiterGroup.add(io.obj);
+jupiterGroup.add(europa.obj);
+jupiterGroup.add(ganymede.obj);
+jupiterGroup.add(callisto.obj);
+jupiterGroup.position.set(_distanceConstants.jupiter, 0, 0);
+const jupiterRotationGroup = new _three.Group();
+jupiterRotationGroup.add(sun.obj);
+jupiterRotationGroup.add(jupiterGroup);
+scene.add(jupiterRotationGroup);
+//create saturn moons and form rotation group
+const titan = createMoon(_sizeConstants.titan, (0, _titanPngDefault.default), _distanceConstants.titan);
+const enceladus = createMoon(_sizeConstants.enceladus, (0, _enceladusPngDefault.default), _distanceConstants.enceladus);
+const saturnGroup = new _three.Group();
+saturnGroup.add(saturn.obj);
+saturnGroup.add(saturn.obj.ringMesh);
+saturnGroup.add(titan.obj);
+saturnGroup.add(enceladus.obj);
+saturnGroup.position.set(_distanceConstants.saturn, 0, 0);
+const saturnRotationGroup = new _three.Group();
+saturnRotationGroup.add(sun.obj);
+saturnRotationGroup.add(saturnGroup);
+scene.add(saturnRotationGroup);
+// create neptune moon and form rotation group
+const triton = createMoon(_sizeConstants.triton, (0, _tritonJpgDefault.default), _distanceConstants.triton);
+const neptuneGroup = new _three.Group();
+neptuneGroup.add(neptune.obj);
+neptuneGroup.add(triton.obj);
+neptuneGroup.position.set(_distanceConstants.neptune, 0, 0);
+const neptuneRotationGroup = new _three.Group();
+neptuneRotationGroup.add(sun.obj);
+neptuneRotationGroup.add(neptuneGroup);
+scene.add(neptuneRotationGroup);
+// make the light come from the sun
 const pointLight = new _three.PointLight(0xFFFFFF, 10);
 scene.add(pointLight);
 function animate() {
@@ -829,18 +891,29 @@ function animate() {
     neptune.mesh.rotateY(_speedConstantsJs.neptuneRotation);
     pluto.mesh.rotateY(_speedConstantsJs.plutoRotation);
     moon.mesh.rotateY(_speedConstantsJs.moonRotation);
+    io.mesh.rotateY(_speedConstantsJs.ioRotation);
     //Around-sun-rotation
     mercury.obj.rotateY(_speedConstantsJs.mercurySpeed);
     venus.obj.rotateY(_speedConstantsJs.venusSpeed);
-    moon.obj.rotateY(scale.value ? .12 : _speedConstantsJs.moonSpeed);
     mars.obj.rotateY(_speedConstantsJs.marsSpeed);
-    jupiter.obj.rotateY(_speedConstantsJs.jupiterSpeed);
-    saturn.obj.rotateY(_speedConstantsJs.saturnSpeed);
+    //saturn.obj.rotateY(speeds.saturnSpeed);
     uranus.obj.rotateY(_speedConstantsJs.uranusSpeed);
-    neptune.obj.rotateY(_speedConstantsJs.neptuneSpeed);
+    //neptune.obj.rotateY(speeds.neptuneSpeed);
     pluto.obj.rotateY(_speedConstantsJs.plutoSpeed);
-    //change size and position based on view type
     rotationGroup.rotateY(_speedConstantsJs.earthSpeed); //makes earth/moon rotate sun
+    jupiterRotationGroup.rotateY(_speedConstantsJs.jupiterSpeed);
+    saturnRotationGroup.rotateY(_speedConstantsJs.saturnSpeed);
+    neptuneRotationGroup.rotateY(_speedConstantsJs.neptuneSpeed);
+    //around planet rotation
+    moon.obj.rotateY(scale.value ? .12 : _speedConstantsJs.moonSpeed);
+    io.obj.rotateY(scale.value ? .062 : _speedConstantsJs.ioSpeed);
+    europa.obj.rotateY(scale.value ? .049 : _speedConstantsJs.europaSpeed);
+    ganymede.obj.rotateY(scale.value ? .039 : _speedConstantsJs.ganymedeSpeed);
+    callisto.obj.rotateY(scale.value ? .029 : _speedConstantsJs.callistoSpeed);
+    titan.obj.rotateY(scale.value ? .05 : _speedConstantsJs.titanSpeed);
+    enceladus.obj.rotateY(scale.value ? .1 : _speedConstantsJs.enceladusSpeed);
+    triton.obj.rotateY(scale.value ? .05 : _speedConstantsJs.tritonSpeed);
+    //change size and position based on view type
     sun.scale.set(scale.value ? 2.9 : 1, scale.value ? 2.9 : 1, scale.value ? 2.9 : 1);
     mercury.mesh.scale.set(scale.value ? 16.8 : 1, scale.value ? 16.8 : 1, scale.value ? 16.8 : 1);
     mercury.mesh.position.x = scale.value ? 28 : _distanceConstants.mercury;
@@ -853,15 +926,28 @@ function animate() {
     mars.mesh.scale.set(scale.value ? 8 : 1, scale.value ? 8 : 1, scale.value ? 8 : 1);
     mars.mesh.position.x = scale.value ? 78 : _distanceConstants.mars;
     jupiter.mesh.scale.set(scale.value ? 2 : 1, scale.value ? 2 : 1, scale.value ? 2 : 1);
-    jupiter.mesh.position.x = scale.value ? 100 : _distanceConstants.jupiter;
+    jupiterGroup.position.x = scale.value ? 100 : _distanceConstants.jupiter;
+    io.mesh.scale.set(scale.value ? 3 : 1, scale.value ? 3 : 1, scale.value ? 3 : 1);
+    io.mesh.position.x = scale.value ? 12 : _distanceConstants.io;
+    europa.mesh.scale.set(scale.value ? 3 : 1, scale.value ? 3 : 1, scale.value ? 3 : 1);
+    europa.mesh.position.x = scale.value ? 15 : _distanceConstants.europa;
+    ganymede.mesh.scale.set(scale.value ? 3 : 1, scale.value ? 3 : 1, scale.value ? 3 : 1);
+    ganymede.mesh.position.x = scale.value ? 18 : _distanceConstants.ganymede;
+    callisto.mesh.scale.set(scale.value ? 3 : 1, scale.value ? 3 : 1, scale.value ? 3 : 1);
+    callisto.mesh.position.x = scale.value ? 21 : _distanceConstants.callisto;
     saturn.mesh.scale.set(scale.value ? 2 : 1, scale.value ? 2 : 1, scale.value ? 2 : 1);
-    saturn.mesh.position.x = scale.value ? 138 : _distanceConstants.saturn;
-    saturn.obj.children[1].position.x = scale.value ? 138 : _distanceConstants.saturn;
+    saturnGroup.position.x = scale.value ? 138 : _distanceConstants.saturn;
+    titan.mesh.scale.set(scale.value ? 4 : 1, scale.value ? 4 : 1, scale.value ? 4 : 1);
+    titan.mesh.position.x = scale.value ? 25 : _distanceConstants.titan;
+    enceladus.mesh.scale.set(scale.value ? 10 : 1, scale.value ? 10 : 1, scale.value ? 10 : 1);
+    enceladus.mesh.position.x = scale.value ? 22 : _distanceConstants.enceladus;
     uranus.mesh.scale.set(scale.value ? 3.5 : 1, scale.value ? 3.5 : 1, scale.value ? 3.5 : 1);
     uranus.mesh.position.x = scale.value ? 176 : _distanceConstants.uranus;
     uranus.obj.children[1].position.x = scale.value ? 176 : _distanceConstants.uranus;
-    neptune.mesh.scale.set(scale.value ? 8 : 1, scale.value ? 8 : 1, scale.value ? 8 : 1); //todo
-    neptune.mesh.position.x = scale.value ? 200 : _distanceConstants.neptune;
+    neptune.mesh.scale.set(scale.value ? 5 : 1, scale.value ? 5 : 1, scale.value ? 5 : 1); //todo
+    neptuneGroup.position.x = scale.value ? 200 : _distanceConstants.neptune;
+    triton.mesh.scale.set(scale.value ? 3 : 1, scale.value ? 3 : 1, scale.value ? 3 : 1);
+    triton.mesh.position.x = scale.value ? 12 : _distanceConstants.triton;
     pluto.mesh.scale.set(scale.value ? 8 : 1, scale.value ? 8 : 1, scale.value ? 8 : 1);
     pluto.mesh.position.x = scale.value ? 216 : _distanceConstants.pluto;
     pointLight.intensity = scale.value ? 2 : 8;
@@ -876,7 +962,7 @@ window.addEventListener("resize", function() {
     labelRenderer.setSize(this.window.innerWidth, this.window.innerHeight);
 });
 
-},{"three":"ktPTu","three/examples/jsm/controls/OrbitControls.js":"7mqRv","3878a8afca23ff8f":"hYovN","@parcel/transformer-js/src/esmodule-helpers.js":"Gl9w7","./src/js/constants/speedConstants.js":"iTwIK","./src/js/constants/sizeConstants":"yioLF","./src/js/constants/distanceConstants":"gQXzp","./src/img/stars.jpg":"2iW0S","./src/img/sun.jpg":"9ePMA","./src/img/mercury.jpg":"8Elja","./src/img/venus.jpg":"8JEij","./src/img/earth.jpg":"bjLEc","./src/img/mars.jpg":"iXB8B","./src/img/jupiter.jpg":"hpdAb","./src/img/saturn.jpg":"dmEqi","./src/img/saturn ring.png":"kFP7F","./src/img/uranus.jpg":"khOR6","./src/img/uranus ring.png":"73au7","./src/img/neptune.jpg":"jHh9J","./src/img/pluto.jpg":"guN5P","./src/img/Io.jpg":"dePSf","./src/img/moon.jpg":"3jyAL","three/examples/jsm/renderers/CSS2DRenderer":"3tWLO","ddc3b05bff6d84c0":"fCgem","fs":"fHW36"}],"ktPTu":[function(require,module,exports) {
+},{"three":"ktPTu","three/examples/jsm/controls/OrbitControls.js":"7mqRv","3878a8afca23ff8f":"hYovN","@parcel/transformer-js/src/esmodule-helpers.js":"Gl9w7","./src/js/constants/speedConstants.js":"iTwIK","./src/js/constants/sizeConstants":"yioLF","./src/js/constants/distanceConstants":"gQXzp","./src/img/stars.jpg":"2iW0S","./src/img/sun.jpg":"9ePMA","./src/img/mercury.jpg":"8Elja","./src/img/venus.jpg":"8JEij","./src/img/earth.jpg":"bjLEc","./src/img/mars.jpg":"iXB8B","./src/img/jupiter.jpg":"hpdAb","./src/img/saturn.jpg":"dmEqi","./src/img/saturn ring.png":"kFP7F","./src/img/uranus.jpg":"khOR6","./src/img/uranus ring.png":"73au7","./src/img/neptune.jpg":"jHh9J","./src/img/pluto.jpg":"guN5P","./src/img/Io.jpg":"dePSf","./src/img/moon.jpg":"3jyAL","three/examples/jsm/renderers/CSS2DRenderer":"3tWLO","ddc3b05bff6d84c0":"fCgem","fs":"fHW36","./src/img/europa.jpg":"8GN7M","./src/img/ganymede.jpg":"1xk8E","./src/img/callisto.jpg":"38nO7","./src/img/Titan.png":"cQcZo","./src/img/Enceladus.png":"drsUc","./src/img/triton.jpg":"2vvtO"}],"ktPTu":[function(require,module,exports) {
 /**
  * @license
  * Copyright 2010-2021 Three.js Authors
@@ -31045,11 +31131,17 @@ parcelHelpers.export(exports, "ioRotation", ()=>ioRotation);
 parcelHelpers.export(exports, "europaRotation", ()=>europaRotation);
 parcelHelpers.export(exports, "callistoRotation", ()=>callistoRotation);
 parcelHelpers.export(exports, "ganymedeRotation", ()=>ganymedeRotation);
+parcelHelpers.export(exports, "titanRotation", ()=>titanRotation);
+parcelHelpers.export(exports, "enceladusRotation", ()=>enceladusRotation);
+parcelHelpers.export(exports, "tritonRotation", ()=>tritonRotation);
 parcelHelpers.export(exports, "moonSpeed", ()=>moonSpeed);
 parcelHelpers.export(exports, "ioSpeed", ()=>ioSpeed);
 parcelHelpers.export(exports, "europaSpeed", ()=>europaSpeed);
 parcelHelpers.export(exports, "callistoSpeed", ()=>callistoSpeed);
 parcelHelpers.export(exports, "ganymedeSpeed", ()=>ganymedeSpeed);
+parcelHelpers.export(exports, "titanSpeed", ()=>titanSpeed);
+parcelHelpers.export(exports, "enceladusSpeed", ()=>enceladusSpeed);
+parcelHelpers.export(exports, "tritonSpeed", ()=>tritonSpeed);
 const sunRotation = 0.0006871; //6,871km/h
 const mercuryRotation = 0.000001083; //10.83km/h
 const venusRotation = -0.000000652; //-6.52km/h
@@ -31069,16 +31161,22 @@ const saturnSpeed = 0.0034848; //34,848km/h
 const uranusSpeed = 0.0024516; //24,516km/h
 const neptuneSpeed = 0.0019548; //19,548km/h
 const plutoSpeed = 0.0017074; //17,074km/h
-const moonRotation = 0.0003683; //3,683km/h //TODO
+const moonRotation = 0.0003683; //3,683km/h
 const ioRotation = 0.00624024; //62,402.4 km/h
 const europaRotation = .0049476096; //49,476.096 km/h
 const callistoRotation = .002961193; //29,611.93
 const ganymedeRotation = .0001653; //1,653 km/h
+const titanRotation = .0020052; //20,052 km/h
+const enceladusRotation = .00454873; //45,487.3 km/h
+const tritonRotation = .0015804; // 15,804 km/h
 const moonSpeed = 0.0003683; //3,683km/h
 const ioSpeed = 0.00624024; //62,402.4 km/h
 const europaSpeed = .0049476096; //49,476.096 km/h
 const callistoSpeed = .002961193; //29,611.93 km/h
 const ganymedeSpeed = .0039168; //39,168 km/h
+const titanSpeed = .0020052; //20,052 km/h
+const enceladusSpeed = .00454873; //45,487.3 km/h
+const tritonSpeed = .0015804; // 15,804 km/h
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"Gl9w7"}],"yioLF":[function(require,module,exports) {
 //size of sun/planets/moons
@@ -31100,6 +31198,9 @@ parcelHelpers.export(exports, "io", ()=>io);
 parcelHelpers.export(exports, "ganymede", ()=>ganymede);
 parcelHelpers.export(exports, "europa", ()=>europa);
 parcelHelpers.export(exports, "callisto", ()=>callisto);
+parcelHelpers.export(exports, "titan", ()=>titan);
+parcelHelpers.export(exports, "enceladus", ()=>enceladus);
+parcelHelpers.export(exports, "triton", ()=>triton);
 const sun = 5.4374; //1,391,980km
 const mercury = 0.1905; //4,880km
 const venus = 0.4725; //12,100km
@@ -31115,6 +31216,9 @@ const io = .3640; // 3,640 km
 const ganymede = .5262; //5,262 km
 const europa = .3100; //3,100 km
 const callisto = .4820; // 4,820.6 km
+const titan = .51495; //5,149.5 km
+const enceladus = .0504; //504.2 km
+const triton = .2700; // 2,700 km
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"Gl9w7"}],"gQXzp":[function(require,module,exports) {
 //distance from sun for planets
@@ -31132,6 +31236,12 @@ parcelHelpers.export(exports, "neptune", ()=>neptune);
 parcelHelpers.export(exports, "pluto", ()=>pluto);
 parcelHelpers.export(exports, "moon", ()=>moon);
 parcelHelpers.export(exports, "io", ()=>io);
+parcelHelpers.export(exports, "ganymede", ()=>ganymede);
+parcelHelpers.export(exports, "europa", ()=>europa);
+parcelHelpers.export(exports, "callisto", ()=>callisto);
+parcelHelpers.export(exports, "titan", ()=>titan);
+parcelHelpers.export(exports, "enceladus", ()=>enceladus);
+parcelHelpers.export(exports, "triton", ()=>triton);
 const mercury = 10; //58 million km
 const venus = 18.62; //108 million km
 const earth = 25.86; //150 million km
@@ -31141,8 +31251,14 @@ const saturn = 246.55; //1,430 million km
 const uranus = 494.82; //2,870 million km
 const neptune = 775.86; //4,500 million km
 const pluto = 1017.24; //5,900 million km
-const moon = 38.2500; //382,500 km
-const io = 42.2000; //422,000km
+const moon = 382500 / 58000000; //382,500 km
+const io = 422000 / 58000000; //422,000km
+const ganymede = 1070000 / 58000000; //1,070,000 km
+const europa = 671000 / 58000000; //671,000 km
+const callisto = 1883000 / 58000000; // 1,883,000 km
+const titan = 1200000 / 58000000; //1,200,000 km
+const enceladus = 238000 / 58000000; //238,000 km
+const triton = 354800 / 58000000; // 354,800 km
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"Gl9w7"}],"2iW0S":[function(require,module,exports) {
 module.exports = require("a270c0383463ec80").getBundleURL("eLQ0X") + "stars.a1d7fe60.jpg" + "?" + Date.now();
@@ -32700,6 +32816,24 @@ exports.write = function(buffer, value, offset, isLE, mLen, nBytes) {
 },{}],"fHW36":[function(require,module,exports) {
 "use strict";
 
-},{}]},["h6Xe0","f47v6"], "f47v6", "parcelRequire7930")
+},{}],"8GN7M":[function(require,module,exports) {
+module.exports = require("ff97bfd32b3f8d0b").getBundleURL("eLQ0X") + "europa.3918651c.jpg" + "?" + Date.now();
+
+},{"ff97bfd32b3f8d0b":"8F1tm"}],"1xk8E":[function(require,module,exports) {
+module.exports = require("867008f493553ed8").getBundleURL("eLQ0X") + "ganymede.6157ef60.jpg" + "?" + Date.now();
+
+},{"867008f493553ed8":"8F1tm"}],"38nO7":[function(require,module,exports) {
+module.exports = require("a6577883b071d770").getBundleURL("eLQ0X") + "callisto.8209bfec.jpg" + "?" + Date.now();
+
+},{"a6577883b071d770":"8F1tm"}],"cQcZo":[function(require,module,exports) {
+module.exports = require("624329d55dd7751f").getBundleURL("eLQ0X") + "Titan.cdd732cd.png" + "?" + Date.now();
+
+},{"624329d55dd7751f":"8F1tm"}],"drsUc":[function(require,module,exports) {
+module.exports = require("e811eac746f4b443").getBundleURL("eLQ0X") + "Enceladus.75c5fbb1.png" + "?" + Date.now();
+
+},{"e811eac746f4b443":"8F1tm"}],"2vvtO":[function(require,module,exports) {
+module.exports = require("49feda18487ddae2").getBundleURL("eLQ0X") + "triton.4dbc9a06.jpg" + "?" + Date.now();
+
+},{"49feda18487ddae2":"8F1tm"}]},["h6Xe0","f47v6"], "f47v6", "parcelRequire7930")
 
 //# sourceMappingURL=index.b2335e0c.js.map
