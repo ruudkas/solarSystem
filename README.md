@@ -4,11 +4,11 @@
  You will also find a folder in the controls called facts that offers a option to display a fact for each planet. After you begin viewing facts you must select none to turn off the facts. 
 
 # Instructions for installation
-If you don't have git installed:
+## If you don't have git installed:
 - gitforwindows.org follow instruction prompt, default options should be sufficient
-If you don't have node/npm installed:
+## If you don't have node/npm installed:
 - nodejs.org/en/download select windows installer
-General Instructions:
+## General Instructions:
 - Open a command prompt and enter the following commands
 - `git clone https://github.com/ruudkas/solarSystem.git`
 - `cd solarSystem`
