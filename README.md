@@ -1,5 +1,12 @@
 # solarSystem
 
+# Instructions for installation
+- `git clone https://github.com/ruudkas/solarSystem.git`
+- `cd solarSystem`
+- `npm i`
+- `npm run start:dev`
+- `navigate to localhost:1234 in a browser`
+
 # Sources
 https://celestiamotherlode.net/catalog/jupiter.html
 https://www.britannica.com/place/Io-satellite-of-Jupiter
