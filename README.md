@@ -5,9 +5,11 @@
 
 # Instructions for installation
 ## If you don't have git installed:
-- gitforwindows.org follow instruction prompt, default options should be sufficient
+- gitforwindows.org 
+- follow instruction prompt, default options should be sufficient
 ## If you don't have node/npm installed:
-- nodejs.org/en/download select windows installer
+- nodejs.org/en/download 
+- select windows installer
 ## General Instructions:
 - Open a command prompt and enter the following commands
 - `git clone https://github.com/ruudkas/solarSystem.git`
